@@ -1,56 +1,85 @@
 import { Routes ,Route } from "react-router-dom";
-import HomePage from "./Pages/HomePage.js";
-import "./App.css";
-import LoginPage from "./Pages/LoginPage.js";
-import SignupPage from "./Pages/SignupPage.js";
-import AboutPage from "./Pages/AboutPage.js";
-import Navbar from "./components/homePageComponents/Navbar.js";
-import Sponsors from "./Pages/Sponsors.js";
-import ContactUs from "./Pages/ContactusPage.js";
-import FAQPage from "./Pages/FAQsPage.js";
-import ForgetPasswordPage from "./Pages/ForgetPassword.js";
 import  { Toaster } from 'react-hot-toast';
+import { useSelector,useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
+import io from "socket.io-client";
+import { useEffect,useContext } from "react";
+import "./App.css";
+
+//API USED
+import {  getRole, getUserId } from "./Services/operations/GetUserInformation.jsx";
+import { setRole, setRoomcode } from "./Slices/authSlice.js";
+import { socketContext } from "./ContextApi/SocketContext.js";
+import { getRequiredRooms } from "./Services/operations/GetUserInformation.jsx";
+
+//Self Defined Routes
+import OpenRoute from "./components/Core/Auth/OpenRoute.jsx";
+import ProtectedRoute from "./components/Core/Auth/ProtectedRoute.jsx";
+
+//Public Pages 
+import HomePage from "./Pages/Public_pages/HomePage/HomePage.js";
+import Sponsors from "./Pages/Public_pages/Sponsors.js";
+import FAQPage from "./Pages/Public_pages/FAQsPage.js";
+import BecomeVendor from "./Pages/Public_pages/BecomeVendor.jsx";
+import VendorPricingPage from "./Pages/Public_pages/Pricing.jsx";
+
+
+//Legal Pages
+import AboutPage from "./Pages/Legal_Pages/AboutPage.js";
+import ContactUs from "./Pages/Legal_Pages/ContactusPage.js";
+import PrivacyPolicy from "./Pages/Legal_Pages/PrivacyPolicy.jsx";
+import TermsAndConditions from "./Pages/Legal_Pages/TermsAndCondition.jsx";
+import Disclaimer from "./Pages/Legal_Pages/Disclaimer.jsx";
+import RefundAndCancellationPolicy from "./Pages/Legal_Pages/RefundAndCancellation.jsx";
+import ShippingAndDeliveryPolicy from "./Pages/Legal_Pages/ShippingAndDeliveryPolicy.jsx";
+
+//Auth Pages
+import LoginPage from "./Pages/AuthPages/LoginPage.js";
+import SignupPage from "./Pages/AuthPages/SignupPage.js";
+import ForgetPasswordPage from "./Pages/ForgetPassword.js";
 import UpdatePasswordPage from "./Pages/UpdatePassword.js";
-import OTPPage from "./Pages/OTPPage.js";
+import VendorSignupPage from "./Pages/VendorSignupPage.jsx";
+import VendorSignup from "./Pages/VendorSignupPage.jsx";
+
+//General_Pages
+import NotFoundPage from "./Pages/General_Pages/NotFound.jsx";
+import SuccessPage from "./Pages/General_Pages/SuccessPage.jsx";
+
+
+
+
+import Navbar from "./Pages/Public_pages/HomePage/Components/Navbar.js";
 import DashboardSidebar from "./components/DashboardComponents/DashboardSidebar.jsx";
-import { useSelector } from "react-redux";
+
 import DashboardTemplate from "./components/DashboardComponents/DashboardTemplate.jsx";
 import MyProfile from "./Pages/MyProfile.jsx"
-import VendorSignupPage from "./Pages/VendorSignupPage.jsx";
-import AddCollegeForm from "./Pages/AddCollegeForm.jsx";
-import AddCollegePage from "./Pages/AddCollegeRelatedPages/addCollegePage.jsx";
 import  YourShopPage from "./Pages/YourShopRelatedComponents/YourShopPage.jsx";
 import PlaceOrderCollegeSelection from "./components/PlaceOrderComponent/PlaceOrderSelect.jsx";
 import OrderDashboard from "./Pages/OrderDashboard.jsx";
-import { useLocation } from "react-router-dom";
-import OpenRoute from "./components/Core/Auth/OpenRoute.jsx";
-import ProtectedRoute from "./components/Core/Auth/ProtectedRoute.jsx";
-import NotFoundPage from "./Pages/NotFound.jsx";
+import VendorInboxPage from "./Pages/MailPages/VendorInboxPage.jsx";
+
+
+
 import Settings from "./Pages/Settings.jsx";
 import CancelledOrdersDashboard from "./Pages/CancelledOrdersDashboard.jsx";
 import OngoingOrders from "./Pages/OngoingOrders.jsx";
 import UnreceivedOrders from "./Pages/UnreceivedOrders.jsx";
 import OrderHistoryDashboard from "./Pages/OrderHistoryDashboard.jsx"
-import VendorSignup from "./Pages/VendorSignupPage.jsx";
-import PrivacyPolicy from "./Pages/PrivacyPolicy.jsx";
-import TermsAndConditions from "./Pages/TermsAndCondition.jsx";
-import Disclaimer from "./Pages/Disclaimer.jsx";
-import RefundAndCancellationPolicy from "./Pages/RefundAndCancellation.jsx";
-import ShippingAndDeliveryPolicy from "./Pages/ShippingAndDeliveryPolicy.jsx"
-import BecomeVendor from "./Pages/BecomeVendor.jsx";
-import io from "socket.io-client";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import SuccessPage from "./Pages/SuccessPage.jsx";
-import {  getRole, getUserId } from "./Services/operations/GetUserInformation.jsx";
-import { setRole, setRoomcode } from "./Slices/authSlice.js";
-import { useContext } from "react";
-import { socketContext } from "./ContextApi/SocketContext.js";
-import { getRequiredRooms } from "./Services/operations/GetUserInformation.jsx";
-import LogoutModel from "./components/LogoutComponents/LogoutModel.jsx";
+
+
+
+
+
+
+
+import LogoutModel from "./components/Core/Auth/LogoutModel.jsx";
 import SpecificCollegeShopWithoutLogin from "./Pages/SpecificCollegeShopWithoutLogin.jsx";
-import VendorPricingPage from "./Pages/Pricing.jsx";
+
 import AddVendorPage from "./Pages/AddVendorPage.jsx";
+import EaserOutboxPage from "./Pages/MailPages/EaserOutboxPage.jsx";
+import Store from "./Pages/DashboardPages/Store/Store.jsx";
+
+
 
 
 function App() {
@@ -62,51 +91,51 @@ function App() {
   const showModel = useSelector((state)=>{return state.logout.showModel});
 
 
-   useEffect(()=>{
+  //  useEffect(()=>{
 
-     let socket="";
-     async function fetchCollegeCode()
-     {  
-        if(token)
-        {
+  //    let socket="";
+  //    async function fetchCollegeCode()
+  //    {  
+  //       if(token)
+  //       {
          
           
-          socket = io( "https://easer-official-backend-production.up.railway.app" ,{transports:["websocket"]});  
-          setSocket(socket);
-          const userId = await dispatch(getUserId(token));
+  //         socket = io( "http://localhost:5000" ,{transports:["websocket"]});  
+  //         setSocket(socket);
+  //         const userId = await dispatch(getUserId(token));
          
-          if(userId)
-          { 
-            dispatch(setRoomcode(userId));
-            socket.emit("join-initial-self-room" , userId);
-          }
-        }
-     }
+  //         if(userId)
+  //         { 
+  //           dispatch(setRoomcode(userId));
+  //           socket.emit("join-initial-self-room" , userId);
+  //         }
+  //       }
+  //    }
 
-     async function setUserRole()
-     {
-        let role ="";
-        if(token)
-        {
-            role = await dispatch(getRole(token));
-            dispatch(setRole(role)); 
-        }
+  //    async function setUserRole()
+  //    {
+  //       let role ="";
+  //       if(token)
+  //       {
+  //           role = await dispatch(getRole(token));
+  //           dispatch(setRole(role)); 
+  //       }
 
-        if(token && role)
-        {
-            if(role ==="user")
-            {
-                const rooms = await dispatch(getRequiredRooms(token));
-                socket.emit("user-enter-the-required-room" , rooms);
+  //       if(token && role)
+  //       {
+  //           if(role ==="user")
+  //           {
+  //               const rooms = await dispatch(getRequiredRooms(token));
+  //               socket.emit("user-enter-the-required-room" , rooms);
                 
-            }
-        }
-     }
+  //           }
+  //       }
+  //    }
 
-     fetchCollegeCode();
-     setUserRole();
+  //    fetchCollegeCode();
+  //    setUserRole();
 
-   },[token])
+  //  },[token])
 
 
   return (
@@ -147,6 +176,8 @@ function App() {
         <Route path="/contactus" element={<ContactUs/>}></Route>
         <Route path="/FAQs" element={<FAQPage/>}></Route>
 
+        
+
 
         <Route path="/forget-password" 
               element={<OpenRoute>
@@ -159,14 +190,6 @@ function App() {
               element={<OpenRoute>
                           <UpdatePasswordPage/>
                       </OpenRoute>}>
-        </Route>
-
-
-        <Route path="/otp" 
-              element={
-                          <OTPPage/>
-                      }
-        >
         </Route>
 
         <Route path="/privacy-policy"
@@ -223,21 +246,14 @@ function App() {
       </Route>
 
 
-      <Route path="/signup/vendor/:id" 
+      {/* <Route path="/signup/vendor/:id" 
             element={
               <OpenRoute>
                 <VendorSignup/>
               </OpenRoute>
             }
       >
-      </Route>
-
-      <Route path="/add-college-form" 
-            element={
-                <AddCollegeForm />
-            }
-      >
-      </Route>
+      </Route> */}
 
 
 
@@ -246,6 +262,26 @@ function App() {
          <ProtectedRoute>
            <DashboardTemplate>
              <MyProfile />
+           </DashboardTemplate>
+         </ProtectedRoute>
+       }
+      />
+
+      <Route path="/dashboard/easer-store" 
+       element={
+         <ProtectedRoute>
+           <DashboardTemplate>
+             <Store />
+           </DashboardTemplate>
+         </ProtectedRoute>
+       }
+      />
+
+      <Route path="/dashboard/easer-inbox" 
+       element={
+         <ProtectedRoute>
+           <DashboardTemplate>
+             <VendorInboxPage/>
            </DashboardTemplate>
          </ProtectedRoute>
        }
@@ -281,6 +317,16 @@ function App() {
        }
       />
 
+      <Route path="/dashboard/easer-outbox" 
+       element={
+         <ProtectedRoute>
+           <DashboardTemplate>
+              <EaserOutboxPage></EaserOutboxPage>
+           </DashboardTemplate>
+         </ProtectedRoute>
+       }
+      />
+
       <Route path="/dashboard/order-history" 
        element={
          <ProtectedRoute>
@@ -301,15 +347,6 @@ function App() {
             }
       />
 
-      <Route path="/dashboard/add-college" 
-            element={
-              <ProtectedRoute>
-                <DashboardTemplate>
-                  <AddCollegePage />
-                </DashboardTemplate>
-              </ProtectedRoute>
-            }
-      />
 
       <Route path="/dashboard/add-vendor" 
             element={

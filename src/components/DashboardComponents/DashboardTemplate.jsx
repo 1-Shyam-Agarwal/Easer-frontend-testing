@@ -1,6 +1,6 @@
 import React from 'react'
 import DashboardSidebar from './DashboardSidebar'
-import Navbar from '../homePageComponents/Navbar'
+import Navbar from '../../Pages/Public_pages/HomePage/Components/Navbar'
 import { useSelector } from 'react-redux'
 import PlaceOrderModel from '../OrderDashboardComponents/PlaceOrderModel'
 

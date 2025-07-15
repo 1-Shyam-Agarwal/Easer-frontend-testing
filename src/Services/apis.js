@@ -1,33 +1,29 @@
-const BASE_URL = "https://easer-official-backend-production.up.railway.app/api/v1"
+const BASE_URL = "http://localhost:5000/api/v1"
+//https://easer-official-backend-production.up.railway.app/api/v1
 
 
 
 // AUTH ENDPOINTS
 export const authEndpoints = {
+  PRE_CUSTOM_SIGNUP_CHECK_AND_SEND_OTP : BASE_URL+"/auth/custom/pre-signup-check-and-send-otp",
+  VERIFY_OTP_AND_CREATE_ACCOUNT : BASE_URL + "/auth/otp-verify-and-create-account",
+
+  RESEND_OTP : BASE_URL + "/auth/resend-otp",
+  VERIFY_LOGIN_OTP : BASE_URL + "/auth/verify-login-otp",
+  VERIFY_PASSWORD : BASE_URL + "/auth/verify-login-password",
+
+  PRE_GOOGLE_SIGNUP_CHECK : BASE_URL + "/auth/pre-google-signup-check",
+  PRE_CUSTOM_LOGIN_CHECK_AND_SEND_OTP: BASE_URL + "/auth/custom/pre-login-checks-and-send-otp",
+  SAVE_GOOGLE_SIGNUP_DETAILS : BASE_URL + "/auth/save-google-signup-details",
+  
+  GOOGLE_PRE_LOGIN_CHECK : BASE_URL + "/auth/google/pre-login-checks",
   RESETPASSTOKEN_API: BASE_URL+"/reset-password-token",
   RESETPASSWORD_API: BASE_URL+"/reset-password",
-  SIGNUP_API : BASE_URL+"/signup",
-  OTP_API : BASE_URL+"/send-otp",
-  VERIFY_OTP_API : BASE_URL+"/otp-verification",
-  LOGIN_API : BASE_URL+"/login",
-  CREATE_ACCOUNT_API : BASE_URL+"/create-account",
-  VALIDATE_VENDOR_INFO : BASE_URL+"/validate-vendor-info",
-  CREATE_VENDOR_ACCOUNT_API : BASE_URL+"/create-vendor-account",
-  CREATE_REQUEST_FOR_VENDOR_ACCOUNT_API : BASE_URL + "/create-request-for-vendor",
-  GOOGLE_SIGNUP_INFO_EXTRACTION : BASE_URL + "/google-signup-information-extraction",
-  GOOGLE_SIGNUP : BASE_URL + "/google-signup",
-  EMAIL_VALIDATION_AT_LOGIN : BASE_URL + "/email-validation-at-login"
+  
 }
 
 export const getInTouchEndpoints = {
-  GETINTOUCH_API : BASE_URL+"/get-in-touch",
-}
-
-export const addCollegeEndpoints = {
-  ADD_COLLEGE_VALIDATION_API : BASE_URL+"/add-college-validation",
-  CREATE_ADD_COLLEGE_API : BASE_URL+"/create-add-college",
-  GET_ADD_COLLEGES : BASE_URL+"/get-all-add-colleges",
-  
+  GET_IN_TOUCH_API : BASE_URL+"/get-in-touch",
 }
 
 export const collegeDetailsEndpoints = {
@@ -39,6 +35,12 @@ export const getVendorEndpoints = {
   GET_FILTERED_VENDORS : BASE_URL+"/get-filtered-vendors",
   GET_FILTERED_VENDORS_WITH_MINIMUM_DETAILS : BASE_URL+"/get-filtered-vendors-with-minimum-details",
   GET_VENDOR_REQUESTS : BASE_URL + "/get-vendor-requests"
+}
+
+export const outboxOrdersEndpoints = {
+   CREATE_OUTBOX_MAIL : BASE_URL + "/create-outbox-mail",
+   FETCH_OUTBOX_MAIL_FOR_CUSTOMER : BASE_URL + "/fetch-customer-mails",
+   FETCH_INBOX_MAIL_FOR_VENDOR : BASE_URL + "/fetch-vendor-mails"
 }
 
 export const printOrderVendorEndpoints = {

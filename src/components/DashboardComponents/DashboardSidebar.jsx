@@ -107,11 +107,14 @@ import React, { useState } from 'react';
 import { MdPerson, MdList, MdWarning, MdDelete, MdHistory, MdSchool } from 'react-icons/md';
 import { RiExpandRightLine, RiExpandLeftLine } from 'react-icons/ri';
 import { IoMdPersonAdd } from "react-icons/io";
-import { BsFillBuildingsFill } from "react-icons/bs";
+import { BsFillBuildingsFill} from "react-icons/bs";
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRole } from '../../Services/operations/GetUserInformation';
 import { useEffect } from 'react';
+import { MdInbox , MdPayment , MdStore} from 'react-icons/md';
+
+
 
 const DashboardSidebar = () => {
   const [expandSidebar, setExpandSidebar] = useState(false);
@@ -138,42 +141,43 @@ const DashboardSidebar = () => {
 
   // Navigation structures for different roles
   const userNavigation = [
-    { 
-      to: '/dashboard/my-profile', 
-      icon: <MdPerson />, 
-      label: 'My Profile',
-      type: 'single'
-    },
-    { 
-      to: '/dashboard/college-shops', 
-      icon: <MdSchool />, 
-      label: 'College Shops',
-      type: 'single'
-    },
-    {
-      label: 'Orders',
-      icon: <MdList />,
-      type: 'category',
-      items: [
-        { to: '/dashboard/ongoing-orders', icon: <MdSchool />, label: 'Ongoing Orders' },
-        { to: '/dashboard/unreceived-orders', icon: <MdWarning />, label: 'Unreceived Orders' },
-        { to: '/dashboard/cancelled-orders', icon: <MdDelete />, label: 'Cancelled Orders' },
-        { to: '/dashboard/order-history', icon: <MdHistory />, label: 'Order History' },
-      ]
-    },
-    { 
-      to: '/dashboard/place-order', 
-      icon: <MdList />, 
-      label: 'Place Order',
-      type: 'single'
-    },
+  {
+    to: '/dashboard/easer-outbox',
+    icon: <MdInbox />,
+    label: 'Outbox',
+    type: 'single'
+  },
+  {
+    to: '/dashboard/college-shops',
+    icon: <MdPerson />,
+    label: 'Campus Shops',
+    type: 'single'
+  },
+
+  {
+    to: '/dashboard/easer-store',
+    icon: < MdStore />,
+    label: 'Store',
+    type: 'single'
+  },
+
+  {
+    label: 'Prepaid Orders',
+    icon: <MdPayment />,
+    type: 'category',
+    items: [
+      { to: '/dashboard/ongoing-orders', icon: <MdSchool />, label: 'Ongoing Orders' },
+      { to: '/dashboard/cancelled-orders', icon: <MdDelete />, label: 'Cancelled Orders' },
+      { to: '/dashboard/order-history', icon: <MdHistory />, label: 'Order History' }
+    ]
+  }
   ];
 
   const vendorNavigation = [
     { 
-      to: '/dashboard/my-profile', 
-      icon: <MdPerson />, 
-      label: 'View Profile',
+      to: '/dashboard/easer-inbox', 
+      icon: <MdInbox />, 
+      label: 'Inbox',
       type: 'single'
     },
     { 

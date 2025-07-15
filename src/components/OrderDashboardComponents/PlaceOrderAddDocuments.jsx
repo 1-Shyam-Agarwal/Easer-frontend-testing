@@ -321,6 +321,7 @@ const PlaceOrderAddDocuments = (props) => {
         <input
           type="file"
           accept=".pdf"
+          multiple
           ref={addDocumentRef}
           onChange={handleInputChange}
           className="hidden"
