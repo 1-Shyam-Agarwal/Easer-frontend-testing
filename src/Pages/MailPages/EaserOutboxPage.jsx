@@ -36,6 +36,7 @@ const EaserOutboxPage = () => {
   useEffect(()=>
   {   
     // Fetching mails for the customer
+    
     if(!keyword)
     {
         fetchCustomerMails(token , currentPage , setMails ,setLoading, setCurrentPage , setTotalMails, setTotalPages);
@@ -101,8 +102,8 @@ const EaserOutboxPage = () => {
         <MailSearchBar handleSearchByFilename={handleSearchByFilename} searchElement="by document" setKeyword={setKeyword} keyword={keyword}/>
         <button
   onClick={toggleComposeModelVisibility}
-  className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-blue-500 to-sky-500 text-white font-medium rounded-lg shadow-md hover:shadow-lg hover:brightness-110 transition duration-200 
-             fixed bottom-4 right-4 sm:static sm:bottom-auto sm:right-auto z-50"
+  className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-sky-500 text-white font-medium rounded-lg shadow-md hover:shadow-lg hover:brightness-110 transition duration-200 
+             fixed bottom-8 right-8 sm:static sm:bottom-auto sm:right-auto z-50"
 >
   <span><FaPlus/></span>
   <span className='flex items-center'>Compose</span>

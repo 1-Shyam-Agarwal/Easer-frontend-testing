@@ -10,7 +10,7 @@ const CustomerMailCards = ({ mails }) => {
       {mails?.map((mail, index) => (
         <div
           key={index}
-          className="group  relative flex flex-col sm:flex-row sm:items-center  justify-between gap-2 px-4 sm:px-6 py-[0.70rem] sm:py-4 transition-all duration-200 hover:bg-gray-50 hover:shadow-sm rounded-md cursor-pointer"
+          className="group  relative flex flex-col sm:flex-row sm:items-center  justify-between gap-2 px-4 sm:px-6 py-[0.85rem] sm:py-4 transition-all duration-200 hover:bg-gray-50 hover:shadow-sm rounded-md cursor-pointer"
           onClick={() => navigate(`mail/${mail.mail_id}`)}
         >
 
@@ -20,7 +20,7 @@ const CustomerMailCards = ({ mails }) => {
               To
             </div>
             <div className="flex flex-col truncate capitalize">
-              <span className="text-[0.75rem] sm:text-sm font-normal text-gray-700 truncate">
+              <span className="text-[0.85rem] sm:text-sm font-normal text-gray-700 truncate">
                 {mail.receiver?.vendorAdditionalDetails?.shopName}
               </span>
               <span className="text-[0.75rem] sm:text-xs text-gray-500 truncate">
@@ -35,7 +35,7 @@ const CustomerMailCards = ({ mails }) => {
               {mail.documents?.slice(0, 2).map((doc, i) => (
                 <span
                   key={i}
-                  className="bg-green-100 text-green-600 text-[0.75rem] sm:text-xs font-medium px-2 py-[0.2rem] sm:py-1 rounded-full max-w-[110px] truncate"
+                  className="bg-green-100 text-green-600 text-[0.85rem] sm:text-xs font-medium px-2 py-[0.2rem] sm:py-1 rounded-full max-w-[110px] truncate"
                   title={doc.fileName}
                 >
                   {doc.fileName.length > 15
