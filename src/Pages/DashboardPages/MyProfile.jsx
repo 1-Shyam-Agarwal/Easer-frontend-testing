@@ -137,7 +137,7 @@ const MyProfile = () => {
                               <span className="absolute bottom-2 right-2 w-4 h-4 bg-green-500 rounded-full ring-2 ring-white" />
                             </div>
                             <h3 className="text-xl font-medium text-gray-900"><span className='capitalize'>{user?.firstName}</span> <span className='capitalize'>{user?.lastName}</span> </h3>
-                            <p className="text-gray-500 mt-1 capitalize">{user?.role}</p>
+                            <p className="text-gray-500 mt-1 capitalize">{user?.role === "customer" ? "user" : "vendor"}</p>
                             <div className="mt-4 flex items-center justify-center space-x-2 text-gray-600">
                               <MapPin className="w-4 h-4" />
                               <span className="text-sm">{user?.collegeCode?.collegeName}</span>

@@ -98,12 +98,12 @@ const EaserOutboxPage = () => {
   return (
     <div className='p-2 pb-4 sm:p-4 h-full overflow-y-auto bg-gray-100'>
 
-      <div className='flex justify-between mb-[2px] items-center'>
+      <div className='flex justify-between mb-[2px] gap-4 items-center'>
         <MailSearchBar handleSearchByFilename={handleSearchByFilename} searchElement="by document" setKeyword={setKeyword} keyword={keyword}/>
         <button
   onClick={toggleComposeModelVisibility}
-  className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-sky-500 text-white font-medium rounded-lg shadow-md hover:shadow-lg hover:brightness-110 transition duration-200 
-             fixed bottom-8 right-8 sm:static sm:bottom-auto sm:right-auto z-50"
+  className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-sky-500 text-white font-medium rounded-xl shadow-md hover:shadow-lg hover:brightness-110 transition duration-200 
+             fixed bottom-8 right-6 sm:static sm:bottom-auto sm:right-auto z-40"
 >
   <span><FaPlus/></span>
   <span className='flex items-center'>Compose</span>

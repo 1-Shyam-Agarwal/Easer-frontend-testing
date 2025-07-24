@@ -121,7 +121,7 @@ const Navbar = ({setShowInkletInfo}) => {
         <Link
           key={index}
           to={item.to}
-          className="flex items-center gap-2 text-gray-600 hover:text-blue-500 transition-colors"
+          className="flex items-center gap-4 text-[1rem] text-gray-600 hover:text-blue-500 transition-colors"
           onClick={() => setIsMenuOpen(false)}
         >
           {item.icon}
@@ -132,7 +132,7 @@ const Navbar = ({setShowInkletInfo}) => {
   };
 
   return (
-    <nav className={`bg-white w-full backdrop-blur-sm bg-white/90 sticky top-0 z-50 transition-all duration-300 ${token ? "border-b border-gray-200" : "shadow-sm"}`}>
+    <nav className={`bg-white py-1 w-full backdrop-blur-sm bg-white/90 sticky top-0 z-50 transition-all duration-300 ${token ? "border-b border-gray-200" : "shadow-sm"}`}>
       <div className="flex mx-[20px] max-w-maxContent mx-auto justify-between items-center py-2">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-[15px] md:gap-4 group max-870:ml-[1.2rem] max-1100:gap-3 max-870:gap-2 mx-[1.5rem]">
@@ -143,7 +143,7 @@ const Navbar = ({setShowInkletInfo}) => {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8 max-1100:gap-6 max-870:gap-[1.2rem]">
+        <div className="hidden md:flex items-center gap-8 max-1100:gap-6 max-870:gap-[10rem]">
           {location.pathname.split("/")[1] !== "dashboard" && 
             NavLinks.map((entry, index) => (
               <Link 
@@ -171,7 +171,7 @@ const Navbar = ({setShowInkletInfo}) => {
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2 bg-blue-50 px-3 py-1 rounded-full text-blue-700 font-normal shadow-sm"
                  onClick={() => {setShowInkletInfo(true)}}>
-              <span className='flex justify-between items-center gap-1'><FaDroplet className='inline'/><span className='font-semibold'>10000 Inklets </span> </span>
+              <span className='flex justify-between items-center gap-1'><FaDroplet className='inline'/><span className='font-semibold'>10 Inklets </span> </span>
             </div>
             <ProfileDropDown image={user} />
           </div>
