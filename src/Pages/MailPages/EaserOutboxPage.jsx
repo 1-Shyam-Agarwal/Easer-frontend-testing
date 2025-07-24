@@ -103,7 +103,7 @@ const EaserOutboxPage = () => {
         <button
   onClick={toggleComposeModelVisibility}
   className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-sky-500 text-white font-medium rounded-xl shadow-md hover:shadow-lg hover:brightness-110 transition duration-200 
-             fixed bottom-8 right-6 sm:static sm:bottom-auto sm:right-auto z-40"
+             fixed bottom-8 right-8 sm:static sm:bottom-auto sm:right-auto z-40"
 >
   <span><FaPlus/></span>
   <span className='flex items-center'>Create</span>

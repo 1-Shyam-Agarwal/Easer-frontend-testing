@@ -204,10 +204,11 @@ const LoginPage = () => {
                                   {/* onSubmit={handleOTP} */}
                                 <div className='flex flex-col items-center'>
 
-                                <h5 className="mt-8 text-md w-full font-normal text-gray-700 text-center">
-                                  OTP has been sent to  {email}
-                                  {/* <span className="text-blue-600 font-semibold"> {watch("email")} </span> */}
-                                </h5>
+                               <h5 className="mt-8 text-md w-full font-normal text-gray-700 text-center">
+  OTP has been sent to <span className="font-semibold">{email}</span><br />
+  <span className="text-sm text-gray-500">If you didn’t find the OTP, please check your spam.</span>
+</h5>
+
 
                                   <OtpInput
                                   value={otp}
