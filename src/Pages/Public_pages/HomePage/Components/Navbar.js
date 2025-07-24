@@ -143,7 +143,7 @@ const Navbar = ({setShowInkletInfo}) => {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8 max-1100:gap-6 max-870:gap-[10rem]">
+        <div className="hidden md:flex items-center gap-8 max-1100:gap-6 max-870:gap-[1.2rem]">
           {location.pathname.split("/")[1] !== "dashboard" && 
             NavLinks.map((entry, index) => (
               <Link 

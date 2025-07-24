@@ -2,15 +2,15 @@ import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { clearUser } from '../../Slices/profileSlice';
 import { clearToken } from '../../Slices/authSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 import { setShowModel } from '../../Slices/LogoutSlice';
 import { useLocation } from 'react-router-dom';
 
 const ProfileDropDown = (props) => {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const location = useLocation();
+    const role = useSelector(state => state.auth.role);
+    console.log("Role : " , role);
 
     const handleLogout = () => {
         dispatch(setShowModel(true));
@@ -27,18 +27,42 @@ const ProfileDropDown = (props) => {
 
             {/* Dropdown Menu */}
             <div className="absolute right-0 z-10 w-48 bg-white rounded-md shadow-lg  opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200">
+                {
+                    role==="customer"? 
+                    (
+                        <NavLink 
+                            to="/dashboard/easer-outbox" 
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                            Outbox
+                        </NavLink>
+                    )
+                    :
+                    (
+                        role==="vendor"?
+                        (
+                            <NavLink 
+                                to="/dashboard/easer-inbox" 
+                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            >
+                                Inbox
+                            </NavLink>
+
+                        )
+                        :(
+                            <div></div>
+                        )
+
+                    )
+                }
+                
+                    
+                
                 <NavLink 
                     to="/dashboard/my-profile" 
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                     My Profile
-                </NavLink>
-                
-                <NavLink 
-                    to="/dashboard/settings" 
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >
-                    Settings
                 </NavLink>
                 <div 
                     onClick={handleLogout} 

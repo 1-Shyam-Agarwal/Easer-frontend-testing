@@ -4,6 +4,7 @@ import kartik from '../../../../Images/kartikPhoto.png';
 import prachi from '../../../../Images/prachi.png';
 import naman from '../../../../Images/naman.png';
 import palak from '../../../../Images/palak.jpg';
+import ArvindSir from '../../../../Images/ArvindSir.png'
 import Testimonialcards from './testimonialcards';
 
 // const Testimonial = () => {
@@ -107,12 +108,12 @@ const Testimonial = () => {
       name: "Kartik Gupta"
     },
     {
-      message: "This service saved me time and effort during my Practical exams!",
-      photo: prachi,
-      name: "Prachi Agarwal"
+      message: "This service has saved my students time and effort, allowing them to focus solely on their studies.",
+      photo: ArvindSir,
+      name: "Arvind Rehalia"
     },
     {
-      message: "I was impressed with the quick turnaround time! My prints were ready in no time, and the quality exceeded my expectations.",
+      message: "This service saved me time and effort during my Practical exams!",
       photo: naman,
       name: "Naman Jain"
     },

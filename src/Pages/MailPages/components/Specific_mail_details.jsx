@@ -119,19 +119,19 @@ const MailDetail = () => {
     <div className="flex items-center gap-2 mb-1">
       <button
         onClick={() => navigate(-1)}
-        className="text-gray-500 hover:text-black text-xl mr-[1rem] mb-[1rem]font-bold sm:text-2xl"
+        className="text-gray-500 hover:text-black text-xl mr-[1rem] font-bold sm:text-2xl"
         aria-label="Go back"
       >
-        <IoMdArrowBack/>
+        <IoMdArrowBack size={25}/>
       </button>
       <h2 className="text-base sm:text-lg font-semibold text-gray-800">Mail Details</h2>
     </div>
-    <p className="text-[11px] sm:text-[11px] text-gray-500 break-words">Mail ID: {mail?.mail_id}</p>
-    <p className="text-[11px] sm:text-[11px] text-gray-500">Sent on: {formatDate(mail?.timeStamp)}</p>
+    <p className="text-[13px] sm:text-[11px] text-gray-500 break-words">Mail ID: {mail?.mail_id}</p>
+    <p className="text-[13px] sm:text-[11px] text-gray-500">Sent on: {formatDate(mail?.timeStamp)}</p>
   </div>
 
             {/* From */}
-  <div className="text-[11px] text-gray-500 flex-1 sm:ml-[20px]">
+  <div className="text-[13px] text-gray-500 flex-1 sm:ml-[20px]">
     <p className="font-medium text-black">From</p>
     <p className="truncate">
       <span className="capitalize">
@@ -143,7 +143,7 @@ const MailDetail = () => {
   </div>
 
   {/* To */}
-  <div className="text-[11px] text-gray-500 flex-1">
+  <div className="text-[13px] text-gray-500 flex-1">
     <p className="font-medium text-black">To</p>
     <p className="capitalize truncate">{mail?.receiver?.vendorAdditionalDetails?.shopName}</p>
     <p className="truncate">{mail?.receiver?.vendorAdditionalDetails?.shopLandMark}</p>
@@ -185,13 +185,13 @@ const MailDetail = () => {
 
 </div>
 
-        <ul className="space-y-2">
+        <ul className="mt-[1rem] space-y-2">
           {mail?.documents?.map((doc) => {
             const type = getFileType(doc.fileName);
             return (
               <li
                 key={doc._id}
-                className="flex  flex-row gap-4 justify-between items-center  bg-white border border-gray-200 shadow-sm rounded-sm px-4 py-1 sm:py-3 hover:shadow-md transition duration-300"
+                className="flex  flex-row gap-4 justify-between items-center  bg-white border border-gray-200 shadow-sm rounded-sm px-4 py-3 sm:py-3 hover:shadow-md transition duration-300"
               >
                 <div className="flex items-center gap-3 truncate mb-2 sm:mb-0">
                   {getFileIcon(type)}
@@ -207,7 +207,7 @@ const MailDetail = () => {
                     download
                     className="flex items-center gap-1 text-[13px] sm:text-sm font-medium text-green-600 hover:text-green-800 hover:underline transition"
                   >
-                    <Download className="w-3 h-3 sm:w-4 sm:h-4" />
+                    <Download className="w-h h-h sm:w-4 sm:h-4" />
                     Download
                   </a>
                 ) : (

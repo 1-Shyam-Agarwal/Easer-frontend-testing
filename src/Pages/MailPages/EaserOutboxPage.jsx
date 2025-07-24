@@ -106,7 +106,7 @@ const EaserOutboxPage = () => {
              fixed bottom-8 right-6 sm:static sm:bottom-auto sm:right-auto z-40"
 >
   <span><FaPlus/></span>
-  <span className='flex items-center'>Compose</span>
+  <span className='flex items-center'>Create</span>
 </button>
 
       </div>
