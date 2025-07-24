@@ -40,7 +40,10 @@ export const getVendorEndpoints = {
 export const outboxOrdersEndpoints = {
    CREATE_OUTBOX_MAIL : BASE_URL + "/create-outbox-mail",
    FETCH_OUTBOX_MAIL_FOR_CUSTOMER : BASE_URL + "/fetch-customer-mails",
-   FETCH_INBOX_MAIL_FOR_VENDOR : BASE_URL + "/fetch-vendor-mails"
+   FETCH_INBOX_MAIL_FOR_VENDOR : BASE_URL + "/fetch-vendor-mails",
+   FETCH_FILTERED_MAILS_BY_FILE_NAME : BASE_URL + "/fetch-filtered-mails-by-filename",
+   FETCH_SPECIFIC_MAIL_DETAILS : BASE_URL + "/fetch-specific-mail-details",
+   FETCH_FILTERED_MAILS_BY_CUSTOMER_NAME : BASE_URL + "/fetch-filtered-mails-by-customer-name"
 }
 
 export const printOrderVendorEndpoints = {

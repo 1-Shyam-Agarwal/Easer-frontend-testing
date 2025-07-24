@@ -382,6 +382,7 @@ export async function handleGooglePreLoginCheck(googleToken , dispatch , navigat
               //Indicating user that you account is created successfully and you are logged in successfully.
               toast.success("Successfully logged in!")
 
+              console.log("Successfully logged in with Google");
               //Navigating the customer to the easer-inbox for placing the order.
               navigate("/dashboard/easer-outbox");
           }
@@ -409,59 +410,53 @@ export async function handleGooglePreLoginCheck(googleToken , dispatch , navigat
 const {
     RESETPASSTOKEN_API,
     RESETPASSWORD_API,
-    VALIDATE_VENDOR_INFO,
 } = authEndpoints ;
 
     
     
 
-
-
-
-
-export function getPasswordResetToken(email , setEmailSent , setLoading)
+//This function will send the reset password token to the email
+export async function getPasswordResetToken(email , setEmailSent , setLoading)
 {
-    
-    return async() =>
+    setLoading(true);
+    try
     {
-        setLoading(true);
-        try
+        const response = await apiConnector("POST",RESETPASSTOKEN_API,{email,});
+
+        if(!response?.data?.success)
         {
-            const response = await apiConnector("POST",RESETPASSTOKEN_API,{email,});
-
-            if(!response?.data?.success)
-            {
-                throw new Error(response?.data?.message);
-            }
-
-            toast.success("Reset Email Sent");
-            setEmailSent(true);
-        }catch(error){
-
-            console.log("RESET PASSWORD TOKEN Error", error);
-            toast.error(error?.response?.data?.message || "Unable to send reset token. Please try again later.");
+            throw new Error(response?.data?.message);
         }
-        setLoading(false);
+
+        toast.success("Reset Email Sent");
+        setEmailSent(true);
+    }catch(error){
+
+        console.log("RESET PASSWORD TOKEN Error", error);
+        toast.error(error?.response?.data?.message || "Unable to send reset token. Please try again later.");
+    }
+    finally{
+      setLoading(false);
     }
 }
 
-
-export function updatePassword(password , confirmPassword ,setLoading ,token,navigate)
+//This function will update the password
+//It will take password , confirmPassword , setLoading , token and navigate as parameters
+export async function updatePassword(password , confirmPassword ,setLoading ,token,navigate)
 {
-    return async()=>{
-        setLoading(true)
-        try
-        {
-            const response = await apiConnector("POST",RESETPASSWORD_API,{password , confirmPassword , token});
-            toast.success("Password is reset successfully");
-            navigate('/', { replace: true });
-        }catch(error){
-    
-                toast.error(error?.response?.data?.message || "Unable to reset the password. Please try again later.");
-        }
-        setLoading(false);
+    setLoading(true)
+    try
+    {
+        const response = await apiConnector("POST",RESETPASSWORD_API,{password , confirmPassword , token});
+        toast.success("Password is reset successfully");
+        navigate('/', { replace: true });
+    }catch(error){
+
+            toast.error(error?.response?.data?.message || "Unable to reset the password. Please try again later.");
     }
+    setLoading(false);
 }
+
 
 
 

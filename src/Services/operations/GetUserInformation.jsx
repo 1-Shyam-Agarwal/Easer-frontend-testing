@@ -7,26 +7,21 @@ import { setShowModel } from "../../Slices/LogoutSlice";
 
 const {GET_USER_DETAILS , GET_SHOP_INFORMATION} = getUserInformationEndpoints;
 
-export function getRole(token , setRole)
+export async function getRole(token , setRole)
 {
-    return async()=>
+    try
     {
-        try
-        {
-            const response = await apiConnector("POST" , getUserInformationEndpoints.GET_USER_ROLE,undefined ,{'Authorization': `Bearer ${token}`} )
-            if(setRole) setRole(response?.data?.role);
-            else{
-                return response?.data?.role;
-            }
-        }catch(error)
-        {
-            console.log(error);
-            if(!((error?.response?.data?.message === "You are logged in on another device.") || (error?.response?.data?.message ==="Session is expired.")))
-            {
-                toast.error(error?.response?.data?.message || "Unable to fetch role. Please try again later.");
-            }        
+        const response = await apiConnector("POST" , getUserInformationEndpoints.GET_USER_ROLE,undefined ,{'Authorization': `Bearer ${token}`} )
+        if(setRole) setRole(response?.data?.role);
+        else{
+            return response?.data?.role;
         }
+    }catch(error)
+    {
+        console.log(error);
+        // toast.error(error?.response?.data?.message || "Unable to fetch role. Please try again later.");
     }
+
 }
 
 export function getShopStatus(token,vendorId ,setIsShopOpen, dispatch , navigate , socket , setSocket)
@@ -68,84 +63,19 @@ export function getShopStatus(token,vendorId ,setIsShopOpen, dispatch , navigate
     }
 }
 
-export function getUserId(token)
+
+export async function getUserDetails(setUser ,token,setLoading)
 {
-    return async()=>
+    setLoading(true);
+    try
     {
-        try
-        {
-            const response = await apiConnector("POST",getUserInformationEndpoints.GET_USER_ID,undefined,
-                {'Authorization': `Bearer ${token}`} 
-            )
-            return response?.data?.userId ;
-
-        }
-        catch(error)
-        {
-            console.log(error);
-            if(!((error?.response?.data?.message === "You are logged in on another device.") || (error?.response?.data?.message ==="Session is expired.")))
-            {
-                toast.error(error?.response?.data?.message || "Unable to get userid. Please try again later.");
-            }   
-            
-        }
-
-    }
-    
-}
-
-export function getRequiredRooms(token)
-{
-    return async()=>
+        const response = await apiConnector("POST" ,GET_USER_DETAILS ,undefined,{'Authorization': `Bearer ${token}`} );
+        setLoading(false);
+        setUser(response?.data?.data);
+    }catch(error)
     {
-        try
-        {
-            const response = await apiConnector("POST" , getUserInformationEndpoints.GET_ROOMS_FOR_USER , undefined ,
-                {'Authorization': `Bearer ${token}`} 
-            )
-
-            return response?.data?.roomSet;
-
-        }catch(error)
-        {
-            console.log(error);
-            if(!((error?.response?.data?.message === "You are logged in on another device.") || (error?.response?.data?.message ==="Session is expired.")))
-            {
-                toast.error(error?.response?.data?.message || "Unable to fetch rooms.Kindly reload the page or try again later.");
-            }   
-        }
-    }
-}
-
-export function getUserDetails(dispatch , setUser ,token,setLoading,navigate,socket,setSocket)
-{
-    return async()=>
-    {
-        if(socket)
-        {
-            setLoading(true);
-            try
-            {
-                const response = await apiConnector("POST" ,GET_USER_DETAILS ,undefined,{'Authorization': `Bearer ${token}`} );
-                setLoading(false);
-                setUser(response?.data?.data);
-            }catch(error)
-            {
-                setLoading(false);
-                if((error?.response?.data?.message === "You are logged in on another device.") || (error?.response?.data?.message ==="Session is expired."))
-                {
-                    dispatch(clearToken());
-                    dispatch(clearUser());
-                    dispatch(clearRole());
-                    dispatch(clearRoomcode());
-                    socket.disconnect();
-                    setSocket(null);
-                    dispatch(setShowModel(false));
-                    navigate("/login" , {new : true});
-                }
-                toast.error(error?.response?.data?.message || "Unable to fetch your details. Please try again later.");
-            }
-        }
+        setLoading(false);
+        toast.error(error?.response?.data?.message || "Unable to fetch your details. Please try again later.");
     }
 
 }

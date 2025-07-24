@@ -6,17 +6,15 @@ import { matchPath } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfileDropDown from '../../../../components/ProfileComponents/ProfileDropDown.jsx';
 import { Menu, X } from 'lucide-react';
-import { MdPerson, MdList, MdWarning, MdDelete, MdHistory, MdSchool } from 'react-icons/md';
-import { RiExpandRightLine, RiExpandLeftLine } from 'react-icons/ri';
+import { MdInbox , MdPayment  } from 'react-icons/md';
 import { IoMdPersonAdd } from "react-icons/io";
 import { BsFillBuildingsFill } from "react-icons/bs";
 import krishna_footprints from "../../../../Images/krishna_footprints.png";
 import "./navbar.css";
-import { getRole } from '../../../../Services/operations/GetUserInformation.jsx';
-import { useEffect } from 'react';
-import toast from 'react-hot-toast';
+import { FaDroplet } from "react-icons/fa6";
 
-const Navbar = () => {
+
+const Navbar = ({setShowInkletInfo}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const token = useSelector((state) => state.auth.token);
   const user = useSelector(state=> state.user.user);
@@ -26,68 +24,45 @@ const Navbar = () => {
 
   // Navigation structures for different roles remain the same as in your code
   const userNavigation = [
-      { 
-        to: '/dashboard/my-profile', 
-        icon: <MdPerson />, 
-        label: 'My Profile',
-        type: 'single'
-      },
-      { 
-        to: '/dashboard/college-shops', 
-        icon: <MdSchool />, 
-        label: 'College Shops',
-        type: 'single'
-      },
-
-          { to: '/dashboard/ongoing-orders', icon: <MdSchool />, label: 'Ongoing Orders' },
-          { to: '/dashboard/unreceived-orders', icon: <MdWarning />, label: 'Unreceived Orders' },
-          { to: '/dashboard/cancelled-orders', icon: <MdDelete />, label: 'Cancelled Orders' },
-          { to: '/dashboard/order-history', icon: <MdHistory />, label: 'Order History' },
-      ,
-      { 
-        to: '/dashboard/place-order', 
-        icon: <MdList />, 
-        label: 'Place Order',
-        type: 'single'
-      },
-    ];
-  
-    const vendorNavigation = [
-      { 
-        to: '/dashboard/my-profile', 
-        icon: <MdPerson />, 
-        label: 'View Profile',
-        type: 'single'
-      },
-      { 
-        to: '/dashboard/college-shops', 
-        icon: <MdSchool />, 
-        label: 'College Shops',
+      {
+        to: '/dashboard/easer-outbox',
+        icon: <MdInbox />,
+        label: 'Outbox',
         type: 'single'
       },
       {
-        label: 'Orders',
-        icon: <MdList />,
-        type: 'category',
-        items: [
-          { to: '/dashboard/ongoing-orders', icon: <MdSchool />, label: 'Ongoing Orders' },
-          { to: '/dashboard/unreceived-orders', icon: <MdWarning />, label: 'Unreceived Orders' },
-          { to: '/dashboard/cancelled-orders', icon: <MdDelete />, label: 'Cancelled Orders' },
-          { to: '/dashboard/order-history', icon: <MdHistory />, label: 'Order History' },
-        ]
+        to: '/dashboard/freq-docs',
+        icon: <MdInbox />,
+        label: 'Study Material',
+        type: 'single'
+      },
+      {
+        to: '/dashboard/ongoing-orders',
+        icon: <MdPayment />,
+        label: 'Prepaid Orders',
+        type: 'single'
+      }
+    ];
+  
+    const vendorNavigation = [
+      {
+        to: '/dashboard/easer-inbox',
+        icon: <MdInbox />,
+        label: 'Inbox',
+        type: 'single'
       },
     ];
   
     const adminNavigation = [
-      { 
-        to: '/dashboard/add-college', 
-        icon: <BsFillBuildingsFill />, 
+      {
+        to: '/dashboard/add-college',
+        icon: <BsFillBuildingsFill />,
         label: 'Add College',
         type: 'single'
       },
-      { 
-        to: '/dashboard/add-vendor', 
-        icon: <IoMdPersonAdd />, 
+      {
+        to: '/dashboard/add-vendor',
+        icon: <IoMdPersonAdd />,
         label: 'Add Vendor',
         type: 'single'
       },
@@ -97,7 +72,7 @@ const Navbar = () => {
   const getNavigationItems = (token,role) => {
     if (!token) return [];
     switch (role) {
-      case 'user':
+      case 'customer':
         return userNavigation;
       case 'vendor':
         return vendorNavigation;
@@ -192,7 +167,16 @@ const Navbar = () => {
         {/* Desktop Auth Buttons and Mobile Controls */}
         <div className="flex items-center gap-4 mx-[1.5rem]">
           {/* Profile Dropdown - Visible on all screen sizes */}
-          {token!==null && <ProfileDropDown image={user}/>}
+          {token!==null && 
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 bg-blue-50 px-3 py-1 rounded-full text-blue-700 font-normal shadow-sm"
+                 onClick={() => {setShowInkletInfo(true)}}>
+              <span className='flex justify-between items-center gap-1'><FaDroplet className='inline'/><span className='font-semibold'>10000 Inklets </span> </span>
+            </div>
+            <ProfileDropDown image={user} />
+          </div>
+          }
+          
           
           {/* Desktop Auth Buttons */}
           {token === null && (
@@ -229,7 +213,7 @@ const Navbar = () => {
           <div className="flex flex-col p-4 space-y-2 text-[13px]">
             {/* Role-based Navigation Items */}
             {token && (
-              <div className="space-y-2 font-md border-b border-gray-100 pb-2">
+              <div className="space-y-2 font-md pb-2">
                 {renderNavItems(getNavigationItems(token,role))}
               </div>
             )}

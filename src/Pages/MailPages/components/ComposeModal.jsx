@@ -3,244 +3,270 @@ import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../../firebase';
 import { v4 as uuidv4 } from 'uuid';
 import toast from 'react-hot-toast';
+import { RxCross2 } from "react-icons/rx"
 
-
-const ComposeModal = ({ toggleComposeModelVisibility  , filteredVendorsData ,sendMail}) => {
-
-  // creating ref for select field
+const ComposeModal = ({ toggleComposeModelVisibility, filteredVendorsData, sendMail }) => {
   const selectRef = useRef(null);
-
-  //In this useState , we store the uploaded files
-  const [uploadingFiles, setUploadingFiles] = useState([]);
-
-  //This ref is pointing to the file input field so that we can clear it after each upload.
   const fileInputRef = useRef(null);
+  const [uploadingFiles, setUploadingFiles] = useState([]);
+  const [dragActive, setDragActive] = useState(false);
+  const [loading , setLoading] = useState(false);
 
-  //This is used to close the compose modal
-  function handleClose() {
-    toggleComposeModelVisibility();
+  const handleClose = () => toggleComposeModelVisibility();
+
+  const MAX_FILE_SIZE_MB = 30;
+const MAX_TOTAL_FILES = 15;
+
+const processFiles = (files) => {
+  const validFiles = Array.from(files);
+
+  if (!validFiles.length) return;
+
+  // Check if adding these files exceeds total file count
+  if (uploadingFiles.length + validFiles.length > MAX_TOTAL_FILES) {
+    toast.error(`Cannot upload more than ${MAX_TOTAL_FILES} files.`);
+    return;
   }
 
-  //This is the main function which handles file upload 
-  function handleFileUpload(e) {
-    
-
-    //Converts the fileList into the proper js array
-    const files = Array.from(e.target.files);
-
-    // Clear input after upload
-    if (fileInputRef.current) fileInputRef.current.value = '';
-
-    //Checks whether the fiels array is empty or not.
-    if (!files.length) {
-        alert("No file selected. Please choose at least one file to upload.");
-        return;
+  const filteredFiles = validFiles.filter(file => {
+    const sizeMB = file.size / (1024 * 1024);
+    if (sizeMB > MAX_FILE_SIZE_MB) {
+      toast.error(`${file.name} exceeds ${MAX_FILE_SIZE_MB}Mb limit.`);
+      return false;
     }
+    return true;
+  });
 
-    // Add selected files to state with initial progress
+  if (!filteredFiles.length) return;
 
-    const initialFiles = files.map((file) => ({
-      file,
-      name : file.name,
-      progress: 0,
-      file_id : uuidv4(),
-      file_ref : `documents/${Date.now()}-${file.name}-${uuidv4()}`,
-      uploading: true,
-      url: null,
-    }));
+  const newFiles = filteredFiles.map((file) => ({
+    file,
+    name: file.name,
+    progress: 0,
+    file_id: uuidv4(),
+    file_ref: `documents/${uuidv4()}${Date.now()}-${file.name}`,
+    uploading: true,
+    url: null,
+  }));
 
-    setUploadingFiles((prev) => [...prev, ...initialFiles]);
+  // Add new files to top
+  setUploadingFiles((prev) => [...newFiles, ...prev]);
 
-    // Upload each file
-    initialFiles.forEach((fileData) => {
+  newFiles.forEach((fileData) => {
+    const { file, file_id, file_ref } = fileData;
+    const storageRef = ref(storage, file_ref);
+    const uploadTask = uploadBytesResumable(storageRef, file);
 
-      const { file, file_id , file_ref } = fileData;
-
-      //Creating path for the docuemnt
-      const storageRef = ref(storage , file_ref);
-
-      //Initiating the upload process
-      const uploadTask = uploadBytesResumable(storageRef, file);
-
-      uploadTask.on(
-        'state_changed',
-        (snapshot) => {
-
-          // Calculating the progress
-          const progress = Math.round(
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          );
-        
-          // Update progress for the file
+    uploadTask.on(
+      'state_changed',
+      (snapshot) => {
+        const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        setUploadingFiles((prev) =>
+          prev.map((f) => (f.file_id === file_id ? { ...f, progress } : f))
+        );
+      },
+      (error) => {
+        toast.error(`Upload failed for ${file.name}`);
+        setUploadingFiles((prev) => prev.filter((file) => file.file_id !== file_id));
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           setUploadingFiles((prev) =>
             prev.map((f) =>
-              f.file_id === file_id ? { ...f, progress } : f
+              f.file_id === file_id ? { ...f, uploading: false, url: downloadURL } : f
             )
           );
-        },
+        });
+      }
+    );
+  });
+};
 
-        (error) => {
 
-          toast.error(`Upload failed for ${file.name}`);
-          console.log(error);
-          setUploadingFiles((prev)=>
-          (
-                prev.filter(
-                    (file)=>
-                    {
-                        return file.file_id!= file_id
-                    }
-                )
-          ));
-        },
-
-        () => {
-
-          //Fetching the downloadable link from the firebase storage
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-
-            // Update file url after successful upload
-            setUploadingFiles((prev) =>
-              prev.map((f) =>
-                f.file_id === file_id
-                  ? { ...f, uploading: false, url: downloadURL }
-                  : f
-              )
-            );
-          });
-        }
-      );
-    });
-  }
-
-  //This fucntion is used to delete a particular uploaded fiel
-  function handleDeleteFile(file_id)
-  {
-        setUploadingFiles((prev)=>
-        (
-            prev.filter(
-                (file)=>
-                {
-                    return file.file_id!= file_id
-                }
-            )
-        ));
-
-  }
-
-  //This funciton is basically used for formatiing the shopname and shopLandmark
-  function formatVendorDisplay(vendor) {
-    const name = vendor?.vendorAdditionalDetails?.shopName?.toUpperCase() || "";
-    const landmark = vendor?.vendorAdditionalDetails?.shopLandMark?.toLowerCase() || "";
-    return `${name} (${landmark})`;
-  }
-
-  //This will return selected vendor
-  const handleVendorValue = () => {
-    const selectedValue = selectRef.current?.value;
-    return selectedValue;
+  const handleFileUpload = (e) => {
+    console.log("file input changed");
+    const uploadedFiles = e.target.files;
+    if (uploadedFiles && uploadedFiles.length > 0) {
+      processFiles(uploadedFiles);
+    }
+    // Clear the input value to allow re-uploading the same file
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   };
 
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="relative bg-white w-full max-w-2xl rounded-2xl shadow-xl p-6">
+  const handleDrag = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.type === 'dragenter' || e.type === 'dragover') {
+      setDragActive(true);
+    } else if (e.type === 'dragleave') {
+      // Only set dragActive to false if we're leaving the drop zone entirely
+      if (!e.currentTarget.contains(e.relatedTarget)) {
+        setDragActive(false);
+      }
+    }
+  };
 
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+    
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      console.log("files dropped:", e.dataTransfer.files);
+      processFiles(e.dataTransfer.files);
+      // Clear the dataTransfer
+      e.dataTransfer.clearData();
+    }
+  };
+
+  const handleDeleteFile = (file_id) => {
+    // LIFO deletion: Remove file while maintaining LIFO order
+    setUploadingFiles((prev) => prev.filter((file) => file.file_id !== file_id));
+  };
+
+  const formatVendorDisplay = (vendor) => {
+    const name = vendor?.vendorAdditionalDetails?.shopName?.toUpperCase() || '';
+    const landmark = vendor?.vendorAdditionalDetails?.shopLandMark?.toLowerCase() || '';
+    return `${name} (${landmark})`;
+  };
+
+  const handleVendorValue = () => selectRef.current?.value;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex items-center justify-center z-50 px-2 sm:px-4">
+      {
+        loading ? 
+           <div className='flex justify-center items-center h-[50vh]'>
+              <span class="loader"></span>
+            </div>
+        :
+        (
+            <div
+        className="relative bg-white w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-sm shadow-lg p-4 sm:p-6 border border-gray-200"
+        onDragEnter={handleDrag}
+        onDragOver={handleDrag}
+        onDragLeave={handleDrag}
+        onDrop={handleDrop}
+      >
         {/* Header */}
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold text-gray-800">Compose Message</h2>
+        <div className="flex justify-between items-center border-b pb-2 sm:pb-3">
+          <h2 className="text-base sm:text-lg font-semibold text-gray-800">Compose Message</h2>
           <button
-            className="text-gray-500 hover:text-red-600 text-2xl font-bold focus:outline-none"
+            className="text-gray-400 hover:text-red-500 text-xl sm:text-2xl font-bold transition"
             onClick={handleClose}
           >
-            &times;
+            <RxCross2/>
           </button>
         </div>
 
-        {/* Select college Shop */}
-        <div className="w-full max-w-md mx-auto my-4">
+        {/* Select Vendor */}
+        <div className="my-3 sm:my-4">
+          <label className="block mb-1 text-sm text-gray-600">Select Shop</label>
           <select
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm bg-white text-gray-800 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
             ref={selectRef}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             {filteredVendorsData?.map((vendor) => (
-              <option
-                key={vendor?.userId}
-                value={vendor?.userId}
-                className="text-sm text-gray-700"
-              >
+              <option key={vendor?.userId} value={vendor?.userId}>
                 {formatVendorDisplay(vendor)}
               </option>
             ))}
           </select>
         </div>
 
-
-        {/* File Input */}
-        <div className="flex justify-center items-center m-4">
+        {/* Drag & Drop Area */}
+        <div
+          className={`relative border-2 border-dashed rounded-md px-3 py-5 text-center text-sm transition-colors ${
+            dragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300'
+          }`}
+        >
+          <p className="text-gray-500 mb-1">Drag & drop files here</p>
+          <button
+            className="text-blue-600 hover:underline text-sm font-medium"
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+          >
+            or click to browse
+          </button>
           <input
             type="file"
             multiple
             ref={fileInputRef}
-            accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.csv,.jpg,.jpeg,.png"
             onChange={handleFileUpload}
-            className="text-sm text-gray-700"
+            accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.csv,.jpg,.jpeg,.png"
+            className="hidden"
           />
+        </div>
 
-          <button type="submit"
-              onClick={()=>{sendMail(uploadingFiles , handleVendorValue() )}}>
-              send
+        {/* Send Button */}
+        <div className="mt-4 text-right">
+          <button
+            type="submit"
+            onClick={() => sendMail(uploadingFiles, handleVendorValue() , setLoading)}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2 rounded-md text-sm font-medium shadow-sm transition"
+          >
+            Send
           </button>
         </div>
 
-        {/* Uploading Cards */}
+        {/* Upload Preview */}
         {uploadingFiles.length > 0 && (
-          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="mt-5 grid grid-cols-1 gap-3 sm:gap-4">
             {uploadingFiles.map((file, index) => (
-
               <div
-                key={index}
-                className="border rounded-lg p-4 bg-gray-50 shadow-sm flex flex-col gap-1"
+                key={file.file_id}
+                className="bg-gray-50 border border-gray-200 rounded-sm p-3 py-2 shadow-sm flex justify-between items-center"
               >
-                    {/* This p represents the name of the file */}
-                    <div className='flex justify-between items-center'>
-                        <p className="text-sm text-gray-800 truncate">{file.name}</p>
-                        <button
-                            className={` ${file.uploading ? "text-gray-400 cursor-not-allowed":"text-gray-500 hover:text-red-600"} text-2xl font-bold focus:outline-none`}
-                            onClick={()=>{handleDeleteFile(file.file_id)}}
-                            disabled={file.uploading}
-                        >
-                            &times;
-                        </button>
+                <div className="flex justify-between items-center gap-4">
+                  <p className="text-sm font-medium text-gray-800 truncate max-w-[80%]">
+                    {file.name}
+                  </p>
+                  {file.url && (
+                    <a
+                      href={file.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-green-600 hover:underline"
+                    >
+                      view 
+                    </a>
+                  )}
+                </div>
+
+                <div className="mt-1 text-xs text-gray-600">
+                  {file.uploading ? (
+                    <div className="flex items-center">
+                      <div className="w-3 h-3 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mr-2" />
+                      Uploading... {file.progress}%
                     </div>
-                    
-
-                    {file.uploading ? 
-
-                        // If file is in uplaoding phase , then we show uploading along with percentage
-                        <div className="flex items-center gap-2 text-[10px] text-gray-600">
-                            <div className="w-2 h-2 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
-                            Uploading... {file.progress}%
-                        </div>
-
-                        : 
-
-                        //If file is uploaded successfully then show public url 
-                        <a
-                            href={file.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-green-600 text-[10px] hover:underline"
-                        >
-                            View Uploaded File
-                        </a>
-                    }
+                  ) : (
+                    <div className='flex items-center'>
+                      <button
+                        className={`${
+                          file.uploading
+                            ? 'text-gray-300 cursor-not-allowed'
+                            : 'text-gray-400 hover:text-red-500'
+                        } text-xl flex items-center font-bold transition`}
+                        onClick={() => handleDeleteFile(file.file_id)}
+                        disabled={file.uploading}
+                      >
+                        <RxCross2/>
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
             ))}
           </div>
         )}
       </div>
+        )
+      }
+      
     </div>
   );
-};
+}
 
 export default ComposeModal;

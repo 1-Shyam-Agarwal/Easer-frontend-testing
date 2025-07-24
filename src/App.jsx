@@ -2,15 +2,13 @@ import { Routes ,Route } from "react-router-dom";
 import  { Toaster } from 'react-hot-toast';
 import { useSelector,useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
-import io from "socket.io-client";
-import { useEffect,useContext } from "react";
+import { useEffect , useState } from "react";
 import "./App.css";
 
 //API USED
-import {  getRole, getUserId } from "./Services/operations/GetUserInformation.jsx";
-import { setRole, setRoomcode } from "./Slices/authSlice.js";
-import { socketContext } from "./ContextApi/SocketContext.js";
-import { getRequiredRooms } from "./Services/operations/GetUserInformation.jsx";
+import {  getRole} from "./Services/operations/GetUserInformation.jsx";
+import { setRole } from "./Slices/authSlice.js";
+
 
 //Self Defined Routes
 import OpenRoute from "./components/Core/Auth/OpenRoute.jsx";
@@ -21,7 +19,7 @@ import HomePage from "./Pages/Public_pages/HomePage/HomePage.js";
 import Sponsors from "./Pages/Public_pages/Sponsors.js";
 import FAQPage from "./Pages/Public_pages/FAQsPage.js";
 import BecomeVendor from "./Pages/Public_pages/BecomeVendor.jsx";
-import VendorPricingPage from "./Pages/Public_pages/Pricing.jsx";
+// import VendorPricingPage from "./Pages/Public_pages/Pricing.jsx";
 
 
 //Legal Pages
@@ -36,14 +34,14 @@ import ShippingAndDeliveryPolicy from "./Pages/Legal_Pages/ShippingAndDeliveryPo
 //Auth Pages
 import LoginPage from "./Pages/AuthPages/LoginPage.js";
 import SignupPage from "./Pages/AuthPages/SignupPage.js";
-import ForgetPasswordPage from "./Pages/ForgetPassword.js";
-import UpdatePasswordPage from "./Pages/UpdatePassword.js";
-import VendorSignupPage from "./Pages/VendorSignupPage.jsx";
-import VendorSignup from "./Pages/VendorSignupPage.jsx";
+import ForgetPasswordPage from "./Pages/AuthPages/ForgetPassword.js";
+import UpdatePasswordPage from "./Pages/AuthPages/UpdatePassword.js";
+// import VendorSignupPage from "./Pages/FutureScope/VendorSignupPage.jsx";
+// import VendorSignup from "./Pages/FutureScope/VendorSignupPage.jsx";
 
 //General_Pages
 import NotFoundPage from "./Pages/General_Pages/NotFound.jsx";
-import SuccessPage from "./Pages/General_Pages/SuccessPage.jsx";
+// import SuccessPage from "./Pages/General_Pages/SuccessPage.jsx";
 
 
 
@@ -52,19 +50,21 @@ import Navbar from "./Pages/Public_pages/HomePage/Components/Navbar.js";
 import DashboardSidebar from "./components/DashboardComponents/DashboardSidebar.jsx";
 
 import DashboardTemplate from "./components/DashboardComponents/DashboardTemplate.jsx";
-import MyProfile from "./Pages/MyProfile.jsx"
-import  YourShopPage from "./Pages/YourShopRelatedComponents/YourShopPage.jsx";
-import PlaceOrderCollegeSelection from "./components/PlaceOrderComponent/PlaceOrderSelect.jsx";
-import OrderDashboard from "./Pages/OrderDashboard.jsx";
+import MyProfile from "./Pages/DashboardPages/MyProfile.jsx"
+// import  YourShopPage from "./Pages/FutureScope/YourShopRelatedComponents/YourShopPage.jsx";
+// import PlaceOrderCollegeSelection from "./components/FuturesScope/PlaceOrderComponent/PlaceOrderSelect.jsx";
+// import OrderDashboard from "./Pages/FutureScope/YourShopRelatedComponents/OrderDashboard.jsx";
 import VendorInboxPage from "./Pages/MailPages/VendorInboxPage.jsx";
+import FrequentDocs from "./Pages/DashboardPages/FrequentDocs.jsx";
 
 
 
-import Settings from "./Pages/Settings.jsx";
-import CancelledOrdersDashboard from "./Pages/CancelledOrdersDashboard.jsx";
-import OngoingOrders from "./Pages/OngoingOrders.jsx";
-import UnreceivedOrders from "./Pages/UnreceivedOrders.jsx";
-import OrderHistoryDashboard from "./Pages/OrderHistoryDashboard.jsx"
+import Settings from "./Pages/DashboardPages/Settings.jsx";
+// import CancelledOrdersDashboard from "./Pages/CancelledOrdersDashboard.jsx";
+// import OngoingOrders from "./Pages/OngoingOrders.jsx";
+// import UnreceivedOrders from "./Pages/UnreceivedOrders.jsx";
+// import OrderHistoryDashboard from "./Pages/OrderHistoryDashboard.jsx";
+import FeatureRelease from "./Pages/General_Pages/ComingSoon.jsx";
 
 
 
@@ -73,77 +73,54 @@ import OrderHistoryDashboard from "./Pages/OrderHistoryDashboard.jsx"
 
 
 import LogoutModel from "./components/Core/Auth/LogoutModel.jsx";
-import SpecificCollegeShopWithoutLogin from "./Pages/SpecificCollegeShopWithoutLogin.jsx";
+// import SpecificCollegeShopWithoutLogin from "./Pages/SpecificCollegeShopWithoutLogin.jsx";
 
-import AddVendorPage from "./Pages/AddVendorPage.jsx";
+// import AddVendorPage from "./Pages/AddVendorPage.jsx";
 import EaserOutboxPage from "./Pages/MailPages/EaserOutboxPage.jsx";
-import Store from "./Pages/DashboardPages/Store/Store.jsx";
+import ShowInkletInfo from "./Pages/Public_pages/HomePage/Components/ShowInkletInfo.jsx";
+import MailDetail from "./Pages/MailPages/components/Specific_mail_details.jsx";
+// import Store from "./Pages/DashboardPages/Store/Store.jsx";
 
 
 
 
 function App() {
 
+  console.log("DashboardTemplate", DashboardTemplate);
   const dispatch = useDispatch();
   const token = useSelector(state=>{return state.auth.token});
   const location= useLocation();
-  const {setSocket} = useContext(socketContext);
   const showModel = useSelector((state)=>{return state.logout.showModel});
+  const [showInkletInfo, setShowInkletInfo] = useState(false);
+  
+
+   useEffect(()=>{
+
+     async function setUserRole()
+     {
+        let role ="";
+        if(token)
+        {
+            role = await getRole(token);
+            dispatch(setRole(role)); 
+        }
+     }
+
+    setUserRole();
+
+   },[token])
 
 
-  //  useEffect(()=>{
-
-  //    let socket="";
-  //    async function fetchCollegeCode()
-  //    {  
-  //       if(token)
-  //       {
-         
-          
-  //         socket = io( "http://localhost:5000" ,{transports:["websocket"]});  
-  //         setSocket(socket);
-  //         const userId = await dispatch(getUserId(token));
-         
-  //         if(userId)
-  //         { 
-  //           dispatch(setRoomcode(userId));
-  //           socket.emit("join-initial-self-room" , userId);
-  //         }
-  //       }
-  //    }
-
-  //    async function setUserRole()
-  //    {
-  //       let role ="";
-  //       if(token)
-  //       {
-  //           role = await dispatch(getRole(token));
-  //           dispatch(setRole(role)); 
-  //       }
-
-  //       if(token && role)
-  //       {
-  //           if(role ==="user")
-  //           {
-  //               const rooms = await dispatch(getRequiredRooms(token));
-  //               socket.emit("user-enter-the-required-room" , rooms);
-                
-  //           }
-  //       }
-  //    }
-
-  //    fetchCollegeCode();
-  //    setUserRole();
-
-  //  },[token])
-
-
+  
   return (
     <div>
+
+      {/* NAVBAR */}
       {
-        location.pathname.split("/")[1] === "dashboard" || location.pathname.split("/")[1]==="success"? <div></div> : <Navbar/>
+        location.pathname.split("/")[1] === "dashboard" || location.pathname.split("/")[1]==="success"? <div></div> : <Navbar setShowInkletInfo={setShowInkletInfo}/>
       }
 
+      {/* LOGOUT MODEL */}
       {
         showModel && (
           <LogoutModel></LogoutModel>
@@ -152,98 +129,207 @@ function App() {
       
       <Routes>
 
-        <Route path="/" element={<HomePage/>}></Route>
-      
-        <Route path="/login" 
-            element={<OpenRoute>
-                        <LoginPage/>
-                    </OpenRoute>}>
-        </Route>
 
-        <Route path="/success"
-              element={<SuccessPage/>}>
-        </Route>
-
-        <Route path="/pricing"
-              element={<VendorPricingPage/>}>
-        </Route>
+          {/*<-------------------PUBLIC PAGES-------------------------> */}
+          <Route path="/" element={<HomePage/>}></Route>
+          <Route path="/about" element={<AboutPage/>}></Route>
+          <Route path="/sponsors" element={<Sponsors/>}></Route>
+          <Route path="/contactus" element={<ContactUs/>}></Route>
+          <Route path="/FAQs" element={<FAQPage/>}></Route>
+          <Route path="/become-vendor"
+                  element={
+                    <BecomeVendor/>
+                  }>
+          </Route>
 
 
 
+          {/* <--------------------BUSINESS RELATED PAGES---------------------> */}
+          <Route path="/privacy-policy"
+                  element={
+                    <PrivacyPolicy/>
+                  }>
+          </Route>
 
-        <Route path="/about" element={<AboutPage/>}></Route>
-        <Route path="/sponsors" element={<Sponsors/>}></Route>
-        <Route path="/contactus" element={<ContactUs/>}></Route>
-        <Route path="/FAQs" element={<FAQPage/>}></Route>
+          <Route path="/shipping-and-delivery-policy"
+                  element={
+                    <ShippingAndDeliveryPolicy/>
+                  }>
+          </Route>
 
-        
+          <Route path="/disclaimer"
+                  element={
+                    <Disclaimer/>
+                  }>
+          </Route>
+
+          <Route path="/terms-and-conditions"
+                  element={
+                    <TermsAndConditions/>
+                  }>
+          </Route>
+
+          <Route path="/refund-and-cancellation-policy"
+                  element={
+                    <RefundAndCancellationPolicy/>
+                  }>
+          </Route>
 
 
-        <Route path="/forget-password" 
+          {/*<------------------------AUTH PAGES-----------------------------> */}
+          <Route path="/login" 
+              element={<OpenRoute>
+                          <LoginPage/>
+                      </OpenRoute>}>
+          </Route>
+
+          <Route path="/signup/user" 
+              element={
+                <OpenRoute>
+                  <SignupPage />
+                </OpenRoute>
+              }>
+          </Route>
+
+          <Route path="/forget-password" 
               element={<OpenRoute>
                           <ForgetPasswordPage/>
                       </OpenRoute>
               }>
-        </Route>
-        
-        <Route path="/update-password/:id" 
-              element={<OpenRoute>
-                          <UpdatePasswordPage/>
-                      </OpenRoute>}>
-        </Route>
-
-        <Route path="/privacy-policy"
-               element={
-                  <PrivacyPolicy/>
-               }>
-        </Route>
-
-        <Route path="/shipping-and-delivery-policy"
-               element={
-                  <ShippingAndDeliveryPolicy/>
-               }>
-        </Route>
-
-        <Route path="/disclaimer"
-               element={
-                  <Disclaimer/>
-               }>
-        </Route>
-
-        <Route path="/become-vendor"
-               element={
-                  <BecomeVendor/>
-               }>
-        </Route>
-
-        <Route path="/terms-and-conditions"
-               element={
-                  <TermsAndConditions/>
-               }>
-        </Route>
-
-        <Route path="/refund-and-cancellation-policy"
-               element={
-                  <RefundAndCancellationPolicy/>
-               }>
-        </Route>
+          </Route>
+          
+          <Route path="/update-password/:id" 
+                element={<OpenRoute>
+                            <UpdatePasswordPage/>
+                        </OpenRoute>}>
+          </Route>
+          
 
 
-      <Route path="/signup/user" 
+          {/*<------------------DASHBOARD PAGE--------------------------->*/}
+          <Route path="/dashboard/my-profile" 
+              element={
+                <ProtectedRoute>
+                  <DashboardTemplate setShowInkletInfo={setShowInkletInfo}>
+                    <MyProfile />
+                  </DashboardTemplate>
+                </ProtectedRoute>
+              }>
+          </Route>
+
+          <Route path="/dashboard/easer-inbox" 
             element={
-              <OpenRoute>
-                <SignupPage />
-              </OpenRoute>
+              <ProtectedRoute>
+                <DashboardTemplate >
+                  <VendorInboxPage/>
+                </DashboardTemplate>
+              </ProtectedRoute>
             }
-      >
-      </Route>
+          >
+          </Route>
 
-      <Route path="/services/printing/select-college/:id/:id"
+          <Route path="/dashboard/easer-outbox" 
+              element={
+                <ProtectedRoute>
+                  <DashboardTemplate setShowInkletInfo={setShowInkletInfo}>
+                      <EaserOutboxPage></EaserOutboxPage>
+                  </DashboardTemplate>
+                </ProtectedRoute>
+              }
+          >
+          </Route>
+
+          <Route path="/dashboard/easer-inbox/mail/:id" 
+              element={
+                <ProtectedRoute>
+                  <DashboardTemplate setShowInkletInfo={setShowInkletInfo}>
+                       <MailDetail/>
+                  </DashboardTemplate>
+                </ProtectedRoute>
+              }
+          >
+          </Route>
+
+          <Route path="/dashboard/easer-outbox/mail/:id" 
+              element={
+                <ProtectedRoute>
+                  <DashboardTemplate setShowInkletInfo={setShowInkletInfo}>
+                      <MailDetail/>
+                  </DashboardTemplate>
+                </ProtectedRoute>
+              }
+          >
+          </Route>
+
+          <Route path="/dashboard/settings" 
+            element={
+              <ProtectedRoute>
+                <DashboardTemplate setShowInkletInfo={setShowInkletInfo}>
+                  <Settings/>
+                </DashboardTemplate>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route path="/dashboard/freq-docs"
+            element={
+                    <ProtectedRoute>
+                      <DashboardTemplate>
+                        <FrequentDocs/>
+                      </DashboardTemplate>
+                    </ProtectedRoute>
+                  }
+          />
+
+
+          
+          {/*<------------------------MESSAGES PAGE---------------------> */}
+            <Route path="*" 
+              element={<NotFoundPage/>}
+            >
+            </Route>
+
+            <Route path="/coming-soon"
+                element={<FeatureRelease/>}
+            >
+            </Route>
+
+
+
+
+
+
+        
+
+        {/* <Route path="/success"
+              element={<SuccessPage/>}>
+        </Route> */}
+
+        {/* <Route path="/pricing"
+              element={<VendorPricingPage/>}>
+        </Route> */}
+
+
+
+
+        
+
+        
+
+
+        
+
+        
+
+        
+      
+
+      {/* <Route path="/services/printing/select-college/:id/:id"
              element={
               <SpecificCollegeShopWithoutLogin/>
              }
       >
-      </Route>
+      </Route> */}
 
 
       {/* <Route path="/signup/vendor/:id" 
@@ -257,17 +343,9 @@ function App() {
 
 
 
-      <Route path="/dashboard/my-profile" 
-       element={
-         <ProtectedRoute>
-           <DashboardTemplate>
-             <MyProfile />
-           </DashboardTemplate>
-         </ProtectedRoute>
-       }
-      />
+      
 
-      <Route path="/dashboard/easer-store" 
+      {/* <Route path="/dashboard/easer-store" 
        element={
          <ProtectedRoute>
            <DashboardTemplate>
@@ -275,39 +353,41 @@ function App() {
            </DashboardTemplate>
          </ProtectedRoute>
        }
-      />
+      /> */}
 
-      <Route path="/dashboard/easer-inbox" 
-       element={
-         <ProtectedRoute>
-           <DashboardTemplate>
-             <VendorInboxPage/>
-           </DashboardTemplate>
-         </ProtectedRoute>
-       }
-      />
+      
 
       <Route path="/dashboard/ongoing-orders" 
        element={
          <ProtectedRoute>
            <DashboardTemplate>
-             <OngoingOrders/>
+             <FeatureRelease/>
            </DashboardTemplate>
          </ProtectedRoute>
        }
       />
 
-      <Route path="/dashboard/cancelled-orders" 
+      <Route path="/dashboard/easer-outbox/mail/:id" 
        element={
          <ProtectedRoute>
            <DashboardTemplate>
-             <CancelledOrdersDashboard/>
+             <FeatureRelease/>
            </DashboardTemplate>
          </ProtectedRoute>
        }
       />
 
-      <Route path="/dashboard/unreceived-orders" 
+      {/* <Route path="/dashboard/cancelled-orders" 
+       element={
+         <ProtectedRoute>
+           <DashboardTemplate>
+             
+           </DashboardTemplate>
+         </ProtectedRoute>
+       }
+      /> */}
+
+      {/* <Route path="/dashboard/unreceived-orders" 
        element={
          <ProtectedRoute>
            <DashboardTemplate>
@@ -315,29 +395,21 @@ function App() {
            </DashboardTemplate>
          </ProtectedRoute>
        }
-      />
+      /> */}
 
-      <Route path="/dashboard/easer-outbox" 
-       element={
-         <ProtectedRoute>
-           <DashboardTemplate>
-              <EaserOutboxPage></EaserOutboxPage>
-           </DashboardTemplate>
-         </ProtectedRoute>
-       }
-      />
+      
 
       <Route path="/dashboard/order-history" 
        element={
          <ProtectedRoute>
            <DashboardTemplate>
-             <OrderHistoryDashboard/>
+              <FeatureRelease/>
            </DashboardTemplate>
          </ProtectedRoute>
        }
       />
 
-      <Route path="/dashboard/place-order" 
+      {/* <Route path="/dashboard/place-order" 
             element={
               <ProtectedRoute>
                 <DashboardTemplate>
@@ -345,10 +417,10 @@ function App() {
                 </DashboardTemplate>
               </ProtectedRoute>
             }
-      />
+      /> */}
 
 
-      <Route path="/dashboard/add-vendor" 
+      {/* <Route path="/dashboard/add-vendor" 
             element={
               <ProtectedRoute>
                 <DashboardTemplate>
@@ -356,19 +428,10 @@ function App() {
                 </DashboardTemplate>
               </ProtectedRoute>
             }
-      />
+      /> */}
 
-      <Route path="/dashboard/settings" 
-            element={
-              <ProtectedRoute>
-                <DashboardTemplate>
-                  <Settings/>
-                </DashboardTemplate>
-              </ProtectedRoute>
-            }
-      />
 
-      <Route path="/dashboard/college-shops" 
+      {/* <Route path="/dashboard/college-shops" 
             element={
               <ProtectedRoute>
                 <DashboardTemplate>
@@ -376,9 +439,9 @@ function App() {
                 </DashboardTemplate>
               </ProtectedRoute>
             }
-      />
+      /> */}
 
-      <Route path="/dashboard/place-order/shop/:id" 
+      {/* <Route path="/dashboard/place-order/shop/:id" 
             element={
               <ProtectedRoute>
                 <DashboardTemplate>
@@ -386,9 +449,9 @@ function App() {
                 </DashboardTemplate>
               </ProtectedRoute>
             }
-      />
+      /> */}
 
-`     <Route path="/dashboard/print-order" 
+{/* `     <Route path="/dashboard/print-order" 
             element={
               <ProtectedRoute>
                 <DashboardTemplate>
@@ -396,14 +459,16 @@ function App() {
                 </DashboardTemplate>
               </ProtectedRoute>
             }
-      />
+      /> */}
 
-      <Route path="*" 
-            element={<NotFoundPage/>}
-      />
+      
 
       </Routes>
       <Toaster/>
+      {
+        showInkletInfo && <ShowInkletInfo setShowModal={setShowInkletInfo}/>
+    }
+
     </div>
   );
 }

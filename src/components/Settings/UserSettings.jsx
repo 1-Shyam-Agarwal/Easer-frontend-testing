@@ -1,5 +1,5 @@
 import React, { useState, useRef, useContext } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Camera, Eye, EyeOff, Save, Upload } from "lucide-react";
 import { useEffect } from "react";
 import { getUserDetails } from "../../Services/operations/GetUserInformation.jsx";
@@ -10,18 +10,14 @@ import {
   resetMobileNumber
 } from "../../Services/operations/resetDeatils";
 import { useNavigate } from "react-router-dom";
-import { socketContext } from "../../ContextApi/SocketContext.js";
-import toast from "react-hot-toast";
 
 const UserSettings = () => {
 
   const token = useSelector((state) => state.auth.token);
-  const dispatch = useDispatch();
   const fileInputRef = useRef();
   const [user , setUser] = useState("");
-  const [loading , setLoading] = useState(false);
-  const navigate = useNavigate();
-  const {socket, setSocket} = useContext(socketContext);
+  const [loading , setLoading] = useState(true);
+  const[disabled , setDisabled] = useState(false);
 
   const [name, setName] = useState({
     firstName: "",
@@ -39,8 +35,8 @@ const UserSettings = () => {
 
   useEffect(()=>
   {
-      dispatch(getUserDetails(dispatch ,setUser,token,setLoading,navigate,socket,setSocket ));
-  },[socket]);
+      getUserDetails(setUser,token,setLoading );
+  },[]);
 
   useEffect(()=>
   {
@@ -87,7 +83,7 @@ const UserSettings = () => {
       setImageState((prev) => ({ ...prev, loading: true }));
       const formData = new FormData();
       formData.append("displayPicture", imageState.file);
-      await dispatch(updateDisplayPicture(token,formData,setUser,dispatch,navigate,socket,setSocket ));
+      await updateDisplayPicture(token,formData,setUser );
       fileInputRef.current.value = "";
 
     } catch (error) {
@@ -101,13 +97,13 @@ const UserSettings = () => {
 
   const handleSubmitName = (e) => {
     e.preventDefault();
-    dispatch(resetName(name.firstName, name.lastName,token,setUser,dispatch,navigate,socket,setSocket ));
+    resetName(name.firstName, name.lastName,token,setUser, setDisabled);
   };
 
   const handleSubmitMobilenumber=(e)=>
   {
       e.preventDefault();
-      dispatch(resetMobileNumber(mobileNumber,token,setUser,dispatch,navigate,socket,setSocket));
+      resetMobileNumber(mobileNumber,token,setUser, setDisabled);
   }
 
   return (
@@ -124,9 +120,9 @@ const UserSettings = () => {
           <div className="min-h-screen bg-gray-50 py-8 px-4 md:px-16 ">
             <h1 className="text-3xl font-normal text-gray-800 mb-12 scale-95 ">User Settings</h1>
 
-            <div className="space-y-8 max-w-4xl mx-auto ">
+            {/* <div className="space-y-8 max-w-4xl mx-auto "> */}
               {/* Profile Image Section */}
-              <div className="bg-white shadow-lg rounded-lg p-6 scale-95">
+              {/* <div className="bg-white shadow-lg rounded-lg p-6 scale-95">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">Profile Picture</h2>
                 <div className="flex flex-col items-center gap-6">
                   <div className="relative">
@@ -160,7 +156,7 @@ const UserSettings = () => {
                     </button>
                   )}
                 </div>
-              </div>
+              </div> */}
 
               {/* Name Form Section */}
               <div className="bg-white shadow-lg rounded-lg p-6 scale-95">
@@ -205,8 +201,8 @@ const UserSettings = () => {
                   </div>
                   <button
                     type="submit"
-                    className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-                    onClick={()=>(handleSubmitName)}
+                    className={`w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                    disabled={disabled}
                   >
                     Save Changes
                   </button>
@@ -239,7 +235,8 @@ const UserSettings = () => {
                   </div>
                   <button
                     type="submit"
-                    className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                    className={`w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 ${disabled ? "opacity-50 cursor-not-allowed" : "" }`}
+                    disabled={disabled}
                   >
                     Update mobile number
                   </button>
@@ -247,8 +244,6 @@ const UserSettings = () => {
               </div>
 
             </div>
-          </div>
-
         )
       }
     </div>

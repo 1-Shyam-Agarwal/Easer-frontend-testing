@@ -6,14 +6,11 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setShowModel } from '../../../Slices/LogoutSlice';
 import toast from 'react-hot-toast';
-import { useContext } from 'react';
-import { socketContext } from '../../../ContextApi/SocketContext';
 
 const LogoutModal = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {socket , setSocket} = useContext(socketContext)
 
     function cancelHandler()
     {
@@ -25,9 +22,7 @@ const LogoutModal = () => {
         dispatch(clearToken());
         dispatch(clearUser());
         dispatch(clearRole());
-        dispatch(clearRoomcode());
-        socket.disconnect();
-        setSocket(null);
+        
         dispatch(setShowModel(false));
         toast.success("Logout Successfully");
         navigate("/login" ,{replace:true});
