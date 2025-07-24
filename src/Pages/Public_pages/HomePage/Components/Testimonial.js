@@ -103,14 +103,14 @@ const TestimonialCard = ({ message, photo, name }) => (
 const Testimonial = () => {
   const testimonials = [
     {
-      message: "As a college student, I always have last-minute print jobs, and this service has been a lifesaver.",
-      photo: kartik,
-      name: "Kartik Gupta"
-    },
-    {
       message: "This service has saved my students time and effort, allowing them to focus solely on their studies.",
       photo: ArvindSir,
       name: "Arvind Rehalia"
+    },
+    {
+      message: "As a college student, I always have last-minute print jobs, and this service has been a lifesaver.",
+      photo: kartik,
+      name: "Kartik Gupta"
     },
     {
       message: "This service saved me time and effort during my Practical exams!",

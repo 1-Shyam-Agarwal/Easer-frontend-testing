@@ -1,0 +1,23 @@
+{
+  "short_name": "Easer",
+  "name": "Easer",
+  "icons": [
+    {
+      "src": "krishna_footprints-192-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "krishna_footprints-512-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#14213d",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "description": "An easy platform for students to print documents from anywhere.",
+  "lang": "en"
+}
