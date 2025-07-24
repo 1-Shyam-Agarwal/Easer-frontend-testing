@@ -10,7 +10,7 @@ const MailSearchBar = ({handleSearchByFilename , setKeyword , keyword , searchEl
         <input
           type="text"
           placeholder={`Search mail ${searchElement}`}
-          className="bg-transparent focus:outline-none text-sm w-full placeholder-gray-500"
+          className="bg-transparent focus:outline-none text-[1rem] w-full p-[1px] placeholder-gray-500"
           value={keyword}
           onChange={(e) => {
             console.log(keyword);

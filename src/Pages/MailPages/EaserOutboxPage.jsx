@@ -11,6 +11,7 @@ import MailSearchBar from './components/MailSearchBar';
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 import { fetchFilteredMailsByFileName } from '../../Services/operations/OutboxOps';
+import { FaPlus } from "react-icons/fa6";
 
 const EaserOutboxPage = () => {
 
@@ -96,14 +97,17 @@ const EaserOutboxPage = () => {
   return (
     <div className='p-2 pb-4 sm:p-4 h-full overflow-y-auto bg-gray-100'>
 
-      <div className='flex justify-between mb-[0.7rem] items-center'>
+      <div className='flex justify-between mb-[2px] items-center'>
         <MailSearchBar handleSearchByFilename={handleSearchByFilename} searchElement="by document" setKeyword={setKeyword} keyword={keyword}/>
         <button
-          onClick={toggleComposeModelVisibility}
-          className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-blue-500 to-sky-500 text-white font-medium rounded-full shadow-md hover:shadow-lg hover:brightness-110 transition duration-200"
-        >
-          Compose
-        </button>
+  onClick={toggleComposeModelVisibility}
+  className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-blue-500 to-sky-500 text-white font-medium rounded-lg shadow-md hover:shadow-lg hover:brightness-110 transition duration-200 
+             fixed bottom-4 right-4 sm:static sm:bottom-auto sm:right-auto z-50"
+>
+  <span><FaPlus/></span>
+  <span className='flex items-center'>Compose</span>
+</button>
+
       </div>
 
       {
@@ -126,10 +130,10 @@ const EaserOutboxPage = () => {
 
         
         {/* Pagination Controls */}
-        <div className="flex flex-row justify-between mb-1 items-center mt-6 px-2 py-[2px] md:px-4 md:py-[4px] bg-gray-100">
+        <div className="flex flex-row justify-between mb-1 items-center mt-4 px-2 py-[2px] md:px-4 md:py-[4px] bg-gray-100">
           
           {/* Total Mails Info */}
-          <div className="text-[10px] md:text-[12px] text-gray-600">
+          <div className="text-[0.85rem] md:text-[12px] text-gray-600">
             Showing page <span className="font-medium text-gray-800">{keyword ? currentFilteredPage : currentPage}</span> of <span className="font-medium text-gray-800">{totalPages}</span> — Total <span className="font-semibold text-gray-900">{totalMails}</span> mails
           </div>
 
