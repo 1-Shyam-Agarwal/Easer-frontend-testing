@@ -9,7 +9,7 @@ const VendorMailCards = ({ mails }) => {
     <div className="flex flex-col divide-y divide-gray-200">
       {mails?.map((mail, index) => {
         const mailTime = new Date(mail?.timeStamp).getTime();
-        const isNew = Date.now() - mailTime < 50 * 1000; // Show NEW for 40 seconds
+        const isNew = Date.now() - mailTime < 30 * 1000; // Show NEW for 40 seconds
 
         return (
           <div

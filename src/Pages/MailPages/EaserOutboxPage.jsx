@@ -12,6 +12,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 import { fetchFilteredMailsByFileName } from '../../Services/operations/OutboxOps';
 import { FaPlus } from "react-icons/fa6";
+import { PollingCustomerMails } from '../../Services/operations/OutboxOps';
 
 const EaserOutboxPage = () => {
 
@@ -20,7 +21,7 @@ const EaserOutboxPage = () => {
   const [loading, setLoading] = useState(true);
   const [filteredVendorsData, setFilteredVendorsData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalMails, setTotalMails] = useState(1); //1 is set so that no mail found will not be shown unnecessarily
+  const [totalMails, setTotalMails] = useState(0); //1 is set so that no mail found will not be shown unnecessarily
   const [totalPages, setTotalPages] = useState(0);
   const [currentFilteredPage, setCurrentFilteredPage] = useState(1);
   const [keyword, setKeyword] = useState("");
@@ -41,6 +42,10 @@ const EaserOutboxPage = () => {
     {
         fetchCustomerMails(token , currentPage , setMails ,setLoading, setCurrentPage , setTotalMails, setTotalPages);
         setCurrentFilteredPage(1);
+
+        const interval = setInterval(() => {
+                PollingCustomerMails(token , currentPage , setMails , setCurrentPage , setTotalMails, setTotalPages);// poll every 5 seconds
+        }, 5000);
     }
 
   },[currentPage,token,keyword]);

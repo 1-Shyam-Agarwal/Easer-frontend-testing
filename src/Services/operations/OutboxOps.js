@@ -154,3 +154,43 @@ export async function fetchFilteredMailsByCustomerName(authToken, FilteredCurren
         setLoading(false);
     }
 }
+
+export async function PollingVendorMails(authToken , currentPage , setMails  , setCurrentPage , setTotalMails, setTotalPages )
+{
+    try
+    {
+        const url = `${FETCH_INBOX_MAIL_FOR_VENDOR}?page=${currentPage}`;
+        const response = await apiConnector("GET" , url , null , {'Authorization': `Bearer ${authToken}`});
+        
+        // contains an array of mails
+        setMails(response?.data?.data);
+        setCurrentPage(response?.data?.page);
+        setTotalMails(response?.data?.totalMails);
+        setTotalPages(response?.data?.totalPages);
+        
+    }catch(error)
+    {
+        toast.error(error?.response?.data?.message || "There is some technical issue. Please try again later.");
+    }
+}
+
+export async function PollingCustomerMails(authToken , currentPage , setMails  , setCurrentPage , setTotalMails, setTotalPages )
+{
+    try
+    {
+        const url = `${FETCH_OUTBOX_MAIL_FOR_CUSTOMER}?page=${currentPage}`;
+
+        // Fetching mails for the customer
+        const response = await apiConnector("GET" , url , null , {'Authorization': `Bearer ${authToken}`});
+
+        // contains an array of mails
+        setMails(response?.data?.data);
+        setCurrentPage(response?.data?.page);
+        setTotalMails(response?.data?.totalMails);
+        setTotalPages(response?.data?.totalPages);
+
+    }catch(error)
+    {
+        toast.error(error?.response?.data?.message || "There is some technical issue. Please try again later.");
+    }
+}

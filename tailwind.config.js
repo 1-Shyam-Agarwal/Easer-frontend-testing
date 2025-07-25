@@ -14,6 +14,7 @@ module.exports = {
         'border-change': 'changeBorderColor 3s forwards',
         'slowspin': 'spin 3s linear infinite', // Slow 3-second spin
         'scaleUpDown': 'scaleUpDown 1.5s ease-in-out infinite',
+        'bg-pulse': 'bg-pulse 1.5s ease-in-out infinite',
       },
 
       animationDelay: {
@@ -46,6 +47,11 @@ module.exports = {
         changeBorderColor: {
           '0%': { borderColor: 'white' },
           '100%': { borderColor: '#39FF14' },
+        },
+
+        'bg-pulse': {
+          '0%, 100%': { backgroundColor: 'rgba(239, 246, 255, 0.29)' }, // bg-gray-25
+          '50%':     { backgroundColor: 'rgba(229, 240, 254, 0.65)' }, // bg-gray-50
         },
       },
       screens: {

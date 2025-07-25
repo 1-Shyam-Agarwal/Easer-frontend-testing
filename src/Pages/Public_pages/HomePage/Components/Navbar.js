@@ -172,7 +172,21 @@ const Navbar = ({setShowInkletInfo}) => {
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2 bg-blue-50 px-3 py-1 rounded-full text-blue-700 font-normal shadow-sm"
                  onClick={() => {setShowInkletInfo(true)}}>
-              <span className='flex justify-between items-center gap-1'><FaDroplet className='inline'/><span className='font-semibold'>10 Inklets </span> </span>
+              
+                {
+                  role==="customer" ? 
+                  (
+                      <span className='flex justify-between items-center gap-1 cursor-pointer'>
+                          <FaDroplet className='inline'/><span className='font-semibold'>10 Inklets </span>
+                      </span>
+                  )
+                  :
+                  (
+                      <div></div>
+                  )
+                }
+              
+
             </div>
             <ProfileDropDown image={user} />
           </div>

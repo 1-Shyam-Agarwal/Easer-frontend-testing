@@ -39,6 +39,7 @@ import MailSearchBar from './components/MailSearchBar';
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 import { fetchFilteredMailsByCustomerName } from '../../Services/operations/OutboxOps';
+import { PollingVendorMails } from '../../Services/operations/OutboxOps';
 
 const VendorInboxboxPage = () => {
 
@@ -61,8 +62,10 @@ const VendorInboxboxPage = () => {
     if(!keyword)
     {
         fetchVendorMails(token , currentPage , setMails ,setLoading, setCurrentPage , setTotalMails, setTotalPages);
-        setCurrentFilteredPage(1); const interval = setInterval(() => {
-      fetchVendorMails(token , currentPage , setMails ,setLoading, setCurrentPage , setTotalMails, setTotalPages);// poll every 5 seconds
+        setCurrentFilteredPage(1); 
+        
+        const interval = setInterval(() => {
+        PollingVendorMails(token , currentPage , setMails , setCurrentPage , setTotalMails, setTotalPages);// poll every 5 seconds
     }, 5000);
 
     return () => clearInterval(interval); // cleanup on unmount
