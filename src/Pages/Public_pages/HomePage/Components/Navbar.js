@@ -6,12 +6,13 @@ import { matchPath } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfileDropDown from '../../../../components/ProfileComponents/ProfileDropDown.jsx';
 import { Menu, X } from 'lucide-react';
-import { MdInbox , MdPayment  } from 'react-icons/md';
+import { MdHistory, MdInbox , MdPayment  } from 'react-icons/md';
 import { IoMdPersonAdd } from "react-icons/io";
 import { BsFillBuildingsFill } from "react-icons/bs";
 import krishna_footprints from "../../../../Images/krishna_footprints.png";
 import "./navbar.css";
 import { FaDroplet } from "react-icons/fa6";
+import {MdPrint,MdSend} from 'react-icons/md';
 
 
 const Navbar = ({setShowInkletInfo}) => {
@@ -26,20 +27,20 @@ const Navbar = ({setShowInkletInfo}) => {
   const userNavigation = [
       {
         to: '/dashboard/easer-outbox',
-        icon: <MdInbox />,
+        icon: <MdSend />,
         label: 'Outbox',
         type: 'single'
       },
       {
         to: '/dashboard/freq-docs',
-        icon: <MdInbox />,
-        label: 'Study Material',
+        icon: <MdHistory />,
+        label: 'Regular Printouts',
         type: 'single'
       },
       {
         to: '/dashboard/ongoing-orders',
-        icon: <MdPayment />,
-        label: 'Prepaid Orders',
+        icon: <MdPrint />,
+        label: 'Remote Prints',
         type: 'single'
       }
     ];
@@ -93,13 +94,13 @@ const Navbar = ({setShowInkletInfo}) => {
 
   // Render navigation items recursively
   const renderNavItems = (items) => {
-    return items.map((item, index) => {
-      if (item.type === 'category') {
+    return items?.map((item, index) => {
+      if (item?.type === 'category') {
         return (
           <div key={index} className="space-y-2">
             <div className="flex items-center gap-2 text-gray-700 font-medium pl-4">
-              {item.icon}
-              {item.label}
+              {item?.icon}
+              {item?.label}
             </div>
             <div className="pl-8 space-y-2">
               {item.items.map((subItem, subIndex) => (
@@ -144,8 +145,8 @@ const Navbar = ({setShowInkletInfo}) => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8 max-1100:gap-6 max-870:gap-[1.2rem]">
-          {location.pathname.split("/")[1] !== "dashboard" && 
-            NavLinks.map((entry, index) => (
+          {location.pathname?.split("/")[1] !== "dashboard" && 
+            NavLinks?.map((entry, index) => (
               <Link 
                 to={entry?.path} 
                 className={`${
@@ -155,7 +156,7 @@ const Navbar = ({setShowInkletInfo}) => {
                 } hover:text-blue-500 transition-colors max-1100:text-[0.85rem] max-1100:py-[0.5rem] max-870:text-[0.8rem] relative group py-2`} 
                 key={index}
               >
-                {entry.title}
+                {entry?.title}
                 <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform ${
                   matchRoute(entry?.path) ? 'scale-x-100' : ''
                 }`}></span>
@@ -219,8 +220,8 @@ const Navbar = ({setShowInkletInfo}) => {
             )}
 
             {/* General Navigation Links */}
-            {location.pathname.split("/")[1] !== "dashboard" && 
-              NavLinks.map((entry, index) => (
+            {location.pathname?.split("/")[1] !== "dashboard" && 
+              NavLinks?.map((entry, index) => (
                 <Link 
                   to={entry?.path} 
                   className={`${
@@ -231,7 +232,7 @@ const Navbar = ({setShowInkletInfo}) => {
                   key={index}
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  {entry.title}
+                  {entry?.title}
                 </Link>
               ))
             }

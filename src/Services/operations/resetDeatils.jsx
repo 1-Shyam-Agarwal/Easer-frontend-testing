@@ -89,7 +89,6 @@ export async function updateDisplayPicture(token, formData , setUser) {
       ));
     } catch (error) {
 
-      console.error("UPDATE_DISPLAY_PICTURE_API ERROR:", error);
       toast.error(error?.response?.data?.message || "Unable to update profile photo.");
 
     } finally {
@@ -148,7 +147,6 @@ export async function resetShopDetails(shopName , shopLandmark , token )
 
     }catch(error)
     {
-      console.log(error);
       toast.error(error?.response?.data?.messgae || "Unable to update the shop details.");
     }
     toast.dismiss(toastId);

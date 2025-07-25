@@ -7,7 +7,6 @@ const Settings = () => {
 
     const role = useSelector(state => state.auth.role);
     const [loading , setLoading] = useState(false);
-   console.log(role);
 
   return (
     <div>

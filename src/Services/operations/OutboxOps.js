@@ -18,7 +18,6 @@ export async function createOutboxMail(mailDoc , vendor , token , setLoading ,to
         vendor : vendor
     }
 
-    console.log(mailDoc , mailDoc.length)
     if(mailDoc.length === 0)
     {
         toast.error("Please upload atleast 1 file.")
@@ -54,6 +53,7 @@ export async function fetchCustomerMails(authToken , currentPage , setMails,setL
         const response = await apiConnector("GET" , url , null , {'Authorization': `Bearer ${authToken}`});
 
         // contains an array of mails
+        console.log("Executing");
         setMails(response?.data?.data);
         setPage(response?.data?.page);
         setTotalMails(response?.data?.totalMails);
@@ -123,13 +123,11 @@ export async function fetchSpecificMailDetails(mailId, authToken, setMailDetails
     try {
         // Construct the URL with the mailId
         const url = `${outboxOrdersEndpoints.FETCH_SPECIFIC_MAIL_DETAILS}/${mailId}`;
-        console.log("Fetching specific mail details with URL: ", url);
 
         // Make the API call to fetch specific mail details
         const response = await apiConnector("GET", url, null, { 'Authorization': `Bearer ${authToken}` });
 
         // Log the response and set the mail details
-        console.log("Fetched specific mail details: ", response.data.data);
         setMailDetails(response?.data?.data);
 
     } catch (error) {
@@ -143,7 +141,6 @@ export async function fetchFilteredMailsByCustomerName(authToken, FilteredCurren
     setLoading(true);
     try {
         const url = `${outboxOrdersEndpoints.FETCH_FILTERED_MAILS_BY_CUSTOMER_NAME}?customerName=${customerName}&page=${FilteredCurrentPage}`;
-        console.log("Fetching filtered mails by customer name with URL: ", url);
         const response = await apiConnector("GET", url, null, { 'Authorization': `Bearer ${authToken}` });
         
         // Set the filtered mails

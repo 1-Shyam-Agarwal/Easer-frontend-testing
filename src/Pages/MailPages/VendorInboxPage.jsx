@@ -46,7 +46,7 @@ const VendorInboxboxPage = () => {
   const token = useSelector((state) => state.auth.token);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalMails, setTotalMails] = useState(0);
+  const [totalMails, setTotalMails] = useState(1); //1 is set so that no mail found will not be shown unnecessarily
   const [totalPages, setTotalPages] = useState(0);
   const [currentFilteredPage, setCurrentFilteredPage] = useState(1);
   const [keyword, setKeyword] = useState("");
@@ -82,7 +82,7 @@ const VendorInboxboxPage = () => {
 
   function handleSearchByFilename(searchTerm) {
     // Function to handle search logic  
-    if (searchTerm && searchTerm.trim()) {
+    if (searchTerm && searchTerm?.trim()) {
       // If search term is empty, reset the mails to the original state
       fetchFilteredMailsByCustomerName(token, currentFilteredPage, searchTerm, setMails, setLoading , setCurrentFilteredPage, setTotalMails, setTotalPages)
     }
@@ -98,7 +98,7 @@ const VendorInboxboxPage = () => {
               <MailSearchBar handleSearchByFilename={handleSearchByFilename} searchElement="by name" setKeyword={setKeyword} keyword={keyword}/>
             </div>
             <div className='flex justify-center items-center h-[50vh]'>
-              <span class="loader"></span>
+              <span className="loader"></span>
             </div>
           </div>
           

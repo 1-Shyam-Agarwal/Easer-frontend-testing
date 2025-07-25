@@ -14,39 +14,14 @@ const HomePage = () => {
 
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state)=>state.auth.role);
-  console.log("role :::: " ,role)
   return (
     <div>
-        {
-            token ? 
-            (
-              role === "customer"?
-              (
-                  <Navigate to="/dashboard/easer-outbox"/>
-              )
-              :(
-                  role === "vendor" ?
-                  <Navigate to="/dashboard/easer-inbox"/>
-                  :
-                  <Navigate to="/error"/>
-              )
-                
-            )
-            :
-            (
-                <div>
-                  <HeroSection/>
-                  {/* <StatisticsPanel/> */}
-                  <HowItWorks/>
-                  <BenefitsSection/>
-                  <Testimonial/>
-                  <Footer/>
-                </div>
-
-            )
-        }
-        
-        
+      <HeroSection/>
+      {/* <StatisticsPanel/> */}
+      <HowItWorks/>
+      <BenefitsSection/>
+      <Testimonial/>
+      <Footer/>
     </div>
   )
 }

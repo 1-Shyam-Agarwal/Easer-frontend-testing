@@ -86,7 +86,6 @@ import MailDetail from "./Pages/MailPages/components/Specific_mail_details.jsx";
 
 function App() {
 
-  console.log("DashboardTemplate", DashboardTemplate);
   const dispatch = useDispatch();
   const token = useSelector(state=>{return state.auth.token});
   const location= useLocation();
@@ -117,7 +116,7 @@ function App() {
 
       {/* NAVBAR */}
       {
-        location.pathname.split("/")[1] === "dashboard" || location.pathname.split("/")[1]==="success"? <div></div> : <Navbar setShowInkletInfo={setShowInkletInfo}/>
+        location.pathname?.split("/")[1] === "dashboard" || location.pathname?.split("/")[1]==="success"? <div></div> : <Navbar setShowInkletInfo={setShowInkletInfo}/>
       }
 
       {/* LOGOUT MODEL */}

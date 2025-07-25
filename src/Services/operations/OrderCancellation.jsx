@@ -27,7 +27,6 @@ export function setOrderCancellationIndicators(token , orderId ,dispatch , navig
 
             }catch(error)
             {
-                console.log("ERROR OCCURED" , error);
                 if((error?.response?.data?.message === "You are logged in on another device.") || (error?.response?.data?.message ==="Session is expired."))
                 {
                     dispatch(clearToken());
@@ -66,7 +65,6 @@ export function desetOrderCancellationIndicators(token , orderId ,dispatch , nav
 
         }catch(error)
         {
-            console.log("ERROR OCCURED" , error);
             if((error?.response?.data?.message === "You are logged in on another device.") || (error?.response?.data?.message ==="Session is expired."))
             {
                 dispatch(clearToken());
@@ -105,7 +103,6 @@ export function cancellationOfOrder(token ,orderId , reason ,dispatch , navigate
         }catch(error)
         {
             toast.dismiss(toastId);
-            console.log("ERROR OCCURED" , error);
             if((error?.response?.data?.message === "You are logged in on another device.") || (error?.response?.data?.message ==="Session is expired."))
             {
                 dispatch(clearToken());

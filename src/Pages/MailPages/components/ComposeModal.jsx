@@ -20,31 +20,31 @@ const MAX_TOTAL_FILES = 15;
 const processFiles = (files) => {
   const validFiles = Array.from(files);
 
-  if (!validFiles.length) return;
+  if (!validFiles?.length) return;
 
   // Check if adding these files exceeds total file count
-  if (uploadingFiles.length + validFiles.length > MAX_TOTAL_FILES) {
+  if (uploadingFiles?.length + validFiles?.length > MAX_TOTAL_FILES) {
     toast.error(`Cannot upload more than ${MAX_TOTAL_FILES} files.`);
     return;
   }
 
-  const filteredFiles = validFiles.filter(file => {
-    const sizeMB = file.size / (1024 * 1024);
+  const filteredFiles = validFiles?.filter(file => {
+    const sizeMB = file?.size / (1024 * 1024);
     if (sizeMB > MAX_FILE_SIZE_MB) {
-      toast.error(`${file.name} exceeds ${MAX_FILE_SIZE_MB}Mb limit.`);
+      toast.error(`${file?.name} exceeds ${MAX_FILE_SIZE_MB}Mb limit.`);
       return false;
     }
     return true;
   });
 
-  if (!filteredFiles.length) return;
+  if (!filteredFiles?.length) return;
 
-  const newFiles = filteredFiles.map((file) => ({
+  const newFiles = filteredFiles?.map((file) => ({
     file,
-    name: file.name,
+    name: file?.name,
     progress: 0,
     file_id: uuidv4(),
-    file_ref: `documents/${uuidv4()}${Date.now()}-${file.name}`,
+    file_ref: `documents/${uuidv4()}${Date.now()}-${file?.name}`,
     uploading: true,
     url: null,
   }));
@@ -52,7 +52,7 @@ const processFiles = (files) => {
   // Add new files to top
   setUploadingFiles((prev) => [...newFiles, ...prev]);
 
-  newFiles.forEach((fileData) => {
+  newFiles?.forEach((fileData) => {
     const { file, file_id, file_ref } = fileData;
     const storageRef = ref(storage, file_ref);
     const uploadTask = uploadBytesResumable(storageRef, file);
@@ -62,18 +62,18 @@ const processFiles = (files) => {
       (snapshot) => {
         const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
         setUploadingFiles((prev) =>
-          prev.map((f) => (f.file_id === file_id ? { ...f, progress } : f))
+          prev?.map((f) => (f?.file_id === file_id ? { ...f, progress } : f))
         );
       },
       (error) => {
-        toast.error(`Upload failed for ${file.name}`);
-        setUploadingFiles((prev) => prev.filter((file) => file.file_id !== file_id));
+        toast.error(`Upload failed for ${file?.name}`);
+        setUploadingFiles((prev) => prev?.filter((file) => file?.file_id !== file_id));
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           setUploadingFiles((prev) =>
             prev.map((f) =>
-              f.file_id === file_id ? { ...f, uploading: false, url: downloadURL } : f
+              f?.file_id === file_id ? { ...f, uploading: false, url: downloadURL } : f
             )
           );
         });
@@ -84,9 +84,8 @@ const processFiles = (files) => {
 
 
   const handleFileUpload = (e) => {
-    console.log("file input changed");
     const uploadedFiles = e.target.files;
-    if (uploadedFiles && uploadedFiles.length > 0) {
+    if (uploadedFiles && uploadedFiles?.length > 0) {
       processFiles(uploadedFiles);
     }
     // Clear the input value to allow re-uploading the same file
@@ -113,9 +112,8 @@ const processFiles = (files) => {
     e.stopPropagation();
     setDragActive(false);
     
-    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      console.log("files dropped:", e.dataTransfer.files);
-      processFiles(e.dataTransfer.files);
+    if (e.dataTransfer.files && e.dataTransfer?.files?.length > 0) {
+      processFiles(e.dataTransfer?.files);
       // Clear the dataTransfer
       e.dataTransfer.clearData();
     }
@@ -123,7 +121,7 @@ const processFiles = (files) => {
 
   const handleDeleteFile = (file_id) => {
     // LIFO deletion: Remove file while maintaining LIFO order
-    setUploadingFiles((prev) => prev.filter((file) => file.file_id !== file_id));
+    setUploadingFiles((prev) => prev?.filter((file) => file?.file_id !== file_id));
   };
 
   const formatVendorDisplay = (vendor) => {
@@ -139,7 +137,7 @@ const processFiles = (files) => {
       {
         loading ? 
            <div className='flex justify-center items-center h-[50vh]'>
-              <span class="loader"></span>
+              <span clasNames="loader"></span>
             </div>
         :
         (
@@ -212,20 +210,20 @@ const processFiles = (files) => {
         </div>
 
         {/* Upload Preview */}
-        {uploadingFiles.length > 0 && (
+        {uploadingFiles?.length > 0 && (
           <div className="mt-5 grid grid-cols-1 gap-3 sm:gap-4">
-            {uploadingFiles.map((file, index) => (
+            {uploadingFiles?.map((file, index) => (
               <div
-                key={file.file_id}
+                key={file?.file_id}
                 className="bg-gray-50 border border-gray-200 rounded-sm p-3 py-2 shadow-sm flex justify-between items-center"
               >
                 <div className="flex justify-between items-center gap-4">
                   <p className="text-sm font-medium text-gray-800 truncate max-w-[80%]">
-                    {file.name}
+                    {file?.name}
                   </p>
-                  {file.url && (
+                  {file?.url && (
                     <a
-                      href={file.url}
+                      href={file?.url}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-green-600 hover:underline"
@@ -236,10 +234,10 @@ const processFiles = (files) => {
                 </div>
 
                 <div className="mt-1 text-xs text-gray-600">
-                  {file.uploading ? (
+                  {file?.uploading ? (
                     <div className="flex items-center">
                       <div className="w-3 h-3 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mr-2" />
-                      Uploading... {file.progress}%
+                      Uploading... {file?.progress}%
                     </div>
                   ) : (
                     <div className='flex items-center'>
@@ -249,8 +247,8 @@ const processFiles = (files) => {
                             ? 'text-gray-300 cursor-not-allowed'
                             : 'text-gray-400 hover:text-red-500'
                         } text-xl flex items-center font-bold transition`}
-                        onClick={() => handleDeleteFile(file.file_id)}
-                        disabled={file.uploading}
+                        onClick={() => handleDeleteFile(file?.file_id)}
+                        disabled={file?.uploading}   
                       >
                         <RxCross2/>
                       </button>

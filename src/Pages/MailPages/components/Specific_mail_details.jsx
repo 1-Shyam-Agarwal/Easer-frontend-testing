@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { IoMdArrowBack } from "react-icons/io";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
+import toast from "react-hot-toast";
 
 import {
   FileSpreadsheet,
@@ -24,7 +25,7 @@ const MailDetail = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
-  const mailId = location.pathname.split("/").pop();
+  const mailId = location.pathname?.split("/")?.pop();
 
   function formatFileSize(bytes) {
     if (bytes === 0) return "0 Bytes";
@@ -46,20 +47,19 @@ const MailDetail = () => {
   };
 
   const downloadAllAttachments = async () => {
-    if (!mail.documents || mail.documents.length === 0) {
+    if (!mail?.documents || mail?.documents?.length === 0) {
       alert("No attachments to download.");
       return;
     }
 
     const zip = new JSZip();
     for (const file of mail?.documents) {
-      console.log(file.fileUrl, file.fileName);
       try {
-        const response = await fetch(file.fileUrl);       // Fetch the file from the URL
+        const response = await fetch(file?.fileUrl);       // Fetch the file from the URL
         const blob = await response.blob();            // Convert the response into a Blob
-        zip.file(file.fileName, blob);                     // Add the blob into the zip with the specified name
+        zip.file(file?.fileName, blob);                     // Add the blob into the zip with the specified name
       } catch (error) {
-        console.error(`Error fetching ${file.fileName}:`, error); // Log if fetching fails
+        toast.error(`Error fetching ${file?.fileName}:`); // Log if fetching fails
       }
     }
 
@@ -187,23 +187,23 @@ const MailDetail = () => {
 
         <ul className="mt-[1rem] space-y-2">
           {mail?.documents?.map((doc) => {
-            const type = getFileType(doc.fileName);
+            const type = getFileType(doc?.fileName);
             return (
               <li
-                key={doc._id}
+                key={doc?._id}
                 className="flex  flex-row gap-4 justify-between items-center  bg-white border border-gray-200 shadow-sm rounded-sm px-4 py-3 sm:py-3 hover:shadow-md transition duration-300"
               >
                 <div className="flex items-center gap-3 truncate mb-2 sm:mb-0">
                   {getFileIcon(type)}
                   <div className="flex flex-col sm:flex-row sm:items-center sm:gap-3 truncate">
-                    <span className="text-sm font-semibold text-gray-800 truncate">{doc.fileName}</span>
-                    <span className="text-xs text-gray-500">{formatFileSize(Number(doc.fileSize))}</span>
+                    <span className="text-sm font-semibold text-gray-800 truncate">{doc?.fileName}</span>
+                    <span className="text-xs text-gray-500">{formatFileSize(Number(doc?.fileSize))}</span>
                   </div>
                 </div>
 
                 {isDownloadable(type) ? (
                   <a
-                    href={doc.fileUrl}
+                    href={doc?.fileUrl}
                     download
                     className="flex items-center gap-1 text-[13px] sm:text-sm font-medium text-green-600 hover:text-green-800 hover:underline transition"
                   >
@@ -212,7 +212,7 @@ const MailDetail = () => {
                   </a>
                 ) : (
                   <a
-                    href={doc.fileUrl}
+                    href={doc?.fileUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-[13px] sm:text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline transition"

@@ -18,20 +18,20 @@ const MyProfile = () => {
 
 
   const actions = [
-    {
-      name: 'Order History',
-      icon: History,
-      path: '/dashboard/order-history',
-      color: 'text-blue-600',
-      bgColor: 'bg-blue-50'
-    },
-    {
-      name: 'Ongoing Orders',
-      icon: Clock,
-      path: '/dashboard/ongoing-orders',
-      color: 'text-blue-600',
-      bgColor: 'bg-blue-50'
-    },
+    // {
+    //   name: 'Printables',
+    //   icon: History,
+    //   path: '/dashboard/order-history',
+    //   color: 'text-blue-600',
+    //   bgColor: 'bg-blue-50'
+    // },
+    // {
+    //   name: 'Remote Prints',
+    //   icon: Clock,
+    //   path: '/dashboard/ongoing-orders',
+    //   color: 'text-blue-600',
+    //   bgColor: 'bg-blue-50'
+    // },
     {
       name: 'Settings',
       icon: Settings,

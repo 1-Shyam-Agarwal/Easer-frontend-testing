@@ -98,7 +98,7 @@ const LoginPage = () => {
   //Login with Google : Pre-checks (if user is customer : login otherwise move to admin/vendor password section.)
   const googleLogin = useGoogleLogin({
     onSuccess: async(response) => {
-        const data = await handleGooglePreLoginCheck(response.access_token , dispatch , navigate);
+        const data = await handleGooglePreLoginCheck(response?.access_token , dispatch , navigate);
 
         if(data?.data?.role ==="vendor"  || data?.data?.role ==="admin"){
           setLoginData(data?.data);
@@ -171,7 +171,7 @@ const LoginPage = () => {
                                               peer-focus:text-blue-600">
                                         Email Address
                                       </label>
-                                      {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
+                                      {errors?.email && <ErrorMessage>{errors?.email?.message}</ErrorMessage>}
                                   </div>
                                   
 
@@ -299,7 +299,7 @@ const LoginPage = () => {
                                     peer-focus:text-blue-600">
                               Password
                             </label>
-                            {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
+                            {errors?.password && <ErrorMessage>{errors?.password?.message}</ErrorMessage>}
 
                             <div className='flex justify-center'>
                               {

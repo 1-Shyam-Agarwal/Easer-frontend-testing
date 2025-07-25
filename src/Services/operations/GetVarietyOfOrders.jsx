@@ -24,8 +24,7 @@ export function fetchAllCancelledOrders( token ,setCancelledOrders , setLoading 
 
             }catch(error)
             {
-                setLoading(false);
-                console.log(error);     
+                setLoading(false); 
                 if((error?.response?.data?.message === "You are logged in on another device.") || (error?.response?.data?.message ==="Session is expired."))
                 {
                     dispatch(clearToken());
@@ -61,7 +60,6 @@ export function fetchAllSpecificOnGoingOrders(token , setOngoingOrders ,setLoadi
             }catch(error)
             {
                 setLoading(false);
-                console.log(error);
                 if((error?.response?.data?.message === "You are logged in on another device.") || (error?.response?.data?.message ==="Session is expired."))
                 {
                     dispatch(clearToken());
@@ -98,7 +96,6 @@ export function fetchAllSpecificUnreceivedOrders(token , setUnreceivedOrders ,se
 
             }catch(error)
             {
-                console.log(error);
                 if((error?.response?.data?.message === "You are logged in on another device.") || (error?.response?.data?.message ==="Session is expired."))
                 {
                     dispatch(clearToken());
@@ -132,7 +129,6 @@ export function fetchSpecificOrderHistory(token ,setOrderHistory,setLoading,disp
 
             }catch(error)
             {
-                console.log("Error occured while fetching order Hsitory : " , error);
                 if((error?.response?.data?.message === "You are logged in on another device.") || (error?.response?.data?.message ==="Session is expired."))
                 {
                     dispatch(clearToken());

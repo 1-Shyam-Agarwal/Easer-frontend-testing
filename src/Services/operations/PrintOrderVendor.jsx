@@ -27,7 +27,6 @@ export function validatePrintOrderVendor(setLoading , navigate , token , vendorI
             }catch(error)
             {
                 setLoading(false);
-                console.log(error);
                 if((error?.response?.data?.message === "You are logged in on another device.") || (error?.response?.data?.message ==="Session is expired."))
                 {
                     dispatch(clearToken());
@@ -82,7 +81,6 @@ export function validateFileFormatAndSize(file , formats, setFiles ,setLoading,s
                 return true;
             }catch(error)
             {
-                console.log(error);
                 if((error?.response?.data?.message === "You are logged in on another device.") || (error?.response?.data?.message ==="Session is expired."))
                 {
                     dispatch(clearToken());
@@ -136,8 +134,6 @@ export function validatingOrder(token , vendorID , files , fileConfigs , price ,
                 navigate("/login" , {new : true});
             }
             toast.error(error?.response?.data?.message || "Unable to validate the order. Please try again.");
-            console.log("ERROR OCCURED");
-            console.log(error);
             return 0;
         }
         
@@ -165,7 +161,6 @@ export function creatingOrder(setLoading,setDisplayCross,files, fileConfigs, use
             return response?.data;
         } catch (e) {
             toast.error("Failed to create order");
-            console.error("Error occurred: ", e);
             setLoading(false);
             setDisplayCross(true);
             return 0;
@@ -194,7 +189,6 @@ export const deleteFileFromCloudinary = (public_id,setFiles , setFileConfigs , f
                 return true;
     
             } catch (error) {
-                console.error("Error deleting file:", error);
                 if((error?.response?.data?.message === "You are logged in on another device.") || (error?.response?.data?.message ==="Session is expired."))
                 {
                     dispatch(clearToken());

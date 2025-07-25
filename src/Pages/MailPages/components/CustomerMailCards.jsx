@@ -11,7 +11,7 @@ const CustomerMailCards = ({ mails }) => {
         <div
           key={index}
           className="group  relative flex flex-col sm:flex-row sm:items-center  justify-between gap-2 px-4 sm:px-6 py-[0.85rem] sm:py-4 transition-all duration-200 hover:bg-gray-50 hover:shadow-sm rounded-md cursor-pointer"
-          onClick={() => navigate(`mail/${mail.mail_id}`)}
+          onClick={() => navigate(`mail/${mail?.mail_id}`)}
         >
 
           {/* Receiver */}
@@ -21,10 +21,10 @@ const CustomerMailCards = ({ mails }) => {
             </div>
             <div className="flex flex-col truncate capitalize">
               <span className="text-[0.85rem] sm:text-sm font-normal text-gray-700 truncate">
-                {mail.receiver?.vendorAdditionalDetails?.shopName}
+                {mail?.receiver?.vendorAdditionalDetails?.shopName}
               </span>
               <span className="text-[0.75rem] sm:text-xs text-gray-500 truncate">
-                {mail.receiver?.vendorAdditionalDetails?.shopLandMark}
+                {mail?.receiver?.vendorAdditionalDetails?.shopLandMark}
               </span>
             </div>
           </div>
@@ -32,20 +32,20 @@ const CustomerMailCards = ({ mails }) => {
           {/* Documents */}
           <div className="w-full sm:w-1/3 overflow-hidden">
             <div className="flex flex-wrap gap-1 sm:gap-2">
-              {mail.documents?.slice(0, 2).map((doc, i) => (
+              {mail?.documents?.slice(0, 2)?.map((doc, i) => (
                 <span
                   key={i}
                   className="bg-green-100 text-green-600 text-[0.85rem] sm:text-xs font-medium px-2 py-[0.2rem] sm:py-1 rounded-full max-w-[110px] truncate"
-                  title={doc.fileName}
+                  title={doc?.fileName}
                 >
-                  {doc.fileName.length > 15
-                    ? doc.fileName.slice(0, 12) + "..."
-                    : doc.fileName}
+                  {doc?.fileName?.length > 15
+                    ? doc?.fileName?.slice(0, 12) + "..."
+                    : doc?.fileName}
                 </span>
               ))}
-              {mail.documents.length > 2 && (
+              {mail?.documents?.length > 2 && (
                 <span className="text-[0.75rem] sm:text-xs text-gray-500 mt-1">
-                  +{mail.documents.length - 2} more
+                  +{mail?.documents?.length - 2} more
                 </span>
               )}
             </div>
@@ -57,12 +57,12 @@ const CustomerMailCards = ({ mails }) => {
 
           {/* Time */}
           <div className="text-right w-full absolute top-0 right-0 py-2 px-3 sm:relative sm:w-1/6 text-[0.70rem] sm:text-xs text-gray-500 group-hover:text-gray-700">
-            {new Date(mail.timeStamp).toLocaleDateString("en-GB", {
+            {new Date(mail?.timeStamp)?.toLocaleDateString("en-GB", {
               day: "2-digit",
               month: "short",
               year: "2-digit",
             })},{" "}
-            {new Date(mail.timeStamp).toLocaleTimeString("en-US", {
+            {new Date(mail?.timeStamp)?.toLocaleTimeString("en-US", {
               hour: "2-digit",
               minute: "2-digit",
               hour12: true,

@@ -13,7 +13,6 @@ const MailSearchBar = ({handleSearchByFilename , setKeyword , keyword , searchEl
           className="bg-transparent focus:outline-none text-[1rem] w-[100%] block p-[1px] placeholder-gray-500"
           value={keyword}
           onChange={(e) => {
-            console.log(keyword);
             setKeyword(e.target.value);
           }}
           onKeyDown={(e) => {

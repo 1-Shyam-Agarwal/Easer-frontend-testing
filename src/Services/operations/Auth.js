@@ -191,8 +191,6 @@ export async function handleSaveGoogleSignupAllDetails(information , setGoogleSi
         {
             const response  = await apiConnector("POST" , SAVE_GOOGLE_SIGNUP_DETAILS , information);
 
-            console.log(response?.data);
-
             //Storing the JWT_Token at the localStorage
             localStorage.setItem("user", JSON.stringify(response?.data?.profileImage));
             localStorage.setItem("token", JSON.stringify(response?.data?.easerSecurityTicket));
@@ -382,7 +380,6 @@ export async function handleGooglePreLoginCheck(googleToken , dispatch , navigat
               //Indicating user that you account is created successfully and you are logged in successfully.
               toast.success("Successfully logged in!")
 
-              console.log("Successfully logged in with Google");
               //Navigating the customer to the easer-inbox for placing the order.
               navigate("/dashboard/easer-outbox");
           }
@@ -432,7 +429,6 @@ export async function getPasswordResetToken(email , setEmailSent , setLoading)
         setEmailSent(true);
     }catch(error){
 
-        console.log("RESET PASSWORD TOKEN Error", error);
         toast.error(error?.response?.data?.message || "Unable to send reset token. Please try again later.");
     }
     finally{

@@ -9,7 +9,7 @@ import {
   updateDisplayPicture,
   resetMobileNumber
 } from "../../Services/operations/resetDeatils";
-import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const UserSettings = () => {
 
@@ -88,7 +88,7 @@ const UserSettings = () => {
 
     } catch (error) {
 
-      console.error("Upload failed:", error);
+      toast.error("Upload failed.");
 
     } finally {
       setImageState((prev) => ({ ...prev, loading: false }));

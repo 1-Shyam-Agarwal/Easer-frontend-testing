@@ -18,7 +18,6 @@ export async function getRole(token , setRole)
         }
     }catch(error)
     {
-        console.log(error);
         // toast.error(error?.response?.data?.message || "Unable to fetch role. Please try again later.");
     }
 
@@ -39,7 +38,7 @@ export function getShopStatus(token,vendorId ,setIsShopOpen, dispatch , navigate
                 return response?.data?.data?.vendorAdditionalDetails?.isShopOpen;
             }catch(error)
             {
-                console.log(error);
+
                 if(navigate)
                 {
                     if((error?.response?.data?.message === "You are logged in on another device.") || (error?.response?.data?.message ==="Session is expired."))
@@ -88,11 +87,11 @@ export function getShopDetails(dispatch , setShopDetails , shopCode , setLoading
         try
         {
             const response = await apiConnector("POST" , GET_SHOP_INFORMATION ,{shopId : shopCode});
-            console.log(response);
+
             setShopDetails(response?.data?.response);
         }catch(error)
         {   
-            console.log(error);
+           
             toast.error(error?.response?.data?.message)
         }
         setLoading(false);

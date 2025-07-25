@@ -26,7 +26,6 @@ export function priceCalculator(fileConfigs , setInvoice , setLoading , vendorId
                 setLoading(false);
             }catch(error)
             {
-                console.log("Error Occured in Calculating the Printing Price",error);
                 if((error?.response?.data?.message === "You are logged in on another device.") || (error?.response?.data?.message ==="Session is expired."))
                 {
                     dispatch(clearToken());

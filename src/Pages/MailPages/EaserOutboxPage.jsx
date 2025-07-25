@@ -20,7 +20,7 @@ const EaserOutboxPage = () => {
   const [loading, setLoading] = useState(true);
   const [filteredVendorsData, setFilteredVendorsData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalMails, setTotalMails] = useState(0);
+  const [totalMails, setTotalMails] = useState(1); //1 is set so that no mail found will not be shown unnecessarily
   const [totalPages, setTotalPages] = useState(0);
   const [currentFilteredPage, setCurrentFilteredPage] = useState(1);
   const [keyword, setKeyword] = useState("");
@@ -66,18 +66,18 @@ const EaserOutboxPage = () => {
 
         for(let file of uploadedDocs)
         {
-            if(!file.url)
+            if(!file?.url)
             {
                 infoToast("Please wait until all the documents are fully uploaded.");
                 return;
             }
 
             let doc = {
-              fileName : file.name,
-              fileUrl : file.url,
-              fileRef : file.file_ref,
-              fileType : file.file.type,
-              fileSize : file.file.size
+              fileName : file?.name,
+              fileUrl : file?.url,
+              fileRef : file?.file_ref,
+              fileType : file?.file?.type,
+              fileSize : file?.file?.size
             }
 
             mailDocs.push(doc);
@@ -88,8 +88,7 @@ const EaserOutboxPage = () => {
 
   function handleSearchByFilename(searchTerm) {
     // Function to handle search logic  
-    console.log("Search Term: ", searchTerm);
-    if (searchTerm && searchTerm.trim()) {
+    if (searchTerm && searchTerm?.trim()) {
       // If search term is empty, reset the mails to the original state
       fetchFilteredMailsByFileName(token, currentFilteredPage, searchTerm, setMails, setLoading , setCurrentFilteredPage, setTotalMails, setTotalPages)
     }
@@ -116,7 +115,7 @@ const EaserOutboxPage = () => {
           <div>
             
             <div className='flex justify-center items-center h-[50vh]'>
-              <span class="loader"></span>
+              <span className="loader"></span>
             </div>
           </div>
           

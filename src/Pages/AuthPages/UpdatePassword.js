@@ -20,13 +20,13 @@ const UpdatePasswordPage = () => {
     e.preventDefault();
 
 
-    if(password.includes(" ") || confirmPassword.includes(" "))
+    if(password?.includes(" ") || confirmPassword?.includes(" "))
     {
        toast.error("Password and confirm password should not contain any spaces.");
        return;
     }
 
-    if(password.length < 8 || confirmPassword.length < 8)
+    if(password?.length < 8 || confirmPassword?.length < 8)
     {
         toast.error("Password and confirm password must be atleast 8 characters long.");
         return;

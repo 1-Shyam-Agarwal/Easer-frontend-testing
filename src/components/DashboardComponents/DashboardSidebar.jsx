@@ -6,6 +6,7 @@ import { BsFillBuildingsFill } from "react-icons/bs";
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRole } from '../../Services/operations/GetUserInformation';
+import {MdPrint,MdSend} from 'react-icons/md';
 
 // ✅ Hook to detect mobile screen
 const useIsMobile = () => {
@@ -42,23 +43,24 @@ const DashboardSidebar = () => {
 
   const userNavigation = [
     {
-      to: '/dashboard/easer-outbox',
-      icon: <MdInbox />,
-      label: 'Outbox',
-      type: 'single'
-    },
-    {
-      to: '/dashboard/freq-docs',
-      icon: <MdInbox />,
-      label: 'Study Material',
-      type: 'single'
-    },
-    {
-      to: '/dashboard/ongoing-orders',
-      icon: <MdPayment />,
-      label: 'Prepaid Orders',
-      type: 'single'
-    }
+  to: '/dashboard/easer-outbox',
+  icon: <MdSend />, // Represents "sent" or "outbox"
+  label: 'Outbox',
+  type: 'single'
+},
+{
+  to: '/dashboard/freq-docs',
+  icon: <MdHistory />, // Represents "frequent", "recent", or "regular"
+  label: 'Regular Printouts',
+  type: 'single'
+},
+{
+  to: '/dashboard/ongoing-orders',
+  icon: <MdPrint />, // Represents cloud-based or remote printing
+  label: 'Remote Prints',
+  type: 'single'
+}
+
   ];
 
   const vendorNavigation = [

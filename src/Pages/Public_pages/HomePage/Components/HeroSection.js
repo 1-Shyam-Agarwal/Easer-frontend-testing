@@ -9,7 +9,7 @@ import cube from '../../../../Images/cube.png';
 
 const HeroSection = () => {
   return (
-    <div className="w-full py-12 md:py-20">
+    <div className="w-full mt-8 py-12 md:py-20">
       <div className="max-w-6xl mx-auto px-8 md:px-8">
         <div className="flex max-870:flex-col flex-row items-center gap-8 md:gap-12">
           {/* Left Content */}

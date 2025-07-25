@@ -13,7 +13,6 @@ const FrequentDocs = () => {
     
     // Simulate API call
     setTimeout(() => {
-      console.log({ title, description, file });
       setIsSubmitting(false);
       setTitle('');
       setDescription('');

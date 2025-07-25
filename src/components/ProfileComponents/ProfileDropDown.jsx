@@ -10,7 +10,6 @@ import { useLocation } from 'react-router-dom';
 const ProfileDropDown = (props) => {
     const dispatch = useDispatch();
     const role = useSelector(state => state.auth.role);
-    console.log("Role : " , role);
 
     const handleLogout = () => {
         dispatch(setShowModel(true));

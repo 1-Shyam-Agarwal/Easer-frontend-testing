@@ -36,7 +36,6 @@ export function setNotifyCustomerIndicator(token,orderId,value)
             {
                 toast.error(e?.response?.data?.message || "Unable to notify the customer. Please try again.");
             }
-            console.log("ERROR OCCURED" , e);
             return false; 
         }
     }
@@ -66,7 +65,6 @@ export function sendMessageToUser(token,orderId,message)
             else{
                 toast.error(error?.response?.data?.message || "Unable to send message to the user.")
             }
-            console.log("ERROR OCCURED" , error);
             toast.dismiss(toastId);
             return false; 
         }
@@ -94,7 +92,6 @@ export function setProcessOrderIndicatorByVendor(token,orderId)
         {
             toast.error(error?.response?.data?.message || "Unable to update status.");
             toast.dismiss(toastId);
-            console.log("ERROR OCCURED" , error);
             return 0;
         }
     }
@@ -119,7 +116,6 @@ export function desetProcessOrderIndicatorByVendor(token , orderId)
             {
                 toast.error(error?.response?.data?.message || "Unable to update status.");
                 toast.dismiss(toastId);
-                console.log("ERROR OCCURED" , error);
                 return 0;
             }
         }
@@ -145,7 +141,6 @@ export function completeUserOrder(token,orderId , message)
         {
             toast.error(error?.response?.data?.message || "Unable to complete the order. Please try again.");
             toast.dismiss(toastId);
-            console.log("ERROR OCCURED" , error);
             return 0;
         }
     }
@@ -173,7 +168,6 @@ export function receiveUserOrder(token,orderId , exactFine , fineTaken , additio
         }
         catch(error)
         {
-            console.log(error);
             toast.dismiss(toastId);
             toast.error(error?.response?.data?.message || "Unable to perform this operation. Please try again.");
             

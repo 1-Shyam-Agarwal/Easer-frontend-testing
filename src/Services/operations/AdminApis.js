@@ -14,7 +14,6 @@ export function getAllVendorRequests(setRequest,setLoading , token)
         try
         {
             const response = await apiConnector("GET" , GET_VENDOR_REQUESTS , undefined , {'Authorization': `Bearer ${token}`});
-            console.log(response?.data?.response);
             setRequest(response?.data?.response);
 
         }catch(error)

@@ -69,7 +69,7 @@ const FeatureRelease = () => {
 
         <div className="mt-10 text-center">
   <button className="px-5 py-2 bg-green-600 hover:bg-green-700 text-white text-sm sm:text-base font-semibold rounded-full shadow-md transition duration-300 ease-in-out">
-    🚀 Coming Soon — Happy Janmashtami!
+     Coming Soon — Happy Janmashtami!
   </button>
 </div>
 
