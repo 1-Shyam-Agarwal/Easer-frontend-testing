@@ -170,7 +170,7 @@ export async function PollingVendorMails(authToken , currentPage , setMails  , s
         
     }catch(error)
     {
-        toast.error(error?.response?.data?.message || "There is some technical issue. Please try again later.");
+        // toast.error(error?.response?.data?.message || "There is some technical issue. Please try again later.");
     }
 }
 
@@ -191,6 +191,6 @@ export async function PollingCustomerMails(authToken , currentPage , setMails  ,
 
     }catch(error)
     {
-        toast.error(error?.response?.data?.message || "There is some technical issue. Please try again later.");
+        // toast.error(error?.response?.data?.message || "There is some technical issue. Please try again later.");
     }
 }
