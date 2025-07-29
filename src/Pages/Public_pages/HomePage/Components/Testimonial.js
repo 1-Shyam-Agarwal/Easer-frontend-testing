@@ -105,7 +105,7 @@ const Testimonial = () => {
     {
       message: "This service has saved my students time and effort, allowing them to focus solely on their studies.",
       photo: ArvindSir,
-      name: "Arvind Rehalia"
+      name: "Dr. Arvind Rehalia"
     },
     {
       message: "As a college student, I always have last-minute print jobs, and this service has been a lifesaver.",

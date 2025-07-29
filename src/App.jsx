@@ -79,10 +79,18 @@ import LogoutModel from "./components/Core/Auth/LogoutModel.jsx";
 import EaserOutboxPage from "./Pages/MailPages/EaserOutboxPage.jsx";
 import ShowInkletInfo from "./Pages/Public_pages/HomePage/Components/ShowInkletInfo.jsx";
 import MailDetail from "./Pages/MailPages/components/Specific_mail_details.jsx";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 // import Store from "./Pages/DashboardPages/Store/Store.jsx";
 
 
-
+ const GoogleAuthWrapper = ()=>
+  {
+    return (
+      <GoogleOAuthProvider clientId="870752404932-68dghd3ep8omvsam0jot88s601be7mbc.apps.googleusercontent.com">
+        <SignupPage/>
+      </GoogleOAuthProvider>
+    )
+  }
 
 function App() {
 
@@ -185,7 +193,7 @@ function App() {
           <Route path="/signup/user" 
               element={
                 <OpenRoute>
-                  <SignupPage />
+                  <GoogleAuthWrapper/>
                 </OpenRoute>
               }>
           </Route>

@@ -137,7 +137,7 @@ const processFiles = (files) => {
       {
         loading ? 
            <div className='flex justify-center items-center h-[50vh]'>
-              <span clasNames="loader"></span>
+              <span clasName="loader"></span>
             </div>
         :
         (

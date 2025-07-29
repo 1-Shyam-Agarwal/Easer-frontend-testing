@@ -575,19 +575,22 @@ const SignupPage = () => {
   //Handling google preSignupCheck
   const googleSignup = useGoogleLogin({
     onSuccess: async(response) => {
-        const data = await handleGooglePreSignupCheck(response?.access_token);
+        console.log("response :" , response);
+        const data = await handleGooglePreSignupCheck(response?.code);
         if(data){
           setGoogleSignupAdditionalDetailsDialogBox(true);
-          setGoogleSignupData({googleToken : response?.access_token});
+          setGoogleSignupData({...data});
         }
   },
     onError: () => {toast.error("Please try again.")},
+    flow : 'auth-code'
   });
 
 
   //Handling signup through google
   const saveGoogleSignupAllDetailsHandler = (googleSignupData)=>
   {
+      console.log("googleSignupData :" , googleSignupData);
       handleSaveGoogleSignupAllDetails(googleSignupData , setGoogleSignupAdditionalDetailsDialogBox , navigate , dispatch);
   }
 

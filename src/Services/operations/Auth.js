@@ -171,8 +171,10 @@ export async function handleGooglePreSignupCheck(googleToken) {
 
           toast.dismiss(toastId);
 
+          console.log("response.data.userData : " , response.data.userData);
+
           //This indicates that token is verified successfully
-          return 1;
+          return response.data.userData;
         
       } catch (error) {
           toast.dismiss(toastId);
