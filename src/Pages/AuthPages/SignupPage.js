@@ -575,6 +575,7 @@ const SignupPage = () => {
   //Handling google preSignupCheck
   const googleSignup = useGoogleLogin({
     onSuccess: async(response) => {
+        console.log("response : " , response);
         const data = await handleGooglePreSignupCheck(response?.code);
         if(data){
           setGoogleSignupAdditionalDetailsDialogBox(true);

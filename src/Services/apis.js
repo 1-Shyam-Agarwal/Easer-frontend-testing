@@ -1,5 +1,6 @@
-const BASE_URL = "http://easer-2-0-backend.onrender.com/api/v1"
+const BASE_URL = "http://localhost:5000/api/v1"
 //https://easer-official-backend-production.up.railway.app/api/v1
+//easer-2-0-backend.onrender.com
 // 
 
 

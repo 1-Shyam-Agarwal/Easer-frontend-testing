@@ -38,19 +38,24 @@ const EaserOutboxPage = () => {
   {   
     // Fetching mails for the customer
     
+    let interval;
     if(!keyword)
     {
         fetchCustomerMails(token , currentPage , setMails ,setLoading, setCurrentPage , setTotalMails, setTotalPages);
         setCurrentFilteredPage(1);
 
-        const interval = setInterval(() => {
+        interval = setInterval(() => {
                 PollingCustomerMails(token , currentPage , setMails , setCurrentPage , setTotalMails, setTotalPages);// poll every 5 seconds
         }, 5000);
     }
 
+    return () => clearInterval(interval);
+
   },[currentPage,token,keyword]);
 
   useEffect(()=>{
+
+    
     if(keyword)
     {
         handleSearchByFilename(keyword);

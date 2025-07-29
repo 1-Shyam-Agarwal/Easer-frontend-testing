@@ -59,17 +59,17 @@ const VendorInboxboxPage = () => {
   useEffect(()=>
   {   
     // Fetching mails for the customer
+    let interval;
     if(!keyword)
     {
         fetchVendorMails(token , currentPage , setMails ,setLoading, setCurrentPage , setTotalMails, setTotalPages);
         setCurrentFilteredPage(1); 
         
-        const interval = setInterval(() => {
+        interval = setInterval(() => {
         PollingVendorMails(token , currentPage , setMails , setCurrentPage , setTotalMails, setTotalPages);// poll every 5 seconds
     }, 5000);
 
     return () => clearInterval(interval); // cleanup on unmount
-
 
     }
 
