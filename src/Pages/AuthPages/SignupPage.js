@@ -575,7 +575,6 @@ const SignupPage = () => {
   //Handling google preSignupCheck
   const googleSignup = useGoogleLogin({
     onSuccess: async(response) => {
-        console.log("response :" , response);
         const data = await handleGooglePreSignupCheck(response?.code);
         if(data){
           setGoogleSignupAdditionalDetailsDialogBox(true);
@@ -590,7 +589,6 @@ const SignupPage = () => {
   //Handling signup through google
   const saveGoogleSignupAllDetailsHandler = (googleSignupData)=>
   {
-      console.log("googleSignupData :" , googleSignupData);
       handleSaveGoogleSignupAllDetails(googleSignupData , setGoogleSignupAdditionalDetailsDialogBox , navigate , dispatch);
   }
 

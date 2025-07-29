@@ -83,11 +83,13 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 // import Store from "./Pages/DashboardPages/Store/Store.jsx";
 
 
- const GoogleAuthWrapper = ()=>
+ const GoogleAuthWrapper = ({children})=>
   {
     return (
       <GoogleOAuthProvider clientId="870752404932-68dghd3ep8omvsam0jot88s601be7mbc.apps.googleusercontent.com">
-        <SignupPage/>
+        {
+          children
+        }
       </GoogleOAuthProvider>
     )
   }
@@ -186,14 +188,18 @@ function App() {
           {/*<------------------------AUTH PAGES-----------------------------> */}
           <Route path="/login" 
               element={<OpenRoute>
+                        <GoogleAuthWrapper>
                           <LoginPage/>
+                        </GoogleAuthWrapper>
                       </OpenRoute>}>
           </Route>
 
           <Route path="/signup/user" 
               element={
                 <OpenRoute>
-                  <GoogleAuthWrapper/>
+                  <GoogleAuthWrapper>
+                    <SignupPage/>
+                  </GoogleAuthWrapper>
                 </OpenRoute>
               }>
           </Route>

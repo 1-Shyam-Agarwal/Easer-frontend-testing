@@ -12,8 +12,6 @@ import {
           verifyPasswordHandler,
           handleVerifyLoginOtp
        } from '../../Services/operations/Auth';
-
-
 import { useGoogleLogin } from '@react-oauth/google';
 import {  FaEye, FaEyeSlash } from "react-icons/fa";
 
@@ -98,7 +96,7 @@ const LoginPage = () => {
   //Login with Google : Pre-checks (if user is customer : login otherwise move to admin/vendor password section.)
   const googleLogin = useGoogleLogin({
     onSuccess: async(response) => {
-        const data = await handleGooglePreLoginCheck(response?.access_token , dispatch , navigate);
+        const data = await handleGooglePreLoginCheck(response?.code , dispatch , navigate);
 
         if(data?.data?.role ==="vendor"  || data?.data?.role ==="admin"){
           setLoginData(data?.data);
@@ -106,6 +104,7 @@ const LoginPage = () => {
         }
   },
     onError: () => {toast.error("Please try again.")},
+    flow : 'auth-code'
   });
 
 
