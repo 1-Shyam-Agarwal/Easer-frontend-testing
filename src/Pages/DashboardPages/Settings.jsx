@@ -30,7 +30,7 @@ const Settings = () => {
                         role=== "vendor" ? 
                         <VendorSettings/> :
                         (
-                            <div>heLLO</div>
+                            <div className="flex jusitfy-center items-center w-[40vh] text-gray-600">No Interent connection</div>
                         )
                     )
                 }
