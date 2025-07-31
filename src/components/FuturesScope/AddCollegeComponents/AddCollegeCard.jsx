@@ -6,7 +6,7 @@
 //   <div className="p-6 bg-gray-50 rounded-lg shadow-md max-w-full mx-auto space-y-6">
 //   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
     
-//     {/* Mobile Number */}
+//     {/* Moble Number */}
 //     <div className="flex items-center space-x-4 bg-white p-4 rounded-lg shadow-sm hover:bg-blue-50 transition-colors duration-200">
 //       <div className="font-semibold text-gray-700 w-36">Mobile Number:</div>
 //       <div className="text-gray-800">{props?.mobileNumber}</div>
