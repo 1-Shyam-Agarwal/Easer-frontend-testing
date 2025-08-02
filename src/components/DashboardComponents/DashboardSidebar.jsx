@@ -48,12 +48,12 @@ const DashboardSidebar = () => {
   label: 'Outbox',
   type: 'single'
 },
-{
-  to: '/dashboard/freq-docs',
-  icon: <MdHistory />, // Represents "frequent", "recent", or "regular"
-  label: 'Regular Printouts',
-  type: 'single'
-},
+// {
+//   to: '/dashboard/freq-docs',
+//   icon: <MdHistory />, // Represents "frequent", "recent", or "regular"
+//   label: 'Regular Printouts',
+//   type: 'single'
+// },
 {
   to: '/dashboard/ongoing-orders',
   icon: <MdPrint />, // Represents cloud-based or remote printing

@@ -6,13 +6,25 @@ import { Navigate } from 'react-router-dom';
 const OpenRoute = ({children}) => {
 
     const token = useSelector((state)=>state.auth.token);
+    const role = useSelector((state)=>state.auth.role);
     const navigate = useNavigate();
 
     if(token === null)
     {
         return children
     }
-    else return <Navigate to="/" />
+    else{
+
+        if(role === "customer")
+        {
+            return <Navigate to="/dashboard/easer-outbox" />
+        }
+        
+        if(role === "vendor")
+        {
+            return <Navigate to="/dashboard/easer-inbox" />
+        }
+    }
 }
 
 export default OpenRoute

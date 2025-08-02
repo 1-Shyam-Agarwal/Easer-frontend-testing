@@ -80,6 +80,7 @@ import EaserOutboxPage from "./Pages/MailPages/EaserOutboxPage.jsx";
 import ShowInkletInfo from "./Pages/Public_pages/HomePage/Components/ShowInkletInfo.jsx";
 import MailDetail from "./Pages/MailPages/components/Specific_mail_details.jsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { Navigate } from "react-router-dom";
 // import Store from "./Pages/DashboardPages/Store/Store.jsx";
 
 
@@ -204,6 +205,14 @@ function App() {
               }>
           </Route>
 
+          <Route path="/services/printing/select-college/7540dee9-90ed-4119-af54-6740da40ae8e/b53bc873-91d4-4028-bde6-f67eabab6c83"
+                 element ={
+                    <Navigate to="/signup/user"/>
+                 }
+          >
+              
+          </Route>
+
           <Route path="/forget-password" 
               element={<OpenRoute>
                           <ForgetPasswordPage/>
@@ -284,7 +293,7 @@ function App() {
             }
           />
 
-          <Route path="/dashboard/freq-docs"
+          {/* <Route path="/dashboard/freq-docs"
             element={
                     <ProtectedRoute>
                       <DashboardTemplate>
@@ -292,7 +301,7 @@ function App() {
                       </DashboardTemplate>
                     </ProtectedRoute>
                   }
-          />
+          /> */}
 
 
           

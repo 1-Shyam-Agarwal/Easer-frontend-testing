@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 const FeatureRelease = () => {
-  const calculateTimeLeft = () => {
-    const targetDate = new Date('2025-08-15T00:00:00');
+    const calculateTimeLeft = () => {
+    const targetDate = new Date('2025-08-31T00:00:00+05:30');
     const now = new Date();
     const difference = targetDate - now;
 
@@ -24,6 +24,7 @@ const FeatureRelease = () => {
 
     return timeLeft;
   };
+
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
@@ -48,7 +49,7 @@ const FeatureRelease = () => {
 
       <div className="text-center max-w-3xl py-12">
         <h1 className="text-2xl md:text-2xl  text-gray-800 mb-8">
-          Feature Launching on <span className="text-blue-700 font-semibold">16 August 2025</span>
+          Feature Launching on <span className="text-blue-700 font-semibold">31 August 2025</span>
         </h1>
 
         {/* <h2 className="mt-3 text-lg md:text-xl text-gray-700 font-normal">
@@ -69,7 +70,7 @@ const FeatureRelease = () => {
 
         <div className="mt-10 text-center">
   <button className="px-5 py-2 bg-green-600 hover:bg-green-700 text-white text-sm sm:text-base font-semibold rounded-full shadow-md transition duration-300 ease-in-out">
-     Coming Soon — Happy Janmashtami!
+     Coming Soon — Happy Radhashtami!
   </button>
 </div>
 

@@ -15,7 +15,7 @@ const ComposeModal = ({ toggleComposeModelVisibility, filteredVendorsData, sendM
   const handleClose = () => toggleComposeModelVisibility();
 
   const MAX_FILE_SIZE_MB = 30;
-const MAX_TOTAL_FILES = 15;
+const MAX_TOTAL_FILES = 25;
 
 const processFiles = (files) => {
   const validFiles = Array.from(files);
@@ -137,7 +137,7 @@ const processFiles = (files) => {
       {
         loading ? 
            <div className='flex justify-center items-center h-[50vh]'>
-              <span clasName="loader"></span>
+              <span className="loader"></span>
             </div>
         :
         (

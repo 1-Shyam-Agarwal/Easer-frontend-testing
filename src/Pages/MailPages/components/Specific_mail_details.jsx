@@ -53,18 +53,26 @@ const MailDetail = () => {
     }
 
     const zip = new JSZip();
+    console.log("file : " , mail?.documents , mail);
+    const toastId = toast.loading("Downloading...")
     for (const file of mail?.documents) {
       try {
+
         const response = await fetch(file?.fileUrl);       // Fetch the file from the URL
         const blob = await response.blob();            // Convert the response into a Blob
-        zip.file(file?.fileName, blob);                     // Add the blob into the zip with the specified name
+        zip.file(file?.fileName, blob); 
+                            // Add the blob into the zip with the specified name
       } catch (error) {
+        toast.dismiss(toastId);
         toast.error(`Error fetching ${file?.fileName}:`); // Log if fetching fails
       }
     }
 
     const content = await zip.generateAsync({ type: "blob" });
-    saveAs(content, `${mail?.sender?.firstName}_${mail?.sender?.lastName}_Attachments`);
+    const folderName = `${mail?.sender?.firstName}-${mail?.sender?.lastName}-${mail?.documents?.length}-${Math.floor(1000 + Math.random() * 9000)
+} `
+    saveAs(content, folderName);
+    toast.dismiss(toastId);
   }
 
 
@@ -79,7 +87,7 @@ const MailDetail = () => {
     return "other";
   };
 
-  const isDownloadable = (type) => type === "excel" || type === "ppt" || type === "word" || type === "image" || type === "other";
+  const isDownloadable = (type) => type === "excel" || type === "ppt" || type === "word"  || type === "other";
 
   const getFileIcon = (type) => {
     switch (type) {

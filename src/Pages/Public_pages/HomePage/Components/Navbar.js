@@ -31,12 +31,12 @@ const Navbar = ({setShowInkletInfo}) => {
         label: 'Outbox',
         type: 'single'
       },
-      {
-        to: '/dashboard/freq-docs',
-        icon: <MdHistory />,
-        label: 'Regular Printouts',
-        type: 'single'
-      },
+      // {
+      //   to: '/dashboard/freq-docs',
+      //   icon: <MdHistory />,
+      //   label: 'Regular Printouts',
+      //   type: 'single'
+      // },
       {
         to: '/dashboard/ongoing-orders',
         icon: <MdPrint />,
@@ -170,14 +170,14 @@ const Navbar = ({setShowInkletInfo}) => {
           {/* Profile Dropdown - Visible on all screen sizes */}
           {token!==null && 
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 bg-blue-50 px-3 py-1 rounded-full text-blue-700 font-normal shadow-sm"
+            <div className="flex items-center gap-2 bg-blue-50  rounded-[7px] text-blue-700 font-normal shadow-sm"
                  onClick={() => {setShowInkletInfo(true)}}>
               
                 {
                   role==="customer" ? 
                   (
-                      <span className='flex justify-between items-center gap-1 cursor-pointer'>
-                          <FaDroplet className='inline'/><span className='font-semibold'>10 Inklets </span>
+                      <span className='flex justify-between px-3 py-1 items-center gap-1 cursor-pointer'>
+                          <FaDroplet className='inline'/><span className='font-normal'>10 Inklets </span>
                       </span>
                   )
                   :

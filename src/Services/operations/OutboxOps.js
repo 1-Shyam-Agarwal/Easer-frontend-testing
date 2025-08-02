@@ -53,7 +53,6 @@ export async function fetchCustomerMails(authToken , currentPage , setMails,setL
         const response = await apiConnector("GET" , url , null , {'Authorization': `Bearer ${authToken}`});
 
         // contains an array of mails
-        console.log("Executing");
         setMails(response?.data?.data);
         setPage(response?.data?.page);
         setTotalMails(response?.data?.totalMails);

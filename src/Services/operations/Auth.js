@@ -337,7 +337,7 @@ export async function verifyPasswordHandler(email , password , navigate, setDisa
       toast.success("Successfully logged in!")
 
       //Navigating the customer to the easer-inbox for placing the order.
-      navigate("/dashboard/easer-outbox");
+      navigate("/dashboard/easer-inbox");
         
       } catch (error) {
         toast.error(error?.response?.data?.message || "Unable to login. Please try again later.");
