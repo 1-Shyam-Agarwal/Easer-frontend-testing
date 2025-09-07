@@ -1,155 +1,168 @@
-import { apiConnector } from "../apiconnect";
-import toast from "react-hot-toast";
-import { resetEndpoints } from "../apis";
+import { apiConnector } from '../apiconnect';
+import toast from 'react-hot-toast';
+import { resetEndpoints } from '../apis';
 
+const {
+  VALIDATE_AND_UPDATE_NAME,
+  VALIDATE_AND_UPDATE_PASSWORD,
+  UPDATE_DISPLAY_PICTURE_API,
+  UPDATE_MOBILE_NUMBER,
+  UPDATE_SHOP_DETAILS,
+  UPDATE_FINE_DETAILS,
+  UPDATE_WAITING_TIME,
+  ALTER_REFUND_STATUS,
+  ALTER_SHOP_STATUS,
+} = resetEndpoints;
 
-const {VALIDATE_AND_UPDATE_NAME , VALIDATE_AND_UPDATE_PASSWORD , UPDATE_DISPLAY_PICTURE_API , UPDATE_MOBILE_NUMBER , UPDATE_SHOP_DETAILS , UPDATE_FINE_DETAILS ,UPDATE_WAITING_TIME , ALTER_REFUND_STATUS , ALTER_SHOP_STATUS} = resetEndpoints;
-
-export async function resetName(firstName , lastName , token , setUser , setDisabled)
-{
-  const toastId = toast.loading("Loading...")
+export async function resetName(
+  firstName,
+  lastName,
+  token,
+  setUser,
+  setDisabled
+) {
+  const toastId = toast.loading('Loading...');
   setDisabled(true);
-  try
-  {
-
-      const response = await apiConnector("POST" , VALIDATE_AND_UPDATE_NAME , {
-          firstName,
-          lastName,
-      },
-      {'Authorization': `Bearer ${token}`}
-      )
-
-      setUser((prev)=>
+  try {
+    const response = await apiConnector(
+      'POST',
+      VALIDATE_AND_UPDATE_NAME,
       {
-        return{
-          ...prev ,
-          firstName: response?.data?.data?.firstName,
-          lastName : response?.data?.data?.lastName
-        }
-      })
+        firstName,
+        lastName,
+      },
+      { Authorization: `Bearer ${token}` }
+    );
 
-      toast.dismiss(toastId);
-      toast.success("Name is updated successfully.");
+    setUser((prev) => {
+      return {
+        ...prev,
+        firstName: response?.data?.data?.firstName,
+        lastName: response?.data?.data?.lastName,
+      };
+    });
 
-  }catch(error){
-      toast.dismiss(toastId);
-      toast.error(error?.response?.data?.message || "Unable to update name. Please try again.");
-  }
-  finally {
+    toast.dismiss(toastId);
+    toast.success('Name is updated successfully.');
+  } catch (error) {
+    toast.dismiss(toastId);
+    toast.error(
+      error?.response?.data?.message ||
+        'Unable to update name. Please try again.'
+    );
+  } finally {
     setDisabled(false);
   }
 }
 
+export async function resetPassword(currentPassword, newPassword, token) {
+  const toastId = toast.loading('Loading...');
+  try {
+    const response = await apiConnector(
+      'POST',
+      VALIDATE_AND_UPDATE_PASSWORD,
+      {
+        currentPassword,
+        newPassword,
+      },
+      { Authorization: `Bearer ${token}` }
+    );
 
-export async function resetPassword(currentPassword , newPassword , token)
-{
-    const toastId = toast.loading("Loading...")
-    try
-    {
-        const response = await apiConnector("POST" , VALIDATE_AND_UPDATE_PASSWORD , {
-            currentPassword,
-            newPassword,
-        },
-        {'Authorization': `Bearer ${token}`}
-      )
-
-        toast.dismiss(toastId);
-        toast.success("Password is successfully Changed");
-        
-
-    }catch(error){
-        toast.dismiss(toastId);
-        toast.error(error?.response?.data?.message || "Unable to update password. Please try again.");
-    }
+    toast.dismiss(toastId);
+    toast.success('Password is successfully Changed');
+  } catch (error) {
+    toast.dismiss(toastId);
+    toast.error(
+      error?.response?.data?.message ||
+        'Unable to update password. Please try again.'
+    );
   }
-
-
-export async function updateDisplayPicture(token, formData , setUser) {
-    const toastId = toast.loading("Loading...");
-    try {
-
-      // Make API call to update the display picture
-      const response = await apiConnector(
-        "POST",
-        UPDATE_DISPLAY_PICTURE_API,
-        formData,
-        {'Authorization': `Bearer ${token}`}
-      );
-
-      // Notify user of success
-      toast.success("Profile photo updated successfully");
-      localStorage.setItem("user", JSON.stringify(response?.data?.profileImage));
-      setUser((prev)=>
-      (
-        {
-          ...prev , 
-          profileImage: response?.data?.profileImage
-        }
-
-      ));
-    } catch (error) {
-
-      toast.error(error?.response?.data?.message || "Unable to update profile photo.");
-
-    } finally {
-      // Dismiss the loading toast
-      toast.dismiss(toastId);
-    }
-};
-
-export async function resetMobileNumber(mobileNumber , token , setUser ,setDisabled)
-{
-    const toastId = toast.loading("Loading...");
-    setDisabled(true);
-    try
-    {
-        const response = await apiConnector("POST",UPDATE_MOBILE_NUMBER,{
-          mobileNumber
-        },
-        {'Authorization': `Bearer ${token}`}
-        )
-
-        toast.dismiss(toastId);
-        setUser((prev)=>
-        {
-            return {
-              ...prev,
-              mobileNumber : mobileNumber
-            }
-        })
-        toast.success("Mobile number is updated successfully.")
-    }
-    catch(error)
-    {
-        toast.dismiss(toastId);
-        toast.error(error?.response?.data?.message || "Unable to update mobile number.");
-    }
-    finally {
-      setDisabled(false);
-    }
 }
 
+export async function updateDisplayPicture(token, formData, setUser) {
+  const toastId = toast.loading('Loading...');
+  try {
+    // Make API call to update the display picture
+    const response = await apiConnector(
+      'POST',
+      UPDATE_DISPLAY_PICTURE_API,
+      formData,
+      { Authorization: `Bearer ${token}` }
+    );
 
-
-export async function resetShopDetails(shopName , shopLandmark , token )
-{
-    const toastId = toast.loading("Loading...")
-    try
-    {
-        const response = await apiConnector("POST",UPDATE_SHOP_DETAILS,{
-          shopName,
-          shopLandmark
-        },
-        {'Authorization': `Bearer ${token}`}
-        )
-
-        toast.success("Shop details updated successfully");
-
-    }catch(error)
-    {
-      toast.error(error?.response?.data?.messgae || "Unable to update the shop details.");
-    }
+    // Notify user of success
+    toast.success('Profile photo updated successfully');
+    localStorage.setItem('user', JSON.stringify(response?.data?.profileImage));
+    setUser((prev) => ({
+      ...prev,
+      profileImage: response?.data?.profileImage,
+    }));
+  } catch (error) {
+    toast.error(
+      error?.response?.data?.message || 'Unable to update profile photo.'
+    );
+  } finally {
+    // Dismiss the loading toast
     toast.dismiss(toastId);
+  }
+}
+
+export async function resetMobileNumber(
+  mobileNumber,
+  token,
+  setUser,
+  setDisabled
+) {
+  const toastId = toast.loading('Loading...');
+  setDisabled(true);
+  try {
+    const response = await apiConnector(
+      'POST',
+      UPDATE_MOBILE_NUMBER,
+      {
+        mobileNumber,
+      },
+      { Authorization: `Bearer ${token}` }
+    );
+
+    toast.dismiss(toastId);
+    setUser((prev) => {
+      return {
+        ...prev,
+        mobileNumber: mobileNumber,
+      };
+    });
+    toast.success('Mobile number is updated successfully.');
+  } catch (error) {
+    toast.dismiss(toastId);
+    toast.error(
+      error?.response?.data?.message || 'Unable to update mobile number.'
+    );
+  } finally {
+    setDisabled(false);
+  }
+}
+
+export async function resetShopDetails(shopName, shopLandmark, token) {
+  const toastId = toast.loading('Loading...');
+  try {
+    const response = await apiConnector(
+      'POST',
+      UPDATE_SHOP_DETAILS,
+      {
+        shopName,
+        shopLandmark,
+      },
+      { Authorization: `Bearer ${token}` }
+    );
+
+    toast.success('Shop details updated successfully');
+  } catch (error) {
+    toast.error(
+      error?.response?.data?.messgae || 'Unable to update the shop details.'
+    );
+  }
+  toast.dismiss(toastId);
 }
 
 // export function resetFineDetails(fineRate , fineEnforcementTime , token)
@@ -166,7 +179,7 @@ export async function resetShopDetails(shopName , shopLandmark , token )
 //         },
 //         {'Authorization': `Bearer ${token}`}
 //       )
-     
+
 //       toast.success("Fine details updated successfully.");
 
 //     }catch(error)

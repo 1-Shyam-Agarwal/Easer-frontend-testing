@@ -1,42 +1,44 @@
-import React, { useState } from "react";
-import toast from "react-hot-toast";
-import "./navbar.css"
+import React, { useState } from 'react';
+import toast from 'react-hot-toast';
+import './navbar.css';
 
 const Footer = () => {
+  const [email, setEmail] = useState('');
 
-  const[email , setEmail]=useState("");
-  
   const quickLinks = [
-    { name: "About Us", href: "/about" },
-    { name: "Contact Us", href: "/contactus" },
-    { name: "Terms & Conditions", href: "/terms-and-conditions" },
-    { name: "Privacy Policy", href: "/privacy-policy" },
-    { name: "Disclaimer", href: "/disclaimer" },
-    { name: "Refund and Cancellation Policy", href: "/refund-and-cancellation-policy" },
-    { name: "Shipping and Delivery Policy", href: "/shipping-and-delivery-policy" },
+    { name: 'About Us', href: '/about' },
+    { name: 'Contact Us', href: '/contactus' },
+    { name: 'Terms & Conditions', href: '/terms-and-conditions' },
+    { name: 'Privacy Policy', href: '/privacy-policy' },
+    { name: 'Disclaimer', href: '/disclaimer' },
+    {
+      name: 'Refund and Cancellation Policy',
+      href: '/refund-and-cancellation-policy',
+    },
+    {
+      name: 'Shipping and Delivery Policy',
+      href: '/shipping-and-delivery-policy',
+    },
+    { name: 'Sponsors', href: '/sponsors' },
+    { name: 'FAQs', href: '/faqs' },
   ];
 
-
-  function emailChangeHandler(e)
-  {
-      const value = e?.target?.value;
-      setEmail(value);
+  function emailChangeHandler(e) {
+    const value = e?.target?.value;
+    setEmail(value);
   }
 
-  function subscribeHandler(e)
-  {
-      e.preventDefault();
-      if(!(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)))
-      {
-          toast.error("Invalid email");
-      }
-      else
-      {
-          toast.success("We’ll keep you updated about our latest updates and innovations. Stay tuned!");
-          toast.success("Welcome to the Easer community! 😊");
-          setEmail("");
-      }
-      
+  function subscribeHandler(e) {
+    e.preventDefault();
+    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+      toast.error('Invalid email');
+    } else {
+      toast.success(
+        'We’ll keep you updated about our latest updates and innovations. Stay tuned!'
+      );
+      toast.success('Welcome to the Easer community! 😊');
+      setEmail('');
+    }
   }
 
   return (
@@ -45,10 +47,8 @@ const Footer = () => {
         {/* Top Section with Logo and Social */}
         <div className="flex justify-center">
           <div className="flex flex-col items-center md:flex-row md:justify-between mb-12">
-
             <div className="mb-6 md:mb-0">
               <div className="flex items-center justify-center gap-[15px] md:gap-4 group">
-                
                 <div className="text-2xl tracking-wide font-semibold text-white hover:scal-110">
                   <span className="text-white specialCharacter">E</span>aser
                 </div>
@@ -58,10 +58,9 @@ const Footer = () => {
                 Simplifying document printing for students and professionals.
                 Secure, fast, and reliable.
               </p>
-          </div>
+            </div>
           </div>
         </div>
-        
 
         {/* Main Content Grid */}
         <div className="grid max-640:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-16 py-4 md:justify-items-center md:items-start sm:justify-items-center max-640:justify-items-center max-640:items-center">
@@ -103,10 +102,8 @@ const Footer = () => {
               <div className="text-gray-400">
                 <span className="font-medium text-gray-100">Phone:</span>
                 <br />
-                <p
-                  className="hover:text-blue-400 transition-colors cursor-pointer duration-200"
-                >
-                  +91 9311161298 
+                <p className="hover:text-blue-400 transition-colors cursor-pointer duration-200">
+                  +91 9311161298
                 </p>
               </div>
             </div>

@@ -23,8 +23,6 @@
 //     const role = useSelector(state => state.auth.role);
 //     const {socket , setSocket} = useContext(socketContext);
 //     let isUserOnWebsite = useRef(true);
-    
-
 
 //     useEffect(()=>
 //     {
@@ -33,7 +31,7 @@
 //         {
 //             document.addEventListener("visibilitychange", () => {
 //                 isUserOnWebsite.current = !isUserOnWebsite.current;
-//             }) 
+//             })
 
 //             if (Notification.permission === "default") {
 //                 Notification.requestPermission().then(permission => {
@@ -63,10 +61,6 @@
 //         }
 //     },[role])
 
-
-   
-
-
 //     function searchTextHandler(e)
 //     {
 //         setSearchQuery(e.target.value);
@@ -77,10 +71,9 @@
 //     {
 //         const Name = role ==="user" ?`${item?.vendor?.vendorAdditionalDetails?.shopName?.toLowerCase()}`: `${item?.user?.firstName?.toLowerCase()} ${item?.user?.lastName?.toLowerCase()}`;
 //         const query = searchQuery?.toLowerCase() ;
-    
+
 //         return Name?.includes(query) ;
 //     })
-
 
 //     // Fetch ongoing orders once role is available
 //     useEffect(() => {
@@ -297,7 +290,6 @@
 //                 ))
 //             })
 
-
 //             socket.on("user-update-your-process-status-in-your-ongoing-dashboard",(orderId)=>
 //             {
 //                 setOngoingOrders((prev)=>
@@ -337,12 +329,10 @@
 
 //     },[role])
 
-
-
 //   return (
 //     <div>
 //       {
-//           loading ? 
+//           loading ?
 //           (
 //             <div className="min-h-screen flex items-center justify-center">
 //               <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
@@ -364,17 +354,17 @@
 //                                         Ongoing Orders
 //                                         </h3>
 //                                     </div>
-                                
+
 //                                     {/* Search Bar Section */}
 //                                     <div className="flex items-start flex-col space-x-4 ">
 //                                         {/* Search Input */}
 //                                         <div className="flex-l w-[390px] max-450:w-[300px]">
 //                                             <div className="relative flex items-center">
-                                            
+
 //                                             <input
 //                                                 type="text"
 //                                                 placeholder="Search Orders"
-//                                                 className="w-full py-2.5 px-4 max-360:py-2 bg-gray-100  
+//                                                 className="w-full py-2.5 px-4 max-360:py-2 bg-gray-100
 //                                                         border-0 rounded-[9px]
 //                                                         text-gray-700 placeholder-gray-500
 //                                                         focus:outline-none focus:ring-2 focus:ring-blue-500
@@ -384,17 +374,17 @@
 //                                             />
 
 //                                             <div className="absolute right-3">
-//                                                 <svg 
+//                                                 <svg
 //                                                 className="h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer"
 //                                                 fill="none"
 //                                                 stroke="currentColor"
 //                                                 viewBox="0 0 24 24"
 //                                                 >
-//                                                 <path 
-//                                                     strokeLinecap="round" 
-//                                                     strokeLinejoin="round" 
-//                                                     strokeWidth={2} 
-//                                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" 
+//                                                 <path
+//                                                     strokeLinecap="round"
+//                                                     strokeLinejoin="round"
+//                                                     strokeWidth={2}
+//                                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
 //                                                 />
 //                                                 </svg>
 //                                             </div>
@@ -404,15 +394,15 @@
 //                                     <div className=' text-gray-500 pt-[4px] text-[11px]'>{ role ==="user" ? "Filter by Shop" : "Filter by Customer"}</div>
 //                                 </div>
 //                             </div>
-                    
+
 //                     <OngoingOrdersHeader role={role}/>
 //                     {
 //                         role ==="user"?
 //                         filteredData?.map((order ,idx)=>
 //                         {
-                            
+
 //                             return (
-//                                 <OnGoingOrderCard 
+//                                 <OnGoingOrderCard
 //                                     key={order?.orderId + Date.now()}
 //                                     orderedAt = {order?.orderedAt}
 //                                     orderId = {order?.orderId}
@@ -426,7 +416,7 @@
 //                                     userOrderCancellation = {order?.userOrderCancellation}
 //                                     notifyCustomerIndicator={order?.notifyCustomerIndicator}
 //                                     processOrderIndicator={order?.processOrderIndicator}
-//                                     timeOfTurn={order?.timeOfTurn} 
+//                                     timeOfTurn={order?.timeOfTurn}
 //                                     waitingTime ={order?.waitingTime}
 //                                     role ={role}
 //                                     shopName ={order?.vendor?.vendorAdditionalDetails?.shopName}
@@ -509,7 +499,7 @@
 //                                     //     userOrderCancellation = {order?.userOrderCancellation}
 //                                     //     notifyCustomerIndicator={order?.notifyCustomerIndicator}
 //                                     //     processOrderIndicator={order?.processOrderIndicator}
-//                                     //     timeOfTurn={order?.timeOfTurn} 
+//                                     //     timeOfTurn={order?.timeOfTurn}
 //                                     //     role ={role}
 //                                     //     userId = {order?.user?.userId}
 //                                     // />
@@ -528,15 +518,15 @@
 //                         <div className="rounded-full bg-blue-50 p-4 mb-4">
 //                         <PackageSearch className="h-8 w-8 text-blue-500" />
 //                         </div>
-                        
+
 //                         <h3 className="text-lg font-semibold text-center text-gray-900 mb-2">
 //                         No Ongoing Orders
 //                         </h3>
-                        
+
 //                         <p className="text-gray-500 text-center max-w-sm mb-6">
 //                         There are no ongoing orders at the moment.
 //                         </p>
-                        
+
 //                         <div className="w-full max-w-xs border-t border-gray-200" />
 //                     </div>
 //                 </div>

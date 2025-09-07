@@ -33,7 +33,7 @@
 
 //       const formattedTOC = `${String(TOC?.getHours())?.padStart(2, '0')}:${String(TOC?.getMinutes())?.padStart(2, '0')}`;;
 //       const query = searchQuery?.toLowerCase();
-            
+
 //       return(
 //         paymentStatus?.includes(query) || formattedTOC?.includes(query) || entity?.includes(query)
 //       )
@@ -55,7 +55,7 @@
 //           {
 //               setUnreceivedOrders((prev)=>
 //               (
-                 
+
 //                   prev.filter(order=>
 //                   {
 //                       return order?.orderId !==orderId
@@ -78,7 +78,7 @@
 //               ))
 //           })
 //         }
-        
+
 //       }
 //   },[socket , role])
 
@@ -100,15 +100,15 @@
 //                       <div className="rounded-full bg-red-50 p-4 mb-4">
 //                           <ShoppingCart className="h-8 w-8 text-red-500" />
 //                       </div>
-                      
+
 //                       <h3 className="text-lg font-semibold text-center text-gray-900 mb-2">
 //                           No Unreceived Orders
 //                       </h3>
-                      
+
 //                       <p className="text-gray-500 text-center max-w-sm mb-6">
 //                           You have no pending orders waiting to be received.
 //                       </p>
-                      
+
 //                       <div className="w-full max-w-xs border-t border-gray-200" />
 //                   </div>
 //               </div>
@@ -125,17 +125,17 @@
 //                               Unreceived Orders
 //                               </h3>
 //                           </div>
-                      
+
 //                           {/* Search Bar Section */}
 //                           <div className="flex items-start flex-col space-x-4 ">
 //                               {/* Search Input */}
 //                               <div className="flex-l w-[390px] max-450:w-[300px]">
 //                                   <div className="relative flex items-center">
-                                  
+
 //                                   <input
 //                                       type="text"
 //                                       placeholder="Search Orders"
-//                                       className="w-full py-2.5 px-4 max-360:py-2 bg-gray-100  
+//                                       className="w-full py-2.5 px-4 max-360:py-2 bg-gray-100
 //                                               border-0 rounded-[9px]
 //                                               text-gray-700 placeholder-gray-500
 //                                               focus:outline-none focus:ring-2 focus:ring-blue-500
@@ -145,17 +145,17 @@
 //                                   />
 
 //                                   <div className="absolute right-3">
-//                                       <svg 
+//                                       <svg
 //                                       className="h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer"
 //                                       fill="none"
 //                                       stroke="currentColor"
 //                                       viewBox="0 0 24 24"
 //                                       >
-//                                       <path 
-//                                           strokeLinecap="round" 
-//                                           strokeLinejoin="round" 
-//                                           strokeWidth={2} 
-//                                           d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" 
+//                                       <path
+//                                           strokeLinecap="round"
+//                                           strokeLinejoin="round"
+//                                           strokeWidth={2}
+//                                           d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
 //                                       />
 //                                       </svg>
 //                                   </div>
@@ -165,13 +165,12 @@
 //                           <div className=' text-gray-500 pt-[4px] text-[11px]'>{ role ==="user" ? "Filter by TOC , Shop , Payment status" : "Filter by TOC , Customer , Payment status"}</div>
 //                       </div>
 //                   </div>
-              
-                        
+
 //               <UnreceivedOrdersHeader unreceivedOrders={unreceivedOrders} role={role}/>
 //               {
 //                 filteredData?.map((order,index)=>
 //                 {
-//                   return  <UnreceivedOrderCard 
+//                   return  <UnreceivedOrderCard
 //                         key={order?.orderId + Date.now()}
 //                         role={role}
 //                         s_no={index+1}

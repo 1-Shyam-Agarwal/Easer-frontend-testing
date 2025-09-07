@@ -1,37 +1,28 @@
 const NavLinks = [
+  {
+    title: 'Home',
+    path: '/',
+  },
 
-    {
-        title : "Home",
-        path : "/"
-    },
+  {
+    title: 'About',
+    path: '/about',
+  },
 
-    {
-        title : "About",
-        path : "/about"
-    },
+  {
+    title: 'Become Vendor',
+    path: '/become-vendor',
+  },
 
-    {
-        title : "Sponsors",
-        path : "/sponsors"
-    },
+  {
+    title: 'Contact Us',
+    path: '/contactus',
+  },
 
-    {
-        title : "Become Vendor",
-        path : "/become-vendor"
-    },
-
-    {
-        title : "Contact Us",
-        path : "/contactus"
-    },
-
-    {
-        title : "FAQs",
-        path : "/faqs"
-    },
-
-]
-
+  {
+    title: 'FAQs',
+    path: '/faqs',
+  },
+];
 
 export default NavLinks;
-

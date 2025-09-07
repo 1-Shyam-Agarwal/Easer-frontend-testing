@@ -28,7 +28,9 @@ const ProductCard = ({ product }) => {
         </div>
 
         <div className="flex items-center justify-between mt-4">
-          <span className="text-xl font-bold text-[#14213d]">₹{product.points}</span>
+          <span className="text-xl font-bold text-[#14213d]">
+            ₹{product.points}
+          </span>
           <FaBoxOpen className="text-[#fca311] text-lg" />
         </div>
 

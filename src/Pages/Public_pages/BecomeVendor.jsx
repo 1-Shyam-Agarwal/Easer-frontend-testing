@@ -1,28 +1,29 @@
-import React from "react";
-import { Printer, Mail, Phone, AlertCircle, ChevronRight } from "lucide-react";
-import Footer from "./HomePage/Components/Footer.js";
+import React from 'react';
+import { Printer, Mail, Phone, AlertCircle, ChevronRight } from 'lucide-react';
+import Footer from './HomePage/Components/Footer.js';
 
 const BecomeVendor = () => {
   return (
     <div>
-        <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-                  <h1 className="text-3xl font-normal text-black mb-2">
-                  Become a Vendor on Easer
-                </h1>
-                <p className="text-sm text-gray-600 max-w-2xl mx-auto">
-                  Join our platform to connect with students and provide essential printing services.
-                </p>
-              </div>
+      <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h1 className="text-3xl font-normal text-black mb-2">
+            Become a Vendor on Easer
+          </h1>
+          <p className="text-sm text-gray-600 max-w-2xl mx-auto">
+            Join our platform to connect with students and provide essential
+            printing services.
+          </p>
+        </div>
         <div className="bg-gray-100 font-sans leading-relaxed">
           <div className="container mx-auto my-4 max-480:p-2 p-6 bg-white shadow-lg rounded-[2px]">
             <div>
               {/* Steps Grid */}
               <div className="grid gap-8 mb-12">
                 {steps.map((step, index) => (
-                  <div 
+                  <div
                     key={index}
-                    className="relative flex flex-col sm:flex-row items-start gap-4 p-6 bg-white rounded-[2px] border border-gray-200 hover:border-blue-100 hover:shadow-md transition-all"
+                    className="relative flex flex-col sm:flex-row items-start gap-4 p-6 bg-white rounded-[2px] border border-gray-200 hover:border-orange-200 hover:bg-orange-50 hover:shadow-md transition-all"
                   >
                     <div className="flex-shrink-0">
                       <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-semibold">
@@ -75,8 +76,11 @@ const BecomeVendor = () => {
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="flex items-center gap-3">
                     <Mail className="w-5 h-5 text-blue-600" />
-                    <a href="mailto:easer.helpdesk.india@gmail.com" className="text-blue-600 hover:underline">
-                    easer.helpdesk.india@gmail.com
+                    <a
+                      href="mailto:easer.helpdesk.india@gmail.com"
+                      className="text-blue-600 hover:underline"
+                    >
+                      easer.helpdesk.india@gmail.com
                     </a>
                   </div>
                   <div className="flex items-center gap-3">
@@ -88,12 +92,18 @@ const BecomeVendor = () => {
 
               {/* Footer */}
               <p className="text-sm text-gray-500 text-center mt-8 p-4">
-                By registering as a vendor, you agree to our{" "}
-                <a href="/terms-and-conditions" className="text-blue-600 hover:underline">
+                By registering as a vendor, you agree to our{' '}
+                <a
+                  href="/terms-and-conditions"
+                  className="text-blue-600 hover:underline"
+                >
                   Terms and Conditions
-                </a>{" "}
-                and{" "}
-                <a href="/privacy-policy" className="text-blue-600 hover:underline">
+                </a>{' '}
+                and{' '}
+                <a
+                  href="/privacy-policy"
+                  className="text-blue-600 hover:underline"
+                >
                   Privacy Policy
                 </a>
                 .
@@ -102,46 +112,48 @@ const BecomeVendor = () => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
-    
   );
 };
 
 // Data Arrays
 const steps = [
   {
-    title: "Visit Our Website",
-    description: "Navigate to our website and locate the Pricing button in the middle part of the navigation bar.",
+    title: 'Visit Our Website',
+    description:
+      'Navigate to our website and locate the Pricing button in the middle part of the navigation bar.',
   },
   {
-    title: "Choose a plan",
-    description: "Select a plan that suits your business the most.",
+    title: 'Choose a plan',
+    description: 'Select a plan that suits your business the most.',
   },
   {
-    title: "Fill Out the Registration Form",
-    description: "Provide all necessary information accurately:",
+    title: 'Fill Out the Registration Form',
+    description: 'Provide all necessary information accurately:',
     details: [
-      "Personal Information: Your name, email, contact number and college ",
-      "Vendor Details: Shop details, pricing schema, fine schema and waiting time",
-      "Mobile Number: For updates",
-      "x-client-id and x-client-secret: Write it carefully otherwise you will not receive your payment.",
+      'Personal Information: Your name, email, contact number and college ',
+      'Vendor Details: Shop details, pricing schema, fine schema and waiting time',
+      'Mobile Number: For updates',
+      'x-client-id and x-client-secret: Write it carefully otherwise you will not receive your payment.',
     ],
   },
   {
-    title: "Verify Your Email",
-    description: "Enter the OTP (One-Time Password) sent to your registered email for verification.",
+    title: 'Verify Your Email',
+    description:
+      'Enter the OTP (One-Time Password) sent to your registered email for verification.',
   },
   {
-    title: "Account Approval",
-    description: "Please wait for our team to review and approve your application. During this process, we may contact you, so stay tuned. You will receive a confirmation email once your account is activated.",
+    title: 'Account Approval',
+    description:
+      'Please wait for our team to review and approve your application. During this process, we may contact you, so stay tuned. You will receive a confirmation email once your account is activated.',
   },
 ];
 
 const tips = [
   "Double-check your mobile number to ensure you don't miss important updates ",
-  "Verify the x-client-id and x-client-secret carefully to avoid payment processing issues.",
-  "Provide accurate shop details to get quick approval from us and it also helps students to locate your shop easily.",
+  'Verify the x-client-id and x-client-secret carefully to avoid payment processing issues.',
+  'Provide accurate shop details to get quick approval from us and it also helps students to locate your shop easily.',
 ];
 
 export default BecomeVendor;

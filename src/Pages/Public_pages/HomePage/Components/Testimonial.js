@@ -1,10 +1,8 @@
-import React from 'react'
 import { FaStar } from 'react-icons/fa';
-import kartik from '../../../../Images/kartikPhoto.png';
-import prachi from '../../../../Images/prachi.png';
-import naman from '../../../../Images/naman.png';
-import palak from '../../../../Images/palak.jpg';
-import ArvindSir from '../../../../Images/ArvindSir.png'
+import kartik from '../../../../Assets/Images/kartikPhoto.webp';
+import naman from '../../../../Assets/Images/naman.webp';
+import palak from '../../../../Assets/Images/palak.webp';
+import ArvindSir from '../../../../Assets/Images/ArvindSir.webp';
 import Testimonialcards from './testimonialcards';
 
 // const Testimonial = () => {
@@ -17,14 +15,14 @@ import Testimonialcards from './testimonialcards';
 //         </div >
 
 //         {/* Image Part of the testimonial */}
-//         <div className="w-[65%] flex flex-row gap-6"> 
+//         <div className="w-[65%] flex flex-row gap-6">
 //           {/* First column */}
-//           <div className="w-[45%] flex flex-col justify-start items-center"> 
+//           <div className="w-[45%] flex flex-col justify-start items-center">
 //             {/* First testimonial */}
-//             <div className="w-[85%] h-[25rem] mb-8 rounded-[10px] relative" 
+//             <div className="w-[85%] h-[25rem] mb-8 rounded-[10px] relative"
 //                  style={{ backgroundImage: `url(${kartik})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
 //               <div className="absolute inset-0 bg-black opacity-40 rounded-[10px]"></div> {/* Fade overlay */}
-//               <Testimonialcards 
+//               <Testimonialcards
 //                   message="As a college student, I always have last-minute print jobs, and this service has been a lifesaver."
 //                   photo={kartik}
 //                   name="Kartik Gupta"
@@ -32,10 +30,10 @@ import Testimonialcards from './testimonialcards';
 //             </div>
 
 //             {/* Second testimonial */}
-//             <div className="w-[85%] h-[25rem] mb-8 rounded-[10px] relative" 
+//             <div className="w-[85%] h-[25rem] mb-8 rounded-[10px] relative"
 //                  style={{ backgroundImage: `url(${prachi})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
 //               <div className="absolute inset-0 bg-black opacity-40 rounded-[10px]"></div> {/* Fade overlay */}
-//               <Testimonialcards 
+//               <Testimonialcards
 //                   message="This service saved me time and effort during my Practical exams!"
 //                   photo={prachi}
 //                   name="Prachi Agarwal"
@@ -44,12 +42,12 @@ import Testimonialcards from './testimonialcards';
 //           </div>
 
 //           {/* Second column */}
-//           <div className="w-[45%] flex flex-col justify-start items-center mt-16"> 
+//           <div className="w-[45%] flex flex-col justify-start items-center mt-16">
 //             {/* Third testimonial */}
-//             <div className="w-[85%] h-[25rem] mb-8 rounded-[10px] relative" 
+//             <div className="w-[85%] h-[25rem] mb-8 rounded-[10px] relative"
 //                  style={{ backgroundImage: `url(${naman})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
 //               <div className="absolute inset-0 bg-black opacity-40 rounded-[10px]"></div> {/* Fade overlay */}
-//               <Testimonialcards 
+//               <Testimonialcards
 //                   message="I was impressed with the quick turnaround time! My prints were ready in no time, and the quality exceeded my expectations."
 //                   photo={naman}
 //                   name="Naman Jain"
@@ -57,10 +55,10 @@ import Testimonialcards from './testimonialcards';
 //             </div>
 
 //             {/* Fourth testimonial */}
-//             <div className="w-[85%] h-[25rem] mb-8 rounded-[10px] relative" 
+//             <div className="w-[85%] h-[25rem] mb-8 rounded-[10px] relative"
 //                  style={{ backgroundImage: `url(${palak})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
 //               <div className="absolute inset-0 bg-black opacity-40 rounded-[10px]"></div> {/* Fade overlay */}
-//               <Testimonialcards 
+//               <Testimonialcards
 //                   message="I love how easy it is to place an order online!"
 //                   photo={palak}
 //                   name="Palak Chaurasia"
@@ -74,12 +72,9 @@ import Testimonialcards from './testimonialcards';
 
 // export default Testimonial;
 
-
-
-
 const TestimonialCard = ({ message, photo, name }) => (
   <div className="relative w-[85%] h-96 rounded-lg mb-8">
-    <div 
+    <div
       className="absolute inset-0 rounded-lg bg-cover bg-center"
       style={{ backgroundImage: `url(${photo})` }}
     >
@@ -93,7 +88,12 @@ const TestimonialCard = ({ message, photo, name }) => (
         ))}
       </div>
       <div className="flex items-center gap-2 mt-2">
-        <img src={photo} alt={name} className="w-12 h-12 rounded-full object-cover" />
+        <img
+          src={photo}
+          alt={name}
+          loading="lazy"
+          className="w-12 h-12 rounded-full object-cover"
+        />
         <p className="font-medium">{name}</p>
       </div>
     </div>
@@ -103,35 +103,40 @@ const TestimonialCard = ({ message, photo, name }) => (
 const Testimonial = () => {
   const testimonials = [
     {
-      message: "This service has saved my students time and effort, allowing them to focus solely on their studies.",
+      message:
+        'This service has saved my students time and effort, allowing them to focus solely on their studies.',
       photo: ArvindSir,
-      name: "Dr. Arvind Rehalia"
+      name: 'Dr. Arvind Rehalia',
     },
     {
-      message: "As a college student, I always have last-minute print jobs, and this service has been a lifesaver.",
+      message:
+        'As a college student, I always have last-minute print jobs, and this service has been a lifesaver.',
       photo: kartik,
-      name: "Kartik Gupta"
+      name: 'Kartik Gupta',
     },
     {
-      message: "This service saved me time and effort during my Practical exams!",
+      message:
+        'This service saved me time and effort during my Practical exams!',
       photo: naman,
-      name: "Naman Jain"
+      name: 'Naman Jain',
     },
     {
-      message: "I love how easy it is to place an order online!",
+      message: 'I love how easy it is to place an order online!',
       photo: palak,
-      name: "Palak Chaurasia"
-    }
+      name: 'Palak Chaurasia',
+    },
   ];
 
   return (
     <div className="flex flex-col lg:flex-row gap-8 items-center max-w-full bg-[#FAFAFA] py-[40px] mt-8 px-6 ">
       <div className="lg:w-2/5 md:w-4/5 flex flex-col md:items-center lg:self-start mb:8 md:mb-8">
-        <h2 className="font-semibold text-3xl mb-4 text-center lg:text-start">
-          Don't just take our word for it - Hear what our satisfied customers have to say!
+        <h2 className="font text-3xl mb-4 text-center lg:text-start">
+          Don't just take our word for it - Hear what our satisfied customers
+          have to say!
         </h2>
         <p className="text-gray-600 text-center lg:text-start">
-          Trusted by students, teachers and professors alike – find out how our service has transformed the way they handle their printing tasks
+          Trusted by students, teachers and professors alike – find out how our
+          service has transformed the way they handle their printing tasks
         </p>
       </div>
 

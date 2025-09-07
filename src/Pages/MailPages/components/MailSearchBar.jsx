@@ -1,7 +1,11 @@
-import { Search } from "lucide-react";
+import { Search } from 'lucide-react';
 
-
-const MailSearchBar = ({handleSearchByFilename , setKeyword , keyword , searchElement}) => {
+const MailSearchBar = ({
+  handleSearchByFilename,
+  setKeyword,
+  keyword,
+  searchElement,
+}) => {
   return (
     <div className="flex items-center justify-between bg-white rounded-full px-3 py-3 w-full max-w-3xl shadow-sm">
       {/* Search Icon + Input */}
@@ -17,7 +21,7 @@ const MailSearchBar = ({handleSearchByFilename , setKeyword , keyword , searchEl
           }}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
-               // Your function to handle search or filter
+              // Your function to handle search or filter
             }
           }}
         />

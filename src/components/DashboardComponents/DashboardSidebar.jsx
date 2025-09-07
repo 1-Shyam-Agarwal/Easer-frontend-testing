@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { MdPerson, MdList, MdWarning, MdDelete, MdHistory, MdSchool, MdInbox, MdPayment } from 'react-icons/md';
+import {
+  MdPerson,
+  MdList,
+  MdWarning,
+  MdDelete,
+  MdHistory,
+  MdSchool,
+  MdInbox,
+  MdPayment,
+} from 'react-icons/md';
 import { RiExpandRightLine, RiExpandLeftLine } from 'react-icons/ri';
-import { IoMdPersonAdd } from "react-icons/io";
-import { BsFillBuildingsFill } from "react-icons/bs";
+import { IoMdPersonAdd } from 'react-icons/io';
+import { BsFillBuildingsFill } from 'react-icons/bs';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRole } from '../../Services/operations/GetUserInformation';
-import {MdPrint,MdSend} from 'react-icons/md';
+import { MdPrint, MdSend } from 'react-icons/md';
 
 // ✅ Hook to detect mobile screen
 const useIsMobile = () => {
@@ -22,15 +31,15 @@ const useIsMobile = () => {
 const DashboardSidebar = () => {
   const [expandSidebar, setExpandSidebar] = useState(false);
   const [openCategories, setOpenCategories] = useState([]);
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState('');
   const token = useSelector((state) => state.auth.token);
   const isMobile = useIsMobile();
 
   const toggleHandler = () => setExpandSidebar(!expandSidebar);
   const toggleCategory = (category) => {
-    setOpenCategories(prev =>
+    setOpenCategories((prev) =>
       prev.includes(category)
-        ? prev.filter(c => c !== category)
+        ? prev.filter((c) => c !== category)
         : [...prev, category]
     );
   };
@@ -43,24 +52,53 @@ const DashboardSidebar = () => {
 
   const userNavigation = [
     {
-  to: '/dashboard/easer-outbox',
-  icon: <MdSend />, // Represents "sent" or "outbox"
-  label: 'Outbox',
-  type: 'single'
-},
-// {
-//   to: '/dashboard/freq-docs',
-//   icon: <MdHistory />, // Represents "frequent", "recent", or "regular"
-//   label: 'Regular Printouts',
-//   type: 'single'
-// },
-{
-  to: '/dashboard/ongoing-orders',
-  icon: <MdPrint />, // Represents cloud-based or remote printing
-  label: 'Remote Prints',
-  type: 'single'
-}
+      to: '/dashboard/easer-outbox',
+      icon: <MdSend />, // Represents "sent" or "outbox"
+      label: 'Outbox',
+      type: 'single',
+    },
 
+    {
+      label: 'Remote Prints',
+      icon: <MdList />,
+      type: 'category',
+      items: [
+        {
+          to: '/dashboard/ongoing-orders',
+          icon: <MdSchool />,
+          label: 'Place & Track Orders',
+        },
+        {
+          to: '/dashboard/unreceived-orders',
+          icon: <MdWarning />,
+          label: 'Unreceived Orders',
+        },
+        {
+          to: '/dashboard/cancelled-refunds-orders',
+          icon: <MdDelete />,
+          label: 'Cancelled & Refunds',
+        },
+        {
+          to: '/dashboard/order-history',
+          icon: <MdHistory />,
+          label: 'Order History',
+        },
+      ],
+    },
+
+    {
+      to: '/dashboard/print-summary',
+      icon: <MdPrint />, // Represents cloud-based or remote printing
+      label: 'Summary',
+      type: 'single',
+    },
+
+    {
+      to: '/dashboard/college-shops',
+      icon: <MdPrint />, // Represents cloud-based or remote printing
+      label: 'Campus Shops',
+      type: 'single',
+    },
   ];
 
   const vendorNavigation = [
@@ -68,7 +106,49 @@ const DashboardSidebar = () => {
       to: '/dashboard/easer-inbox',
       icon: <MdInbox />,
       label: 'Inbox',
-      type: 'single'
+      type: 'single',
+    },
+
+    {
+      label: 'Remote Prints',
+      icon: <MdList />,
+      type: 'category',
+      items: [
+        {
+          to: '/dashboard/vendor/ongoing-orders',
+          icon: <MdSchool />,
+          label: 'Ongoing Orders',
+        },
+        {
+          to: '/dashboard/unreceived-orders',
+          icon: <MdWarning />,
+          label: 'Unreceived Orders',
+        },
+        {
+          to: '/dashboard/cancelled-refunds-orders',
+          icon: <MdDelete />,
+          label: 'Cancelled & Refunds',
+        },
+        {
+          to: '/dashboard/order-history',
+          icon: <MdHistory />,
+          label: 'Order History',
+        },
+      ],
+    },
+
+    {
+      to: '/dashboard/print-summary',
+      icon: <MdPrint />, // Represents cloud-based or remote printing
+      label: 'Summary',
+      type: 'single',
+    },
+
+    {
+      to: '/dashboard/college-shops',
+      icon: <MdPrint />, // Represents cloud-based or remote printing
+      label: 'Campus Shops',
+      type: 'single',
     },
   ];
 
@@ -77,13 +157,13 @@ const DashboardSidebar = () => {
       to: '/dashboard/add-college',
       icon: <BsFillBuildingsFill />,
       label: 'Add College',
-      type: 'single'
+      type: 'single',
     },
     {
       to: '/dashboard/add-vendor',
       icon: <IoMdPersonAdd />,
       label: 'Add Vendor',
-      type: 'single'
+      type: 'single',
     },
   ];
 
@@ -110,26 +190,36 @@ const DashboardSidebar = () => {
           >
             <div className="flex items-center">
               <span className="text-xl">{item?.icon}</span>
-              {expandSidebar && <span className="ml-3 font-normal">{item?.label}</span>}
+              {expandSidebar && (
+                <span className="ml-3 font-normal">{item?.label}</span>
+              )}
             </div>
             {expandSidebar && (
-              <span className={`transform transition-transform duration-100 ${openCategories.includes(item?.label) ? 'rotate-90' : ''}`}>
+              <span
+                className={`transform transition-transform duration-100 ${openCategories.includes(item?.label) ? 'rotate-90' : ''}`}
+              >
                 ›
               </span>
             )}
           </button>
 
-          <div className={`space-y-1 transition-all duration-100 ${openCategories.includes(item?.label) ? 'block' : 'hidden'} ${expandSidebar ? 'ml-4' : ''}`}>
+          <div
+            className={`space-y-1 transition-all duration-100 ${openCategories.includes(item?.label) ? 'block' : 'hidden'} ${expandSidebar ? 'ml-4' : ''}`}
+          >
             {item?.items?.map((subItem) => (
               <NavLink
                 key={subItem?.to}
                 to={subItem?.to}
-                className={({ isActive }) => `flex items-center px-3 py-3 rounded-lg ${isActive ? 'bg-blue-700 text-white' : 'text-gray-400 hover:bg-gray-700'} transition-colors duration-100`}
+                className={({ isActive }) =>
+                  `flex items-center px-3 py-3 rounded-lg ${isActive ? 'bg-blue-700 text-white' : 'text-gray-400 hover:bg-gray-700'} transition-colors duration-100`
+                }
               >
                 <span className={`text-xl ${!expandSidebar ? 'mx-auto' : ''}`}>
                   {subItem?.icon}
                 </span>
-                {expandSidebar && <span className="ml-3 text-sm">{subItem?.label}</span>}
+                {expandSidebar && (
+                  <span className="ml-3 text-sm">{subItem?.label}</span>
+                )}
               </NavLink>
             ))}
           </div>
@@ -141,13 +231,17 @@ const DashboardSidebar = () => {
       <NavLink
         key={item?.to}
         to={item?.to}
-        className={({ isActive }) => `flex items-center px-3 py-3 overflow-x-hidden rounded-lg ${isActive ? 'bg-blue-700 text-white' : 'text-gray-400 hover:bg-gray-700'} transition-colors duration-100`}
+        className={({ isActive }) =>
+          `flex items-center px-3 py-3 overflow-x-hidden rounded-lg ${isActive ? 'bg-blue-700 text-white' : 'text-gray-400 hover:bg-gray-700'} transition-colors duration-100`
+        }
       >
         <span className={`text-xl ${!expandSidebar ? 'mx-auto' : ''}`}>
           {item?.icon}
         </span>
         {expandSidebar && (
-          <span className="ml-3 font-normal text-[0.9rem] text-nowrap">{item?.label}</span>
+          <span className="ml-3 font-normal text-[0.9rem] text-nowrap">
+            {item?.label}
+          </span>
         )}
       </NavLink>
     );
@@ -157,7 +251,10 @@ const DashboardSidebar = () => {
     <div>
       {/* Overlay for mobile */}
       {isMobile && expandSidebar && (
-        <div className="fixed inset-0 bg-black opacity-50 z-30" onClick={toggleHandler}></div>
+        <div
+          className="fixed inset-0 bg-black opacity-50 z-30"
+          onClick={toggleHandler}
+        ></div>
       )}
 
       {/* Sidebar */}
@@ -166,9 +263,10 @@ const DashboardSidebar = () => {
           bg-[#000033] shadow-lg overflow-x-hidden transition-all duration-300 ease-in-out z-40
           h-screen
           ${expandSidebar ? 'w-64' : 'w-16'}
-          ${isMobile
-            ? `fixed top-0 left-0 ${expandSidebar ? 'translate-x-0' : '-translate-x-full'}`
-            : 'relative'
+          ${
+            isMobile
+              ? `fixed top-0 left-0 ${expandSidebar ? 'translate-x-0' : '-translate-x-full'}`
+              : 'relative'
           }
         `}
       >
@@ -193,10 +291,10 @@ const DashboardSidebar = () => {
 
         {/* Navigation */}
         <div className="flex-1 overflow-y-auto p-3 space-y-2">
-          {role === "" ? (
+          {role === '' ? (
             <p></p>
           ) : (
-            getNavigation()?.map(item => renderNavItem(item))
+            getNavigation()?.map((item) => renderNavItem(item))
           )}
         </div>
       </div>

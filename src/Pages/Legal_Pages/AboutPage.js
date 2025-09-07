@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import creatorImage from '../../Images/shyam.png';
-import { IoLogoLinkedin } from "react-icons/io5";
-import Footer from "../Public_pages/HomePage/Components/Footer.js"
+import creatorImage from '../../Assets/Images/shyam.webp';
+import { IoLogoLinkedin } from 'react-icons/io5';
+import Footer from '../Public_pages/HomePage/Components/Footer.js';
 
 const About = () => {
   return (
@@ -33,7 +33,7 @@ const About = () => {
           {/* Text Section */}
           <div className=" flex flex-col  items-center text-center">
             <motion.h2
-              className="text-3xl font-semibold text-gray-900 mb-2"
+              className="text-3xl font-normal text-gray-900 mb-2"
               initial={{ x: -100, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 1, delay: 1 }}
@@ -46,7 +46,7 @@ const About = () => {
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 1, delay: 1.2 }}
             >
-              B.Tech in Information Technology 
+              B.Tech in Information Technology
             </motion.p>
 
             <motion.p
@@ -55,24 +55,33 @@ const About = () => {
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 1, delay: 1.2 }}
             >
-            <Link to='https://www.linkedin.com/in/shyam-agarwal-926521273/' target="_blank" rel="noopener noreferrer" className="text-blue-500 text-[30px] "><IoLogoLinkedin /></Link>
+              <Link
+                to="https://www.linkedin.com/in/shyam-agarwal-926521273/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500 text-[30px] "
+              >
+                <IoLogoLinkedin />
+              </Link>
             </motion.p>
 
-            
             <motion.p
               className="text-gray-600 mt-4 text-center"
               initial={{ x: -100, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 1, delay: 1.4 }}
             >
-              I have always been passionate about solving real-life problems using technology. During Practical Exams, I experienced how frustrating the process of printing documents can be. This inspired me to build a platform that simplifies document printing for students.
+              I have always been passionate about solving real-life problems
+              using technology. During Practical Exams, I experienced how
+              frustrating the process of printing documents can be. This
+              inspired me to build a platform that simplifies document printing
+              for students.
             </motion.p>
           </div>
         </motion.div>
 
         {/* Sections */}
         <div className="w-full md:w-4/5 lg:w-3/4 mt-12 space-y-8">
-
           {/* What we do*/}
           <motion.div
             className="bg-white p-6 shadow-lg rounded-[4px] border-l-4 border-blue-500"
@@ -80,11 +89,17 @@ const About = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 2 }}
           >
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">What we do</h3>
+            <h3 className="text-3xl font-normal text-gray-900 mb-4">
+              What we do
+            </h3>
             <p className="text-gray-700 leading-relaxed">
-            Easer is an online printing platform designed to help students, educators, and professionals place printing orders remotely. Whether it's assignments, reports, or official documents, users can upload, customize, and get their documents printed without physically visiting a shop and get notification when it is done.
+              Easer is an online printing platform designed to help students,
+              educators, and professionals place printing orders remotely.
+              Whether it's assignments, reports, or official documents, users
+              can upload, customize, and get their documents printed without
+              physically visiting a shop and get notification when it is done.
             </p>
-          </motion.div> 
+          </motion.div>
 
           {/* Vision Section */}
           <motion.div
@@ -93,9 +108,14 @@ const About = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.5 }}
           >
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">Our Vision</h3>
+            <h3 className="text-3xl font-normal text-gray-900 mb-4">
+              Our Vision
+            </h3>
             <p className="text-gray-700 leading-relaxed">
-              We aim to transform the document printing experience for students and professionals. Our vision is to make the printing process easy and effortless, ensuring that users can handle all their printing needs remotely without stress.
+              We aim to transform the document printing experience for students
+              and professionals. Our vision is to make the printing process easy
+              and effortless, ensuring that users can handle all their printing
+              needs remotely without stress.
             </p>
           </motion.div>
 
@@ -106,9 +126,15 @@ const About = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.8 }}
           >
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">Our Goal</h3>
+            <h3 className="text-3xl font-normal text-gray-900 mb-4">
+              Our Goal
+            </h3>
             <p className="text-gray-700 leading-relaxed">
-              Our goal is to create a seamless printing platform that allows students to focus more on their studies and less on logistical hassles. We believe that by reducing hassles and simplifying the process, we can make a real difference in the daily lives of students and professionals.
+              Our goal is to create a seamless printing platform that allows
+              students to focus more on their studies and less on logistical
+              hassles. We believe that by reducing hassles and simplifying the
+              process, we can make a real difference in the daily lives of
+              students and professionals.
             </p>
           </motion.div>
 
@@ -119,9 +145,15 @@ const About = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 2 }}
           >
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">Future Plans</h3>
+            <h3 className="text-3xl font-normal text-gray-900 mb-4">
+              Future Plans
+            </h3>
             <p className="text-gray-700 leading-relaxed">
-              While our current focus is on serving students in schools , colleges and universities. we have plans to expand our services to larger institutions in the future. We are also developing a mobile app that will make the process even more convenient, allowing users to place and track their orders on the go.
+              While our current focus is on serving students in schools ,
+              colleges and universities. we have plans to expand our services to
+              larger institutions in the future. We are also developing a mobile
+              app that will make the process even more convenient, allowing
+              users to place and track their orders on the go.
             </p>
           </motion.div>
         </div>
@@ -133,7 +165,7 @@ const About = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 2.5 }}
         >
-          <h3 className="text-2xl font-semibold text-gray-800 mb-8">
+          <h3 className="text-2xl font-medium text-gray-800 mb-8">
             Join us on this journey to make printing more accessible!
           </h3>
           <Link
@@ -145,7 +177,7 @@ const About = () => {
         </motion.div>
       </div>
 
-      <Footer/>
+      <Footer />
     </div>
   );
 };

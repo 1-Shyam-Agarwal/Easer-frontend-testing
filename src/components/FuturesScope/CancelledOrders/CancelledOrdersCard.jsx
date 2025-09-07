@@ -33,7 +33,7 @@
 //   function agreeController()
 //   {
 //       dispatch(updateRefundStatus(token , props?.orderID));
-//       setConfirmationWindow(false);  
+//       setConfirmationWindow(false);
 //   }
 
 //   function disagreeController()
@@ -51,21 +51,21 @@
 //   ];
 
 //   return (
-//     <div 
+//     <div
 //       className={`
-//         max-w-full 
+//         max-w-full
 //         bg-white
-//         overflow-hidden 
+//         overflow-hidden
 //         border-b-gray-50
 //         border-b-[3px]
-//         group 
+//         group
 //       `}
 //     >
 //         {/* Header Row */}
 //         <div>
 //           <div className=" grid grid-cols-6
-//           gap-4 
-//           items-center 
+//           gap-4
+//           items-center
 //           p-[13px]
 //           max-540:p-[8px]
 //           max-360:p-[7px]
@@ -91,8 +91,8 @@
 //                   flex items-center gap-1.5
 //                   justify-center
 //                   transition-all duration-200
-//                   ${data === "offline" 
-//                     ? "text-yellow-700 bg-yellow-100 group-hover:bg-yellow-200" 
+//                   ${data === "offline"
+//                     ? "text-yellow-700 bg-yellow-100 group-hover:bg-yellow-200"
 //                     : "text-emerald-700 bg-emerald-100 group-hover:bg-emerald-200"
 //                   }
 //                 `}>
@@ -145,9 +145,9 @@
 //                       group-hover:text-gray-900
 //                       capitalize
 //                       tracking-wider
-//                       flex 
+//                       flex
 //                       relative
-//                       justify-center 
+//                       justify-center
 //                       items-center
 //                       max-540:text-[10px]
 //                       transition-colors duration-200"
@@ -171,8 +171,8 @@
 //                         group-hover:text-gray-900
 //                         capitalize
 //                         tracking-wider
-//                         flex 
-//                         justify-center 
+//                         flex
+//                         justify-center
 //                         items-center
 //                         max-540:text-[10px]
 //                         transition-colors duration-200"
@@ -182,7 +182,6 @@
 //                 )
 //               )
 
-              
 //           )))}
 //         </div>
 
@@ -202,7 +201,7 @@
 //                 <div className="bg-white p-4 rounded-[3px] max-480:p-2">
 //                   <h3 className="text-[13px] font-normal text-gray-400 mb-[8px] max-480:mb-[4px] max-480:text-[10px]">Refund Details</h3>
 //                   <p className="text-sm text-gray-600">
-//                     <span className="font-normal text-gray-700 max-480:text-[12px]">Refund Money to this Mobile Number:</span> 
+//                     <span className="font-normal text-gray-700 max-480:text-[12px]">Refund Money to this Mobile Number:</span>
 //                     <span className="text-indigo-600 ml-2 max-480:text-[12px]">{props?.user?.mobileNumber}</span>
 //                   </p>
 //                   <div className="flex flex-col sm:flex-row items-center gap-2 justify-between mt-2 max-480:gap-1">
@@ -225,18 +224,17 @@
 //             <div className="text-sm ml-[4px] max-480:text-[12px] max-480:ml-[2px]">{props?.reason}</div>
 //           </div>
 
-
 //           {/* User/Vendor Details */}
 //           {props?.role === "user" && (
 //             <div className="bg-white p-4 rounded-[3px] shadow-sm max-480:p-2">
 //               <h3 className="text-[13px] font-normal text-gray-400 mb-[8px] max-480:mb-[4px] max-480:text-[10px]">Vendor Details</h3>
 //               <div className="grid  max-480:grid-cols-1 grid-cols-2 gap-2 text-sm max-480:gap-1">
-//                 <div className="font-medium max-480:text-[12px] truncate">Shop Name:&nbsp;  
+//                 <div className="font-medium max-480:text-[12px] truncate">Shop Name:&nbsp;
 //                     <span className="font-normal capitalize relative">{props?.vendor?.shopName}
 //                       <img  title={props?.vendor?.shopName} className='absolute inset-0 opacity-0'/>
 //                     </span>
 //                 </div>
-//                 <div className="font-medium max-480:text-[12px] truncate">Location:&nbsp; 
+//                 <div className="font-medium max-480:text-[12px] truncate">Location:&nbsp;
 //                   <span className="font-normal capitalize relative">
 //                     {props?.vendor?.shopLandMark}
 //                     <img  title={props?.vendor?.shopLandMark} className='absolute inset-0 opacity-0'/>
@@ -268,7 +266,7 @@
 //             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm max-480:gap-[3px]">
 //               <div className="font-medium max-480:text-[12px] truncate">Order Time: <span className="font-normal">{formattedTime(props?.times?.timeOfOrder)}</span></div>
 //               {
-//                   props?.times?.timeOfTurn ? 
+//                   props?.times?.timeOfTurn ?
 //                   (
 //                     ""
 //                   )
@@ -288,7 +286,7 @@
 //                     <div className="font-medium max-480:text-[12px] truncate">Processing Time: <span className="font-normal">{formattedTime(props?.times?.timeOfProcessing)}</span></div>
 //                   )
 //               }
-              
+
 //               <div className="font-medium max-480:text-[12px] truncate">Cancellation Time: <span className="font-normal">{formattedTime(props?.times?.timeOfCancellation)}</span></div>
 //               {
 //                   !props?.refundTime ?
@@ -350,7 +348,7 @@
 //               {props?.orderFiles?.map((order, index) => (
 //                 <div
 //                   key={index}
-//                   className={`grid grid-cols-6 max-640:text-[10px] max-640:gap-2 gap-4 p-2 rounded-[5px] bg-gray-50 px-2 text-sm 
+//                   className={`grid grid-cols-6 max-640:text-[10px] max-640:gap-2 gap-4 p-2 rounded-[5px] bg-gray-50 px-2 text-sm
 //                     transition-all duration-200 ease-in-out  group rounded-[5px]`}
 //                 >
 //                   {/* Filename with Tooltip */}
@@ -364,7 +362,7 @@
 //                   <div className="text-right text-gray-700 font-normal flex justify-center items-center">
 //                     {order?.numberOfPages}
 //                   </div>
-                 
+
 //                   <div className="text-center text-gray-700 flex justify-center items-center">
 //                     <span className={`max-640:px-1 px-3 py-1 rounded-full flex justify-center items-center`}>
 //                       {order?.color!=="colored" ? "B&W" : "Color"}
@@ -381,18 +379,18 @@
 //                   <div className="text-center text-gray-700 flex justify-center items-center">
 //                     {order?.copies}
 //                   </div>
-                  
+
 //                 </div>
 //               ))}
 //             </div>
 //           </div>
-        
+
 //         </div>
 //       </div>
 //       {
-//        confirmationWindow && 
-//        <ConfirmationModal 
-//                  agreeText = "Yes" 
+//        confirmationWindow &&
+//        <ConfirmationModal
+//                  agreeText = "Yes"
 //                  disagreeText="Go Back"
 //                  heading="Final Confirmation"
 //                  description={`Are you sure you have refunded the money ? `}
@@ -405,5 +403,3 @@
 // };
 
 // export default CancelledOrdersCard;
-
-

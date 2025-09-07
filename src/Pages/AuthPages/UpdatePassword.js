@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { updatePassword } from '../../Services/operations/Auth';
 import toast from 'react-hot-toast';
 
-
 const UpdatePasswordPage = () => {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -19,40 +18,37 @@ const UpdatePasswordPage = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-
-    if(password?.includes(" ") || confirmPassword?.includes(" "))
-    {
-       toast.error("Password and confirm password should not contain any spaces.");
-       return;
+    if (password?.includes(' ') || confirmPassword?.includes(' ')) {
+      toast.error(
+        'Password and confirm password should not contain any spaces.'
+      );
+      return;
     }
 
-    if(password?.length < 8 || confirmPassword?.length < 8)
-    {
-        toast.error("Password and confirm password must be atleast 8 characters long.");
-        return;
+    if (password?.length < 8 || confirmPassword?.length < 8) {
+      toast.error(
+        'Password and confirm password must be atleast 8 characters long.'
+      );
+      return;
     }
-    
-    if(password !== confirmPassword)
-    {
-        toast.error("Passwords does not match.");
-        return;
+
+    if (password !== confirmPassword) {
+      toast.error('Passwords does not match.');
+      return;
     }
 
     const token = location.pathname?.split('/')?.at(-1);
-    updatePassword(password, confirmPassword, setLoading, token , navigate);
+    updatePassword(password, confirmPassword, setLoading, token, navigate);
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        {loading ? 
-        (
+        {loading ? (
           <div className="min-h-screen flex items-center justify-center">
-              <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+            <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
           </div>
-        )
-        : 
-        (
+        ) : (
           <div>
             {/* Title */}
             <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">
@@ -66,7 +62,10 @@ const UpdatePasswordPage = () => {
             <form onSubmit={submitHandler} className="space-y-6">
               {/* New Password */}
               <div>
-                <label className="block text-sm font-medium text-gray-700" htmlFor='password'>
+                <label
+                  className="block text-sm font-medium text-gray-700"
+                  htmlFor="password"
+                >
                   New Password <sup className="text-red-500">*</sup>
                 </label>
                 <div className="relative">
@@ -78,7 +77,7 @@ const UpdatePasswordPage = () => {
                     value={password}
                     required
                     id="password"
-                    pattern= "^.{8,}$"
+                    pattern="^.{8,}$"
                     title="Password must have atleast 8 characters."
                   />
                   <div
@@ -92,7 +91,10 @@ const UpdatePasswordPage = () => {
 
               {/* Confirm Password */}
               <div>
-                <label className="block text-sm font-medium text-gray-700" htmlFor='confirmPassword'>
+                <label
+                  className="block text-sm font-medium text-gray-700"
+                  htmlFor="confirmPassword"
+                >
                   Confirm Password <sup className="text-red-500">*</sup>
                 </label>
                 <div className="relative">
@@ -115,9 +117,9 @@ const UpdatePasswordPage = () => {
               </div>
 
               <div className="mt-4 p-3 bg-blue-50 border-l-4 border-blue-400 rounded-lg shadow-sm">
-                      <p className="text-sm text-gray-700">
-                        Password must be atleast 8 characters long.
-                      </p>
+                <p className="text-sm text-gray-700">
+                  Password must be atleast 8 characters long.
+                </p>
               </div>
 
               {/* Password Guidelines */}

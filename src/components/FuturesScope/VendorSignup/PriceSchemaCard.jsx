@@ -15,22 +15,22 @@
 //                     <div className="px-4 py-2 font-normal  text-[10px] self-center justify-self-center">{props?.pricingMethod ==="perPrint" ? "Per-print" : (props?.pricingMethod==="combined"?"Combined" : "Invalid")}</div>
 //                     <div className="px-4 py-2 font-normal uppercase text-[10px] self-center justify-self-center">
 //                     <div className="flex items-center justify-center space-x-2">
-//                         <button 
+//                         <button
 //                             onClick={(e)=>{
 //                                 e.preventDefault();
 //                                 props.editHandler(props?.idx);
 
-//                             }} 
+//                             }}
 //                             className="text-gray-500 hover:text-blue-500 transition-colors p-1 rounded-md hover:bg-blue-50"
 //                         >
 //                             <Pencil className="w-4 h-4" />
 //                         </button>
-//                         <button 
+//                         <button
 //                             onClick={(e)=>
 //                                 {
 //                                     e.preventDefault();
 //                                     props.deleteHandler(props?.idx);
-//                                 } 
+//                                 }
 //                             }
 //                             className="text-gray-500 hover:text-red-500 transition-colors p-1 rounded-md hover:bg-red-50"
 //                         >

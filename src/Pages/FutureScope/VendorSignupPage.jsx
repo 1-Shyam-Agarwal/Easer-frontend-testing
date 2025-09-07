@@ -16,7 +16,6 @@
 // import OTPPage from './OTPPage.js';
 // import { CheckCircle } from 'lucide-react';
 
-
 // const ApplicationReviewMessage = () => {
 //   return (
 //     <div className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 p-6 rounded-[4px] shadow-lg max-w-xl mx-auto mt-[9rem] text-center animate-fade-in">
@@ -39,14 +38,12 @@
 //   );
 // };
 
-
-
 // const VendorSignup = ()=>
 // {
 
 //     const [collegeData, setCollegeData] = useState([]);
 
-//     const [priceSchema , setPriceSchema] = useState([]); 
+//     const [priceSchema , setPriceSchema] = useState([]);
 //     const [singlePriceScheme , setSinglePriceScheme] = useState(null);
 
 //     const [showPassword, setShowPassword] = useState(false);
@@ -71,7 +68,6 @@
 //         navigate("/pricing");
 //     }
 
-
 //     const { register, handleSubmit, reset,formState: { errors ,isSubmitSuccessful}, watch } = useForm({
 //         defaultValues: {
 //           role:"vendor",
@@ -92,10 +88,8 @@
 //         }
 //       });
 
-      
-
 //     // useEffect(() => {
-  
+
 //     //   const fetchCollegeData = async () => {
 //     //     try {
 //     //       dispatch(getCollegeList(setCollegeData , setLoading));
@@ -136,7 +130,7 @@
 
 //     function editHandler(idx)
 //     {
-        
+
 //         setSinglePriceScheme({...priceSchema[idx] , "idx":idx});
 //         setShowPriceModel(true);
 //         toast.success("edit successfully");
@@ -145,7 +139,6 @@
 //       const ErrorMessage = ({ message }) => (
 //         <p className="text-red-500 text-xs mt-1">{message}</p>
 //       );
-
 
 //       return (
 //         <div>
@@ -159,28 +152,28 @@
 //               )
 //               :
 //               (
-//                   showSignupPage ? 
+//                   showSignupPage ?
 //                   (
 //                       <div className="min-h-screen bg-gray-50 p-4 md:p-6 lg:p-8 flex flex-col item-center">
 //                         <div className="text-center mb-12">
 //                           <h1 className="text-3xl font-normal text-gray-900 mb-4"> Vendor Signup</h1>
-                          
+
 //                           <p className="text-gray-600 max-w-2xl mx-auto mb-4">
 //                             Elevate Your Business to New Heights
 //                           </p>
 //                           <div className="w-18 h-1 bg-blue-500 mx-auto rounded-full "></div>
 //                         </div>
-              
+
 //                         <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg">
-              
+
 //                           <div className="p-4">
 //                             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8" noValidate>
 //                               {/* Basic Details Section */}
 //                               <section className="space-y-6">
-              
+
 //                                 <h3 className="text-lg font-normal text-blue-700 border-gray-700 border-b py-2 ">Basic Details</h3>
 //                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              
+
 //                                   {/* firstName */}
 //                                   <div className="space-y-2">
 //                                     <label className="block text-sm font-medium text-gray-700"
@@ -188,11 +181,11 @@
 //                                       First Name  <sup><FaStarOfLife className="text-red-600 text-[5px] inline"/></sup>
 //                                     </label>
 //                                     <input
-//                                       {...register("firstName", { 
+//                                       {...register("firstName", {
 //                                         required: "First name is required",
 //                                         minLength: { value: 2, message: "First name must be between 2 and 20 characters long." },
 //                                         maxLength: { value:20 ,message: "First name must be between 2 and 20 characters long." },
-//                                         pattern: { 
+//                                         pattern: {
 //                                           value: /^[A-Za-z]+$/,
 //                                           message: "First Name must contain alphabetic characters only."
 //                                         }
@@ -203,7 +196,7 @@
 //                                     />
 //                                     {errors?.firstName && <ErrorMessage message={errors?.firstName?.message} />}
 //                                   </div>
-                  
+
 //                                   {/* lastName */}
 //                                   <div className="space-y-2">
 //                                     <label className="block text-sm font-medium text-gray-700"
@@ -211,9 +204,9 @@
 //                                       Last Name
 //                                     </label>
 //                                     <input
-//                                       {...register("lastName", { 
+//                                       {...register("lastName", {
 //                                         maxLength: { value: 20, message: "Last name must be no more than 20 characters long." },
-//                                         pattern: { 
+//                                         pattern: {
 //                                           value: /^[A-Za-z]*$/,
 //                                           message: "Last Name must contain alphabetic characters only."
 //                                         }
@@ -224,7 +217,7 @@
 //                                     />
 //                                     {errors?.lastName && <ErrorMessage message={errors?.lastName?.message} />}
 //                                   </div>
-                  
+
 //                                   {/* email */}
 //                                   <div className="space-y-2">
 //                                     <label className="block text-sm font-medium text-gray-700"
@@ -234,9 +227,9 @@
 //                                     <input
 //                                       type="email"
 //                                       id="email"
-//                                       {...register("email", { 
+//                                       {...register("email", {
 //                                         required: "Email is required",
-//                                         pattern: { 
+//                                         pattern: {
 //                                           value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
 //                                           message: "Invalid Email Format."
 //                                         }
@@ -246,26 +239,26 @@
 //                                     />
 //                                     {errors?.email && <ErrorMessage message={errors?.email?.message} />}
 //                                   </div>
-                                      
+
 //                                   {/* mobileNumber */}
 //                                   <div className="space-y-2">
 //                                     <label className="block text-sm font-medium text-gray-700"
 //                                           htmlFor='mobileNumber'>
 //                                       Mobile Number <sup><FaStarOfLife className="text-red-600 text-[5px] inline"/></sup>
 //                                     </label>
-              
+
 //                                     <input
 //                                       type="number"
 //                                       id="mobileNumber"
 //                                       className={`w-full px-4 py-2 rounded-md border ${errors?.mobileNumber ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
 //                                       placeholder="Enter Mobile Number"
-//                                       {...register("mobileNumber", { 
+//                                       {...register("mobileNumber", {
 //                                         valueAsNumber: true,
 //                                         required: "Mobile number is required",
 //                                         validate: (value) =>
 //                                             value.toString().length === 10 || "Invalid mobile number"
 //                                       })}
-                                      
+
 //                                     />
 //                                     {errors?.mobileNumber && <ErrorMessage message={errors?.mobileNumber?.message} />}
 //                                     {
@@ -278,7 +271,7 @@
 //                                       )
 //                                     }
 //                                   </div>
-                                      
+
 //                                   {/* select College */}
 //                                   <div className="space-y-2 md:col-span-2">
 //                                     <label className="block text-sm font-medium text-gray-700"
@@ -299,7 +292,7 @@
 //                                     </select>
 //                                   </div>
 //                                   {errors?.collegeCode && <ErrorMessage message={errors?.collegeCode?.message} />}
-              
+
 //                                   {location?.pathname?.split('/')?.[2] === 'vendor' && (
 //                                     <div className=" p-3 bg-yellow-50 border-l-4 border-yellow-400 rounded-lg shadow-sm">
 //                                       <p className="text-sm text-gray-700">
@@ -314,12 +307,12 @@
 //                                   )}
 //                                 </div>
 //                               </section>
-                  
+
 //                               {/* Shop Details Section */}
 //                               <section className="space-y-6 ">
 //                                 <h3 className="text-lg font-normal text-blue-700 border-gray-700 border-b pb-2  mt-[50px]">Shop Details</h3>
 //                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              
+
 //                                   <div className="space-y-2">
 //                                     <label className="block text-sm font-medium text-gray-700"
 //                                           htmlFor="shopName">
@@ -333,7 +326,7 @@
 //                                     />
 //                                     {errors?.shopName && <ErrorMessage message={errors?.shopName?.message} />}
 //                                   </div>
-                  
+
 //                                   <div className="space-y-2">
 //                                     <label className="block text-sm font-medium text-gray-700"
 //                                           htmlFor='shopLandMark'>
@@ -349,7 +342,7 @@
 //                                   </div>
 //                                 </div>
 //                               </section>
-                  
+
 //                               {/* Price Schema Section */}
 //                               <section className="space-y-6">
 //                                 <h3 className="text-lg font-normal text-blue-700 border-gray-700 mt-[50px] border-b pb-2">Price Schema (All in INR)</h3>
@@ -358,14 +351,14 @@
 //                                   <Plus className='w-[14px] h-[14px] text-gray-500 group-hover:text-blue-500 transition-colors'/>
 //                                   <div className='text-xs font-medium group-hover:text-blue-600'>Click to add Price Structure</div>
 //                                 </div>
-              
+
 //                                 <div>
 //                                   {
 //                                     priceSchema?.length>0 && (
 //                                       <PriceSchemaHeader/>
 //                                     )
 //                                   }
-              
+
 //                                   {
 //                                     priceSchema?.map((schema,idx)=>
 //                                     {
@@ -394,7 +387,7 @@
 //                                     </p>
 //                                   </div>
 //                               </section>
-                  
+
 //                               {/* Fine Details Section */}
 //                               <section className="space-y-6">
 //                                 <h3 className="text-lg font-normal text-blue-700 border-gray-700 mt-[50px] border-b pb-2">Fine Details</h3>
@@ -417,7 +410,7 @@
 //                                     />
 //                                     {errors?.fineEnforcementTimeInMinutes && <ErrorMessage message={errors?.fineEnforcementTimeInMinutes?.message} />}
 //                                   </div>
-                  
+
 //                                   <div className="space-y-2">
 //                                     <label className="block text-sm font-medium text-gray-700"
 //                                           htmlFor='fineRatePerMinute'>
@@ -445,12 +438,12 @@
 //                                     </div>
 //                                   )}
 //                               </section>
-              
+
 //                               {/* Payment Gateway Details Section */}
 //                               {/* <section className="space-y-6">
 //                                 <h3 className="text-lg font-normal text-blue-700 border-gray-700 mt-[50px] border-b pb-2">Payment Gateway Details ( Accept only Cashfree issued credentials )</h3>
 //                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              
+
 //                                 <div className="space-y-2">
 //                                     <label className="block text-sm font-medium text-gray-700"
 //                                           htmlFor='merchantId'>
@@ -464,7 +457,7 @@
 //                                     />
 //                                     {errors?.merchantId && <ErrorMessage message={errors?.merchantId?.message} />}
 //                                 </div>
-                  
+
 //                                 <div className="space-y-2">
 //                                     <label className="block text-sm font-medium text-gray-700"
 //                                           htmlFor='saltKey'>
@@ -479,7 +472,7 @@
 //                                     />
 //                                     {errors?.saltKey && <ErrorMessage message={errors?.saltKey?.message} />}
 //                                 </div>
-              
+
 //                               </div>
 //                               {location?.pathname?.split('/')[2] === 'vendor' && (
 //                                     <div className="mt-4 p-3 bg-yellow-50 border-l-4 border-yellow-400 rounded-lg shadow-sm">
@@ -489,12 +482,12 @@
 //                                     </div>
 //                                 )}
 //                               </section> */}
-              
+
 //                               {/* Fine Details Section */}
 //                               {/* <section className="space-y-6">
 //                                 <h3 className="text-lg font-normal text-blue-700 border-gray-700 mt-[50px] border-b pb-2">Waiting Details</h3>
 //                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              
+
 //                                 <div className="space-y-2">
 //                                     <label className="block text-sm font-medium text-gray-700"
 //                                           htmlFor='waitingTime'>
@@ -514,17 +507,16 @@
 //                                     />
 //                                     {errors?.waitingTime && <ErrorMessage message={errors?.waitingTime?.message} />}
 //                                 </div>
-              
+
 //                                 </div>
 //                               </section> */}
-              
-              
+
 //                               {/* Password Details */}
 //                               <section className="space-y-6">
 //                                 <h3 className="text-lg font-normal text-blue-700 border-gray-700 mt-[50px] border-b pb-2">Password</h3>
 //                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4 w-full">
 //                                   <div className="flex flex-col">
-//                                     <label 
+//                                     <label
 //                                       className="text-sm font-semibold p-[4px]"
 //                                       htmlFor="password"
 //                                     >
@@ -551,10 +543,10 @@
 //                                     </div>
 //                                     {errors?.password && <ErrorMessage message={errors?.password?.message} />}
 //                                   </div>
-                    
+
 //                                   {/* Confirm Password */}
 //                                   <div className="flex flex-col">
-//                                     <label 
+//                                     <label
 //                                       className="text-sm font-semibold p-[4px]"
 //                                       htmlFor="confirmPassword"
 //                                     >
@@ -583,13 +575,13 @@
 //                                   </div>
 //                                 </div>
 //                               </section>
-      
+
 //                               <div className="mt-4 p-3 bg-yellow-50 border-l-4 border-yellow-400 rounded-lg shadow-sm">
 //                                     <p className="text-sm text-gray-700">
 //                                       Password must be atleast 8 characters long.
 //                                     </p>
 //                               </div>
-      
+
 //                               <p className="text-sm text-gray-600 text-center">
 //                                 By signing up, you agree to our{" "}
 //                                 <a href="/terms-and-conditions" className="text-blue-600 hover:underline">
@@ -600,12 +592,10 @@
 //                                   Privacy Policy
 //                                 </a>.
 //                               </p>
-      
-              
-              
+
 //                               {/* Create Button */}
 //                               <div className='flex justify-center items-center'>
-//                                 <button 
+//                                 <button
 //                                   className={` mt-2 px-4 py-[14px] mb-4 ${createAccountEnabled ? "bg-blue-500 cursor-pointer hover:bg-blue-700" : "bg-gray-300 cursor-not-allowed hover:bg-gray-400"} text-white rounded-md transition duration-300 `}
 //                                   disabled = {!createAccountEnabled}
 //                                   type="submit"
@@ -613,12 +603,12 @@
 //                                   Create Account
 //                                 </button>
 //                               </div>
-                              
+
 //                             </form>
 //                           </div>
 //                         </div>
 //                         {
-//                             showPriceModel && <VendorPriceForm 
+//                             showPriceModel && <VendorPriceForm
 //                             setShowPriceModel={setShowPriceModel}
 //                             priceSchema={priceSchema}
 //                             setPriceSchema={setPriceSchema}
@@ -642,9 +632,8 @@
 //               )
 //             }
 //         </div>
-        
+
 //       );
-    
 
 // }
 

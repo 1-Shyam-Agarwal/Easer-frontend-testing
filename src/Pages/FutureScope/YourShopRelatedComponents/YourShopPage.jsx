@@ -34,11 +34,11 @@
 //                     <div className="max-w-screen-xl mx-auto p-6 max-480:p-2 flex flex-col">
 //                         <div className="max-480:gap-2 mb-10 space-y-2 max-480:space-y-0 max-480:flex max-480:flex-col max-480:justify-center max-480:items-center">
 //                             <div className="flex items-center gap-3">
-                                    
+
 //                                 <div className="flex items-center justify-center p-2 rounded-[5px] bg-blue-50 ">
 //                                     <CgMenuGridR className="w-6 h-6 text-blue-500 " />
 //                                 </div>
-                                
+
 //                                 <h1 className="text-2xl sm:text-3xl font-normal  text-gray-800">
 //                                     Campus Shops
 //                                 </h1>
@@ -67,8 +67,8 @@
 //                                         No Print Shops Available
 //                                     </h3>
 //                                     <p className="text-sm text-gray-500 max-w-sm">
-//                                         We haven't found any registered printing shops in your area yet. 
-//                                         Know a print shop owner? Encourage them to join our platform for 
+//                                         We haven't found any registered printing shops in your area yet.
+//                                         Know a print shop owner? Encourage them to join our platform for
 //                                         expanded business opportunities!
 //                                     </p>
 //                                     </div>
@@ -80,7 +80,7 @@
 //                 )
 //             }
 //         </div>
-        
+
 //     );
 // }
 

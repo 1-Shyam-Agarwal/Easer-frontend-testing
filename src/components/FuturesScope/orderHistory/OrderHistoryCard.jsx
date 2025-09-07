@@ -5,7 +5,6 @@
 // const OrderHistoryCard = (props) => {
 //   const [moreDetails, setMoreDetails] = useState(false);
 
-
 //   function formattedTime(date) {
 //     date = new Date(date);
 //     return `${String(date?.getHours())?.padStart(2, '0')}:${String(date?.getMinutes())?.padStart(2, '0')}`;
@@ -19,7 +18,6 @@
 //     return `${day}/${month}/${year}`; // Format: DD-MM-YYYY
 // }
 
-
 //   const Data = [
 //     props?.S_No,
 //     props?.role === "vendor" ? `${props?.user?.firstName} ${props?.user?.lastName}` : props?.vendor?.shopName,
@@ -28,23 +26,22 @@
 //     `₹${props?.price + props?.additionalCharges + props?.fineTaken}`
 //   ];
 
-
 //   return (
-//     <div 
+//     <div
 //           className={`
-//             max-w-full 
+//             max-w-full
 //             bg-white
-//             overflow-hidden 
+//             overflow-hidden
 //             border-b-gray-50
 //             border-b-[3px]
-//             group 
+//             group
 //           `}
 //         >
 //             {/* Header Row */}
 //             <div className="relative">
 //               <div className=" grid grid-cols-5
-//               gap-4 
-//               items-center 
+//               gap-4
+//               items-center
 //               p-[13px]
 //               max-540:p-[10px]
 //               max-360:p-[7px]
@@ -101,13 +98,12 @@
 //                 )
 //               })}
 //             </div>
-    
+
 //             <div className='h-[10px] max-360:h-[7px] bg-gray-200 flex justify-center items-center' onClick={()=>{setMoreDetails(!moreDetails)}}>
 //                       {
 //                           moreDetails ? <TiArrowSortedUp className='text-xs'/> : <TiArrowSortedDown className='text-xs'/>
 //                       }
 //             </div>
-      
 
 //       {/* Details Section */}
 //       <div className={`overflow-hidden transition-all duration-300 ${moreDetails ? 'max-h-[3000px]' : 'max-h-0'}`}>
@@ -118,12 +114,12 @@
 //             <div className="bg-white p-4 rounded-[3px] shadow-sm max-480:p-2">
 //               <h3 className="text-[13px] font-normal text-gray-400 mb-[8px] max-480:mb-[4px] max-480:text-[10px]">Vendor Details</h3>
 //               <div className="grid  max-480:grid-cols-1 grid-cols-2 gap-2 text-sm max-480:gap-1">
-//                 <div className="font-medium max-480:text-[12px] truncate">Shop Name:&nbsp;  
+//                 <div className="font-medium max-480:text-[12px] truncate">Shop Name:&nbsp;
 //                     <span className="font-normal capitalize relative">{props?.vendor?.shopName}
 //                       <img  title={props?.vendor?.shopName} className='absolute inset-0 opacity-0'/>
 //                     </span>
 //                 </div>
-//                 <div className="font-medium max-480:text-[12px] truncate">Location:&nbsp; 
+//                 <div className="font-medium max-480:text-[12px] truncate">Location:&nbsp;
 //                   <span className="font-normal capitalize relative">
 //                     {props?.vendor?.shopLandMark}
 //                     <img  title={props?.vendor?.shopLandMark} className='absolute inset-0 opacity-0'/>
@@ -155,7 +151,7 @@
 //             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm max-480:gap-[3px]">
 //               <div className="font-medium max-480:text-[12px] truncate">Order Time: <span className="font-normal">{formattedTime(props?.orderedAt)}</span></div>
 //               {
-//                   !props?.timeOfTurn ? 
+//                   !props?.timeOfTurn ?
 //                   (
 //                     ""
 //                   )
@@ -177,7 +173,7 @@
 //               }
 
 //               <div className="font-medium max-480:text-[12px] truncate">Completion Time: <span className="font-normal">{formattedTime(props?.timeOfCompletion)}</span></div>
-                    
+
 //               <div className="font-medium max-480:text-[12px] truncate">Receiving Time: <span className="font-normal">{formattedTime(props?.timeOfReceiving)}</span></div>
 //             </div>
 //           </div>
@@ -253,7 +249,7 @@
 //               {props?.orderFiles?.map((order, index) => (
 //                 <div
 //                   key={index}
-//                   className={`grid grid-cols-6 max-640:text-[10px] max-640:gap-2 gap-4 p-2 rounded-[5px] bg-gray-50 px-2 text-sm 
+//                   className={`grid grid-cols-6 max-640:text-[10px] max-640:gap-2 gap-4 p-2 rounded-[5px] bg-gray-50 px-2 text-sm
 //                     transition-all duration-200 ease-in-out  group rounded-[5px]`}
 //                 >
 //                   {/* Filename with Tooltip */}
@@ -267,7 +263,7 @@
 //                   <div className="text-right text-gray-700 font-normal flex justify-center items-center">
 //                     {order?.numberOfPages}
 //                   </div>
-                 
+
 //                   <div className="text-center text-gray-700 flex justify-center items-center">
 //                     <span className={`max-640:px-1 px-3 py-1 rounded-full flex justify-center items-center`}>
 //                       {order?.color!=="colored" ? "B&W" : "Color"}
@@ -284,12 +280,12 @@
 //                   <div className="text-center text-gray-700 flex justify-center items-center">
 //                     {order?.copies}
 //                   </div>
-                  
+
 //                 </div>
 //               ))}
 //             </div>
 //           </div>
-          
+
 //           </div>
 //         </div>
 //       </div>
@@ -298,5 +294,3 @@
 // };
 
 // export default OrderHistoryCard;
-
-

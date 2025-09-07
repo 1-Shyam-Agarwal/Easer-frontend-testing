@@ -1,6 +1,6 @@
-import React from "react";
-import { MoreVertical } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { MoreVertical } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const VendorMailCards = ({ mails }) => {
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ const VendorMailCards = ({ mails }) => {
                     title={doc?.fileName}
                   >
                     {doc?.fileName?.length > 15
-                      ? doc?.fileName?.slice(0, 12) + "..."
+                      ? doc?.fileName?.slice(0, 12) + '...'
                       : doc?.fileName}
                   </span>
                 ))}
@@ -60,7 +60,7 @@ const VendorMailCards = ({ mails }) => {
 
               <div className="text-xs text-gray-500 mt-1">
                 {mail?.documents?.length} document
-                {mail?.documents?.length > 1 ? "s" : ""}
+                {mail?.documents?.length > 1 ? 's' : ''}
               </div>
             </div>
 
@@ -73,15 +73,15 @@ const VendorMailCards = ({ mails }) => {
                   </span>
                 )}
                 <span>
-                  {new Date(mail?.timeStamp).toLocaleDateString("en-GB", {
-                    day: "2-digit",
-                    month: "short",
-                    year: "2-digit",
+                  {new Date(mail?.timeStamp).toLocaleDateString('en-GB', {
+                    day: '2-digit',
+                    month: 'short',
+                    year: '2-digit',
                   })}
-                  ,{" "}
-                  {new Date(mail?.timeStamp).toLocaleTimeString("en-US", {
-                    hour: "2-digit",
-                    minute: "2-digit",
+                  ,{' '}
+                  {new Date(mail?.timeStamp).toLocaleTimeString('en-US', {
+                    hour: '2-digit',
+                    minute: '2-digit',
                     hour12: true,
                   })}
                 </span>

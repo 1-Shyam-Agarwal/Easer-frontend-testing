@@ -11,11 +11,11 @@
 //   {
 
 //   },[])
-  
+
 //   return (
 //     <div className={`fixed inset-0 flex items-start justify-center bg-black/30 backdrop-blur-sm z-50 p-4`}>
 //             <div className="bg-gray-800 shadow-lg rounded-lg p-6 w-full max-w-md mx-auto flex max-390:p-2 max-390:py-4 max-390:text-[13px] flex-col justify-center items-center">
-                
+
 //                 {/* Heading */}
 //                 <div>
 //                     <h4 className="text-xl font-semibold text-white mb-4 text-center max-390:text-[16px]">{props.heading}</h4>
@@ -26,8 +26,8 @@
 
 //                 {/* AdditionalCost */}
 //                 <div className="max-w-sm p-4 max-390:py-2">
-//                     <label 
-//                         htmlFor="additionalAmount" 
+//                     <label
+//                         htmlFor="additionalAmount"
 //                         className="block mb-2 text-sm text-gray-300 max-390:text-[13px]"
 //                     >
 //                         {props.subHeading1}
@@ -45,15 +45,15 @@
 //                 {
 //                     props?.fineRatePerMinute  !==0 && props?.paymentMode ==="online" ?
 //                         <div className="max-w-sm p-4">
-                            
+
 //                             <label htmlFor='fine'
 //                                    className="block mb-2 text-sm text-gray-300 max-390:text-[13px] ">
 //                                     {props.subHeading2} <br/><span className='font-semibold'>Actual Fine is : &#8377; {props?.fineEnforced}</span>
 //                             </label>
 
-//                             <input type="Number" 
-//                                 id="fine" 
-//                                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500" 
+//                             <input type="Number"
+//                                 id="fine"
+//                                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
 //                                 onChange={(e)=>
 //                                 {
 //                                         setFine(e.target.value);
@@ -64,7 +64,7 @@
 //                         :
 //                         <div></div>
 //                 }
-                    
+
 //                     <div className="w-full flex justify-center gap-4 mt-[10px]">
 //                       <button
 //                         className="bg-green-500 text-white font-medium px-6 py-2 rounded-lg hover:bg-green-600 transition-all max-390:text-[13px]"
@@ -80,7 +80,7 @@
 //                                 toast.error("Only numbers are allowed in additional amount");
 //                                 return;
 //                             }
-                            
+
 //                             props?.setDisableAgreeButton(true);
 //                             if(props?.paymentMode ==="online") props.agreeController(props?.token,props?.orderId , props?.fineEnforced ,fine , additionalAmount , props?.timeOfReceiving);
 //                             else props.agreeController(props?.token,props?.orderId , 0,0 , additionalAmount , props?.timeOfReceiving);
@@ -100,8 +100,8 @@
 //                     </div>
 //             </div>
 //     </div>
-    
+
 //   )
 // }
 
-// export default OrderDeliverConfirmationWindow 
+// export default OrderDeliverConfirmationWindow

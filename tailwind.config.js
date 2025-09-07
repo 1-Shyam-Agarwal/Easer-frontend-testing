@@ -3,6 +3,9 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        montserrat: ["Montserrat", "sans-serif"],
+      },
       colors: {
         customGray: '#232222',
         lightOrange : '#FFD6BF',
@@ -46,7 +49,7 @@ module.exports = {
 
         changeBorderColor: {
           '0%': { borderColor: 'white' },
-          '100%': { borderColor: '#39FF14' },
+          '100%': { borderColor: '#2ecc71' },
         },
 
         'bg-pulse': {

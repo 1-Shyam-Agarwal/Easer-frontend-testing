@@ -15,7 +15,7 @@ function SuccessPage() {
     const timer = setTimeout(navigateBack, 5000);
 
     const countdownInterval = setInterval(() => {
-      setCountdown((prev) => prev > 0 ? prev - 1 : 0);
+      setCountdown((prev) => (prev > 0 ? prev - 1 : 0));
     }, 1000);
 
     return () => {
@@ -26,7 +26,7 @@ function SuccessPage() {
 
   useEffect(() => {
     window.history.pushState(null, '', window.location.href);
-    
+
     const handlePopstate = (event) => {
       event.preventDefault();
       window.history.pushState(null, '', window.location.href);
@@ -44,7 +44,7 @@ function SuccessPage() {
         <div className="relative mb-6">
           <div className="mx-auto w-24 h-24 sm:w-32 sm:h-32 relative">
             {/* Circular progress background */}
-            <svg 
+            <svg
               className="w-full h-full transform -rotate-90"
               viewBox="0 0 100 100"
             >
@@ -67,16 +67,16 @@ function SuccessPage() {
                 cx="50"
                 cy="50"
                 style={{
-                  strokeDasharray: "264, 264",
+                  strokeDasharray: '264, 264',
                   strokeDashoffset: 264,
                 }}
               />
             </svg>
-            
+
             {/* Checkmark */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <svg 
-                className="w-12 h-12 sm:w-16 sm:h-16" 
+              <svg
+                className="w-12 h-12 sm:w-16 sm:h-16"
                 viewBox="0 0 100 100"
                 fill="none"
                 stroke="currentColor"
@@ -84,7 +84,7 @@ function SuccessPage() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
-                <path 
+                <path
                   d="M20 50L40 70L80 30"
                   className="text-green-500 animate-[check_0.6s_ease-out_0.8s_forwards]"
                   style={{
@@ -102,18 +102,19 @@ function SuccessPage() {
             </div>
           </div>
         </div>
-        
+
         <h1 className="text-xl sm:text-2xl  md:text-3xl font-normal text-gray-900 mb-3 animate-[slideUp_0.5s_ease-out]">
           Order Successfully Placed!
         </h1>
-        
+
         <p className="text-sm sm:text-base text-gray-600 mb-6 animate-[slideUp_0.5s_ease-out_0.1s_both]">
-          Thank you for your purchase. We'll send you notification when your order is ready.
+          Thank you for your purchase. We'll send you notification when your
+          order is ready.
         </p>
-        
+
         <div className="mb-8 animate-[slideUp_0.5s_ease-out_0.2s_both]">
           <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
-            <div 
+            <div
               className="h-full bg-green-500 rounded-full transition-all duration-1000 ease-linear"
               style={{
                 width: `${(countdown / 5) * 100}%`,

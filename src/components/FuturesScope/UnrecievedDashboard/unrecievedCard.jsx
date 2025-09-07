@@ -10,7 +10,6 @@
 // import { socketContext } from '../../ContextApi/SocketContext';
 // import { useEffect } from 'react';
 
-
 // const UnreceivedOrderCard = (props) => {
 //   const [moreDetails, setMoreDetails] = useState(false);
 //   const [orderDelivered , setOrderDelivered] = useState(false);
@@ -34,7 +33,7 @@
 //         setOrderDelivered(true);
 //         timeOfReceiving.current=Date.now() // Returns the current timestamp in milliseconds
 //         if((timeOfCompletionObject + props?.fineEnforcementTimeInMinutes*60000) - (timeOfReceiving?.current)>=0)
-//           { 
+//           {
 //               setFineEnforced(0);
 //           }
 //           else
@@ -52,14 +51,13 @@
 //       {
 //          socket.emit("update-your-unreceived-orders" , {roomCode :props?.userRoomCode , orderId : props?.orderId})
 //       }
-     
+
 //   }
 
 //   function disagreeController()
 //   {
 //         setOrderDelivered(false);
 //   }
-
 
 //   const Data = [
 //     props?.s_no,
@@ -70,21 +68,21 @@
 //   ];
 
 //   return(
-//     <div 
+//     <div
 //           className={`
-//             max-w-full 
+//             max-w-full
 //             bg-white
-//             overflow-hidden 
+//             overflow-hidden
 //             border-b-gray-200
 //             border-[1px]
-//             group  
+//             group
 //           `}
 //         >
 //             {/* Header Row */}
 //             <div className="relative">
 //               <div className=" grid grid-cols-5
-//               gap-4 
-//               items-center 
+//               gap-4
+//               items-center
 //               p-[13px]
 //               max-540:p-[10px]
 //               max-360:p-[7px]
@@ -108,8 +106,8 @@
 //                       tracking-wider
 //                       flex items-center gap-1.5
 //                       transition-all duration-200
-//                       ${data === "pending" 
-//                         ? "text-red-700 bg-red-100 group-hover:bg-red-200" 
+//                       ${data === "pending"
+//                         ? "text-red-700 bg-red-100 group-hover:bg-red-200"
 //                         : "text-emerald-700 bg-emerald-100 group-hover:bg-emerald-200"
 //                       }
 //                     `}>
@@ -117,14 +115,14 @@
 //                     </span>
 //                   </div>
 //                  :
-//                  idx===4 ? 
+//                  idx===4 ?
 //                  (
 //                       <div
 //                         key={idx}
 //                         className="flex justify-center"
 //                       >
-//                           {props?.role==="user"? 
-                          
+//                           {props?.role==="user"?
+
 //                           <span
 //                               className="text-center
 //                               px-2 py-1.5
@@ -139,18 +137,18 @@
 //                               transition-colors duration-200"
 //                           >
 //                             &#8377; {data}
-//                           </span> 
-//                           : 
+//                           </span>
+//                           :
 //                           (
 //                             <button
 //                                 className="
-//                                             text-white  
-//                                             rounded-full 
-//                                             border 
-//                                             border-blue-200 
+//                                             text-white
+//                                             rounded-full
+//                                             border
+//                                             border-blue-200
 //                                             bg-blue-600
 //                                             hover:bg-blue-800
-//                                             hover:border-blue-400 
+//                                             hover:border-blue-400
 //                                             transition-colors
 //                                             text-center
 //                                             px-2 py-1.5
@@ -213,32 +211,32 @@
 //                         {data}
 //                       </div>
 //                     )
-                      
+
 //                  )
 //               )))}
 //             </div>
-    
+
 //             <div className='h-[10px] max-360:h-[7px] bg-gray-200 flex justify-center items-center' onClick={()=>{setMoreDetails(!moreDetails)}}>
 //                       {
 //                           moreDetails ? <TiArrowSortedUp className='text-xs'/> : <TiArrowSortedDown className='text-xs'/>
 //                       }
 //             </div>
-    
+
 //           {/* Details Section */}
 //           <div className={`overflow-hidden transition-all duration-300 ${moreDetails ? 'max-h-[3000px]' : 'max-h-0'}`}>
 //             <div className="bg-gray-100 p-[8px] space-y-[2px]">
-    
+
 //               {/* User/Vendor Details */}
 //               {props?.role === "user" && (
 //                 <div className="bg-white p-4 rounded-[3px] shadow-sm max-480:p-2">
 //                   <h3 className="text-[13px] font-normal text-gray-400 mb-[8px] max-480:mb-[4px] max-480:text-[10px]">Vendor Details</h3>
 //                   <div className="grid  max-480:grid-cols-1 grid-cols-2 gap-2 text-sm max-480:gap-1">
-//                     <div className="font-medium max-480:text-[12px] truncate">Shop Name:&nbsp;  
+//                     <div className="font-medium max-480:text-[12px] truncate">Shop Name:&nbsp;
 //                         <span className="font-normal capitalize relative">{props?.shopName}
 //                           <img  title={props?.shopName} className='absolute inset-0 opacity-0'/>
 //                         </span>
 //                     </div>
-//                     <div className="font-medium max-480:text-[12px] truncate">Location:&nbsp; 
+//                     <div className="font-medium max-480:text-[12px] truncate">Location:&nbsp;
 //                       <span className="font-normal capitalize relative">
 //                         {props?.shopLocation}
 //                         <img  title={props?.shopLocation} className='absolute inset-0 opacity-0'/>
@@ -247,7 +245,7 @@
 //                   </div>
 //                 </div>
 //               )}
-    
+
 //               {props?.role === "vendor" && (
 //                 <div className="bg-white p-4 rounded-[3px] shadow-sm max-480:p-2">
 //                   <h3 className="text-[13px] font-normal text-gray-400 mb-[8px] max-480:mb-[4px] max-480:text-[10px]">Customer Details</h3>
@@ -263,14 +261,14 @@
 //                   </div>
 //                 </div>
 //               )}
-    
+
 //               {/* Times */}
 //               <div className="bg-white p-4 shadow-sm max-480:p-2">
 //                 <h3 className="text-[13px] font-normal text-gray-400 mb-[8px] max-480:mb-[4px] max-480:text-[10px]">Time Details</h3>
 //                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm max-480:gap-[3px]">
 //                   <div className="font-medium max-480:text-[12px] truncate">Order Time: <span className="font-normal">{formattedTime(props?.orderedAt)}</span></div>
 //                   {
-//                       props?.timeOfTurn===undefined  || props?.timeOfTurn==="NA" ? 
+//                       props?.timeOfTurn===undefined  || props?.timeOfTurn==="NA" ?
 //                       (
 //                         ""
 //                       )
@@ -279,7 +277,7 @@
 //                         <div className="font-medium max-480:text-[12px] truncate">Turn Time: <span className="font-normal">{formattedTime(props?.timeOfTurn)}</span></div>
 //                       )
 //                   }
-    
+
 //                   {
 //                       props?.timeOfProcessing ===undefined || props?.timeOfProcessing === "NA"?
 //                       (
@@ -290,7 +288,7 @@
 //                         <div className="font-medium max-480:text-[12px] truncate">Processing Time: <span className="font-normal">{formattedTime(props?.timeOfProcessing)}</span></div>
 //                       )
 //                   }
-                  
+
 //                   <div className="font-medium max-480:text-[12px] truncate">Completion Time: <span className="font-normal">{formattedTime(props?.timeOfCompletion)}</span></div>
 //                 </div>
 //               </div>
@@ -311,7 +309,7 @@
 //                     <div></div>
 //                  )
 //               }
-    
+
 //               {(
 //                 <div className="bg-white p-4 rounded-[3px] shadow-sm max-480:p-2">
 //                   <h3 className="text-[13px] font-normal text-gray-400 mb-[8px] max-480:mb-[4px] max-480:text-[10px]">Payment Details</h3>
@@ -321,7 +319,7 @@
 //                   </div>
 //                 </div>
 //               )}
-    
+
 //               {/* Order Files */}
 //             <div className=' p-4 bg-white'>
 //               <h3 className="text-[13px] font-normal text-gray-400 mb-[8px]">Order Files</h3>
@@ -333,12 +331,12 @@
 //                   <div className="text-center flex items-center justify-center ">B-T-B</div>
 //                   <div className="text-right flex items-center justify-center " >Copies</div>
 //               </div>
-    
+
 //               <div className="divide-y divide-gray-200">
 //                 {props?.documents?.[0]?.documents?.map((order, index) => (
 //                   <div
 //                     key={index}
-//                     className={`grid grid-cols-6 max-640:text-[10px] max-640:gap-2 gap-4 p-2 rounded-[5px] bg-gray-50 px-2 text-sm 
+//                     className={`grid grid-cols-6 max-640:text-[10px] max-640:gap-2 gap-4 p-2 rounded-[5px] bg-gray-50 px-2 text-sm
 //                       transition-all duration-200 ease-in-out  group rounded-[5px]`}
 //                   >
 //                     {/* Filename with Tooltip */}
@@ -347,12 +345,12 @@
 //                         <span className="truncate text-blue-400 underline">{order?.fileName}<img src="djnkjsdnj" title={order?.fileName} className='absolute top-0 left-0 opacity-0'/></span>
 //                       </Link>
 //                     </div>
-  
+
 //                     {/* Other Cells with Hover Effects */}
 //                     <div className="text-right text-gray-700 font-normal flex justify-center items-center">
 //                       {props?.documents?.[0]?.fileConfigurations?.[index]?.numberOfPages}
 //                     </div>
-                    
+
 //                     <div className="text-center text-gray-700 flex justify-center items-center">
 //                       <span className={`max-640:px-1 px-3 py-1 rounded-full flex justify-center items-center`}>
 //                         {props?.documents?.[0]?.fileConfigurations?.[index]?.color!=="colored" ? "B&W" : "Color"}
@@ -369,7 +367,7 @@
 //                     <div className="text-center text-gray-700 flex justify-center items-center">
 //                       {props?.documents?.[0]?.fileConfigurations?.[index].copies}
 //                     </div>
-                    
+
 //                   </div>
 //                 ))}
 //               </div>
@@ -403,7 +401,6 @@
 //       </div>
 //   );
 
-  
 // };
 
 // export default UnreceivedOrderCard;

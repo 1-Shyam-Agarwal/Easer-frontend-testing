@@ -1,6 +1,6 @@
-import React from "react";
-import { MoreVertical } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { MoreVertical } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const CustomerMailCards = ({ mails }) => {
   const navigate = useNavigate();
@@ -10,15 +10,17 @@ const CustomerMailCards = ({ mails }) => {
       {mails?.map((mail, index) => {
         const mailTime = new Date(mail?.timeStamp).getTime();
         const isNew = Date.now() - mailTime < 30 * 1000; // Show NEW badge for 30 seconds
- 
+
         return (
           <div
             key={index}
-            className={`group relative flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-4 sm:px-6 py-[0.85rem] sm:py-4 transition-all duration-200 hover:bg-gray-50 hover:shadow-sm rounded-md cursor-pointer ${isNew ? "animate-bg-pulse" : ""}`}
+            className={`group relative flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-4 sm:px-6 py-[0.85rem] sm:py-4 transition-all duration-200 hover:bg-gray-50 hover:shadow-sm rounded-md cursor-pointer ${isNew ? 'animate-bg-pulse' : ''}`}
             onClick={() => navigate(`mail/${mail?.mail_id}`)}
           >
             {/* Receiver */}
-            <div className={`flex items-center gap-2 w-full sm:w-1/4 min-w-[150px]`}>
+            <div
+              className={`flex items-center gap-2 w-full sm:w-1/4 min-w-[150px]`}
+            >
               <div className="bg-blue-100 text-blue-600 font-semibold rounded-full px-2 py-[2px] sm:px-2 sm:py-1 text-[14px] sm:text-xs">
                 To
               </div>
@@ -42,7 +44,7 @@ const CustomerMailCards = ({ mails }) => {
                     title={doc?.fileName}
                   >
                     {doc?.fileName?.length > 15
-                      ? doc?.fileName?.slice(0, 12) + "..."
+                      ? doc?.fileName?.slice(0, 12) + '...'
                       : doc?.fileName}
                   </span>
                 ))}
@@ -56,15 +58,15 @@ const CustomerMailCards = ({ mails }) => {
 
             {/* Time and NEW Badge */}
             <div className="text-right w-full absolute top-0 right-0 py-2 px-3 sm:relative sm:w-1/6 text-[0.70rem] sm:text-xs text-gray-500 group-hover:text-gray-700">
-              {new Date(mail?.timeStamp)?.toLocaleDateString("en-GB", {
-                day: "2-digit",
-                month: "short",
-                year: "2-digit",
+              {new Date(mail?.timeStamp)?.toLocaleDateString('en-GB', {
+                day: '2-digit',
+                month: 'short',
+                year: '2-digit',
               })}
-              ,{" "}
-              {new Date(mail?.timeStamp)?.toLocaleTimeString("en-US", {
-                hour: "2-digit",
-                minute: "2-digit",
+              ,{' '}
+              {new Date(mail?.timeStamp)?.toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
                 hour12: true,
               })}
             </div>

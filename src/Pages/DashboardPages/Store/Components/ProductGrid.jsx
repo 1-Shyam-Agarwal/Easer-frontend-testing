@@ -1,7 +1,7 @@
 // components/ProductGrid.jsx
 import React from 'react';
 import ProductCard from './ProductCard';
-import { studentProducts } from "../../../../Data/StudentProducts.js";
+import { studentProducts } from '../../../../Data/StudentProducts.js';
 
 const ProductGrid = () => {
   return (

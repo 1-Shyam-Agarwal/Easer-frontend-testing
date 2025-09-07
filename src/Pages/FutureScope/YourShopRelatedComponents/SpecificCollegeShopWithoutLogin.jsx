@@ -6,7 +6,6 @@
 
 // const SpecificCollegeShopWithoutLogin = () => {
 
-
 //   const location = useLocation();
 //   const shopCode = location.pathname.split("/").pop();
 //   const[shopDetails , setShopDetails] = useState({});
@@ -16,7 +15,6 @@
 //   const token = useSelector((state)=>(state.auth.token));
 //   const navigate = useNavigate();
 
-
 //   useEffect(()=>
 //   {
 //       dispatch(getShopDetails(dispatch , setShopDetails , shopCode , setLoading));
@@ -25,7 +23,7 @@
 //   return (
 //     <div className='p-2 sm:p-6 bg-gray-50 min-h-screen'>
 //       {
-//         loading ? 
+//         loading ?
 //         <div>
 //             <div className="min-h-screen flex items-center justify-center">
 //                 <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
@@ -39,7 +37,7 @@
 //               <p className='text-center capitalize'>{shopDetails?.vendorAdditionalDetails?.shopName}</p>
 //               <p className='text-center text-sm capitalize'>{shopDetails?.collegeCode?.collegeName}</p>
 //             </h1>
-          
+
 //             {/* Order Box */}
 //             <div className="w-[70vw] h-[40vh] max-w-lg border-2 border-dashed border-blue-700 flex justify-center items-center bg-gray-50
 //                             rounded-[7px] shadow-lg transition-transform transform hover:scale-105"

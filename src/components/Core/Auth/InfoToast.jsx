@@ -17,16 +17,14 @@ const infoToast = (message, duration = 3000) => {
 
         {/* Message */}
         <div className="flex-1">
-          <p className="text-sm font-medium text-gray-900">
-            {message}
-          </p>
+          <p className="text-sm font-medium text-gray-900">{message}</p>
         </div>
 
         {/* Progress Bar */}
         <div
           className="absolute bottom-0 left-0 h-1 bg-yellow-500"
           style={{
-            animation: `progress-shrink ${duration}ms linear forwards`
+            animation: `progress-shrink ${duration}ms linear forwards`,
           }}
         />
       </div>

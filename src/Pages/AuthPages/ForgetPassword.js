@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getPasswordResetToken} from '../../Services/operations/Auth.js';
+import { getPasswordResetToken } from '../../Services/operations/Auth.js';
 import { Loader2, ArrowLeft } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -13,20 +13,19 @@ const ForgetPasswordPage = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if(email === "")
-    {
-       toast.error("Please Specify the email");
-       return;
+    if (email === '') {
+      toast.error('Please Specify the email');
+      return;
     }
 
-    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-    if(regex.test(email)) getPasswordResetToken(email, setEmailSent, setLoading);
-    else toast.error("Invalid Email")
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (regex.test(email))
+      getPasswordResetToken(email, setEmailSent, setLoading);
+    else toast.error('Invalid Email');
   };
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 cursor-default">
-
       <div className="w-full max-w-md space-y-8 mt-[-40px]">
         {loading ? (
           <div className="flex flex-col items-center justify-center py-12">
@@ -39,8 +38,8 @@ const ForgetPasswordPage = () => {
                 {emailSent ? 'Email Sent' : 'Reset Password'}
               </h1>
               <p className="mt-6 text-lg leading-8 text-gray-600">
-                {emailSent 
-                  ? `Check your inbox at ${email}` 
+                {emailSent
+                  ? `Check your inbox at ${email}`
                   : "Enter your email and we'll send you instructions to reset your password."}
               </p>
             </div>
@@ -82,16 +81,16 @@ const ForgetPasswordPage = () => {
         )}
 
         {!emailSent && (
-                <div className="text-center">
-                  <a
-                    href="/login"
-                    className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium gap-2 transition-colors duration-200"
-                  >
-                    <ArrowLeft className="w-4 h-4" />
-                    <span>Back to Login</span>
-                  </a>
-                </div>
-              )}
+          <div className="text-center">
+            <a
+              href="/login"
+              className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium gap-2 transition-colors duration-200"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span>Back to Login</span>
+            </a>
+          </div>
+        )}
       </div>
     </div>
   );

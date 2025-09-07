@@ -6,10 +6,10 @@
 
 // const VendorPriceForm = ({ idx , priceSchema, setShowPriceModel, setPriceSchema,singlePriceScheme , setSinglePriceScheme }) => {
 //   const [isSubmitting, setIsSubmitting] = useState(false);
-//   const { 
-//     register , 
-//     handleSubmit, 
-//     getValues, 
+//   const {
+//     register ,
+//     handleSubmit,
+//     getValues,
 //     reset,
 //     formState: { errors, isSubmitSuccessful} ,
 //     watch
@@ -50,7 +50,6 @@
 //       setSinglePriceScheme(null);
 //   }
 
-
 //   const cancelHandler = () => {
 //     setShowPriceModel(false);
 //     if(singlePriceScheme) setSinglePriceScheme(null);
@@ -64,17 +63,17 @@
 //             {/* Colour Selection */}
 //             <div className="form-group">
 //               <label htmlFor='colour' className="form-label">
-//                 Colour 
+//                 Colour
 //                 <FaStarOfLife className="text-red-500 text-[6px] ml-1 inline-block"/>
 //               </label>
-//               <select 
+//               <select
 //                 id='colour'
 //                 className="form-input"
-//                 {...register("colour", { 
+//                 {...register("colour", {
 //                   required: "Colour is required",
-//                   validate : (value)=>{ 
+//                   validate : (value)=>{
 //                             return ((value==="blackAndWhite" || value==="colour") ? true : "Invalid Value");
-//                           } 
+//                           }
 //                 })}
 //               >
 //                 <option value="">Select Colour</option>
@@ -87,17 +86,17 @@
 //             {/* Printing Mode Selection */}
 //             <div className="form-group">
 //               <label htmlFor='printingMode' className="form-label">
-//                 Printing Mode 
+//                 Printing Mode
 //                 <FaStarOfLife className="text-red-500 text-[6px] ml-1 inline-block"/>
 //               </label>
-//               <select 
+//               <select
 //                 id="printingMode"
 //                 className="form-input"
-//                 {...register("printingMethod", { 
+//                 {...register("printingMethod", {
 //                   required: "Printing mode is required" ,
-//                   validate : (value)=>{ 
+//                   validate : (value)=>{
 //                     return ((value==="singleSide" || value==="backToBack") ? true : "Invalid Value");
-//                   } 
+//                   }
 //                 })}
 //               >
 //                 <option value="">Select Mode</option>
@@ -107,7 +106,6 @@
 //               {errors.printingMethod && <p className="form-error">{errors.printingMethod.message}</p>}
 //             </div>
 //           </div>
-
 
 //           {/* specify the range */}
 //           <div className="form-group">
@@ -129,16 +127,15 @@
 //             {errors.rangeType && <p className="form-error">{errors.rangeType.message}</p>}
 //           </div>
 
-
 //           {/* Specify Above Value */}
-          
+
 //           {
 //             rangeTypeValue === "above" &&
 //             (
 //               <div className="form-group">
 //                 <label htmlFor='aboveValue' className="form-label">Specify Above value</label>
-//                 <input 
-//                   type="number" 
+//                 <input
+//                   type="number"
 //                   id="aboveValue"
 //                   className="form-input"
 //                   {...register("aboveValue", {
@@ -151,8 +148,6 @@
 //               </div>
 //             )
 //           }
-          
-
 
 //           {/* Range Selection */}
 //           {
@@ -161,16 +156,16 @@
 //               <div className="grid md:grid-cols-2 gap-4">
 //                 <div className="form-group">
 //                   <label htmlFor='startingRange' className="form-label">Starting Range</label>
-//                   <input 
-//                     type="number" 
+//                   <input
+//                     type="number"
 //                     id="startingRange"
 //                     className="form-input"
 //                     {...register("startingRange", {
 //                       required: "Starting range is required",
 //                       valueAsNumber: true,
 //                       min: { value: 1, message: "Value must be greater than zero" },
-//                       validate: (value) => 
-//                         value <= getValues("endingRange") || 
+//                       validate: (value) =>
+//                         value <= getValues("endingRange") ||
 //                         "Starting range must be less than or equal to ending range" ,
 //                       validate :(value) => ((getValues("printingMethod") === "backToBack") ? (value >1 ? true : "Value must be greater than 1 in case of Back to Back") : true)
 //                     })}
@@ -180,16 +175,16 @@
 
 //                 <div className="form-group">
 //                   <label htmlFor="endingRange" className="form-label">Ending Range</label>
-//                   <input 
-//                     type="number" 
+//                   <input
+//                     type="number"
 //                     id="endingRange"
 //                     className="form-input"
 //                     {...register("endingRange", {
 //                       required: "Ending range is required",
 //                       valueAsNumber: true,
 //                       min: { value: 1, message: "Value must be greater than zero" },
-//                       validate: (value) => 
-//                         value >= getValues("startingRange") || 
+//                       validate: (value) =>
+//                         value >= getValues("startingRange") ||
 //                         "Ending range must be greater than or equal to starting range"
 //                     })}
 //                   />
@@ -198,20 +193,19 @@
 //               </div>
 //              )
 //           }
-            
 
 //           <div className="grid md:grid-cols-2 gap-4">
 //             {/* Pricing Method */}
 //             <div className="form-group">
 //               <label htmlFor='pricingMethod' className="form-label">Pricing Method</label>
-//               <select 
+//               <select
 //                 id="pricingMethod"
 //                 className="form-input"
-//                 {...register("pricingMethod", { 
+//                 {...register("pricingMethod", {
 //                   required: "Pricing method is required",
-//                   validate : (value)=>{ 
+//                   validate : (value)=>{
 //                     return ((value==="perPrint" || value==="combined") ? true : "Invalid Value");
-//                   }  
+//                   }
 //                 })}
 //               >
 //                 <option value="">Select</option>
@@ -224,12 +218,12 @@
 //             {/* Price Input */}
 //             <div className="form-group">
 //               <label htmlFor='price' className="form-label">Price</label>
-//               <input 
-//                 type="number" 
-//                 id="price" 
+//               <input
+//                 type="number"
+//                 id="price"
 //                 placeholder="Enter price"
 //                 className="form-input"
-//                 {...register("price", { 
+//                 {...register("price", {
 //                   required: "Price is required",
 //                   valueAsNumber:true,
 //                   min: { value: 1, message: "Price must be greater than zero" }
@@ -241,7 +235,7 @@
 
 //           {/* Action Buttons */}
 //           <div className="flex justify-end space-x-4 mt-6">
-//             <button 
+//             <button
 //               type="button"
 //               onClick={cancelHandler}
 //               className="btn btn-secondary"
@@ -250,9 +244,9 @@
 //               Cancel
 //             </button>
 //             {
-//                 !singlePriceScheme ? 
+//                 !singlePriceScheme ?
 //                 (
-//                   <button 
+//                   <button
 //                     type="submit"
 //                     className="btn btn-primary"
 //                     disabled={isSubmitting}
@@ -261,7 +255,7 @@
 //                   </button>
 //                 )
 //                 :
-//                 <button 
+//                 <button
 //                     type="submit"
 //                     className="btn btn-primary"
 //                     disabled={isSubmitting}
@@ -269,7 +263,7 @@
 //                     {isSubmitting ? 'Saving Changes...' : 'Save Changes'}
 //                   </button>
 //             }
-           
+
 //           </div>
 //         </form>
 //       </div>
