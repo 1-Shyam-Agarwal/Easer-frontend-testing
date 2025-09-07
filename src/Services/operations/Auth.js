@@ -1,7 +1,7 @@
 import { toast } from 'react-hot-toast';
 import { apiConnector } from '../apiconnect.js';
 import { authEndpoints } from '../apis';
-import { setToken } from '../../Slices/AuthSlice.js';
+import { setToken } from '../../Slices/authSlice.js';
 import { setUser } from '../../Slices/profileSlice.js';
 
 //<------------------------------------------- GENERAL AUTH HANDLERS ------------------------------------------>

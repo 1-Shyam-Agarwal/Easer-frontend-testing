@@ -7,7 +7,7 @@ import './App.css';
 
 //API USED
 import { getRole } from './Services/operations/GetUserInformation.jsx';
-import { setRole } from './Slices/AuthSlice.js';
+import { setRole } from './Slices/authSlice.js';
 
 //Self Defined Routes
 import OpenRoute from './components/Core/Auth/OpenRoute.jsx';
