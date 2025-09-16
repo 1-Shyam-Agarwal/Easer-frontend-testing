@@ -31,7 +31,7 @@ const VendorUnrecievedOrders = () => {
             field_2="Ordered at"  //Date
             field_3="Price" //Price
             field_4="OTP" // Refunded by and date
-            field_5="Documents" //Bank Reference number
+            field_5="Reference No." //Bank Reference number
           />
           <UnreceivedOrders unreceivedOrders = {unreceivedOrders}/>
         </div>

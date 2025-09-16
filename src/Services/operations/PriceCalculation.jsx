@@ -5,7 +5,7 @@ import {
   clearRole,
   clearRoomcode,
   clearToken,
-} from '../../Slices/authSlice.js';
+} from '../../Slices/AuthSlice.js';
 import { clearUser } from '../../Slices/profileSlice';
 import { setShowModel } from '../../Slices/LogoutSlice';
 

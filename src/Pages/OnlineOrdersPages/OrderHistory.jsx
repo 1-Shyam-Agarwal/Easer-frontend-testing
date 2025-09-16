@@ -3,7 +3,7 @@ import OrderCardHeading from './../../components/CommonOrderLayouts/OrderPageHea
 import OrderSearchBar from './../../components/CommonOrderLayouts/OrderSearchBar';
 import NoOrderDisplay from './../../components/CommonOrderLayouts/NoOrderDisplay';
 import NoOrderHistory from './../../Assets/Lotties/NoOngoingOrders.json';
-import OrderHeader_5 from './../../components/CommonOrderLayouts/OrderHeader_5';
+import OrderHeader_4 from './../../components/CommonOrderLayouts/OrderHeader_4';
 import { useState } from 'react';
 import Pagination from './../../components/CommonOrderLayouts/Pagination';
 import OrderHistoryOrders from '../../components/CommonOrderLayouts/OrderList/History';
@@ -26,12 +26,11 @@ const OrderHistory = () => {
       ) : (
         <div>
           <Pagination/>
-          <OrderHeader_5
-            field_1="Sender" //Shop and location
+          <OrderHeader_4
+            field_1="Reciever" //Shop and location
             field_2="Ordered at"  //Date
             field_3="Price" //Price
-            field_4="OTP" // Refunded by and date
-            field_5="Documents" //Bank Reference number
+            field_4="Documents" 
           />
           <OrderHistoryOrders orderHistoryOrders = {orderHistoryOrders}/>
         </div>

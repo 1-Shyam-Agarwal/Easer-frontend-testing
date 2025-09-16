@@ -7,7 +7,7 @@ import { fetchAllSpecificOnGoingOrders } from '../../../../Services/operations/G
 import VendorOngoingCards from './Components/VendorOngoingCards';
 import { useNavigate } from 'react-router-dom';
 import OrderModeToggle from '../../../../components/PlaceAndTrack/Vendor/OrderModeToggle';
-import OrderHeader_4 from '../../../../components/CommonOrderLayouts/OrderHeader_4';
+import OrderHeader_5 from '../../../../components/CommonOrderLayouts/OrderHeader_5';
 import OrderCardContainer from '../../../../components/CommonOrderLayouts/OrderCardContainer';
 import OrderCardHeading from '../../../../components/CommonOrderLayouts/OrderPageHeading';
 import { LiaBorderStyleSolid } from 'react-icons/lia';
@@ -15,6 +15,7 @@ import OrderDetailsPopup from '../../../../components/CommonOrderLayouts/OrderDe
 
 const VendorPlaceAndTrackOrder = () => {
   const [ongoingOrders, setOngoingOrders] = useState(null);
+  const [selectedOngoingOrder , setSelectedOngoingOrder] = useState({});
   const token = useSelector((state) => state.auth.token);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ const VendorPlaceAndTrackOrder = () => {
       fetchAllSpecificOnGoingOrders(token, setOngoingOrders, setLoading);
     }
   }, [token]);
+
 
   return (
     <OrderCardContainer>
@@ -46,16 +48,23 @@ const VendorPlaceAndTrackOrder = () => {
       ) : (
         <div>
           <OrderModeToggle active="Online Orders" />
-          <OrderHeader_4
+          <OrderHeader_5
             field_1="Student"
             field_2="Docs"
-            field_3="Price"
-            field_4="PaymentStatus"
+            field_3="Ordered At"
+            field_4="Price"
+            field_5="OTP"
           />
-          <VendorOngoingCards ongoingOrders={ongoingOrders} />
+          <VendorOngoingCards ongoingOrders={ongoingOrders} selectedOngoingOrder={selectedOngoingOrder} setSelectedOngoingOrder={setSelectedOngoingOrder} />
         </div>
       )}
-      <OrderDetailsPopup />
+      {
+        "orderId" in selectedOngoingOrder ?
+          <OrderDetailsPopup  order={selectedOngoingOrder} setSelectedOngoingOrder={setSelectedOngoingOrder}/>
+          :
+          <div></div>
+      }
+      
     </OrderCardContainer>
   );
 };

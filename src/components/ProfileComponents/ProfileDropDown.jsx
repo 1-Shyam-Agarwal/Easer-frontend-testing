@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { clearUser } from '../../Slices/profileSlice';
-import { clearToken } from '../../Slices/authSlice';
+import { clearToken } from '../../Slices/AuthSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 import { setShowModel } from '../../Slices/LogoutSlice';

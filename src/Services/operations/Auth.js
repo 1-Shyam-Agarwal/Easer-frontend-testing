@@ -1,7 +1,7 @@
 import { toast } from 'react-hot-toast';
 import { apiConnector } from '../apiconnect.js';
 import { authEndpoints } from '../apis';
-import { setToken } from '../../Slices/authSlice.js';
+import { setToken } from '../../Slices/AuthSlice.js';
 import { setUser } from '../../Slices/profileSlice.js';
 
 //<------------------------------------------- GENERAL AUTH HANDLERS ------------------------------------------>
@@ -242,6 +242,7 @@ export async function handlePreCustomLoginChecksAndSendOtp(
     setData(data);
   } catch (error) {
     toast.dismiss(toastId);
+    console.log("logoin error : " , error )
     toast.error(error?.response?.data?.message || 'Please try again later.');
   } finally {
     toast.dismiss(toastId);

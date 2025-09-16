@@ -4,7 +4,7 @@ import {
   clearRole,
   clearRoomcode,
   clearToken,
-} from '../../../Slices/authSlice';
+} from '../../../Slices/AuthSlice';
 import { clearUser } from '../../../Slices/profileSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
