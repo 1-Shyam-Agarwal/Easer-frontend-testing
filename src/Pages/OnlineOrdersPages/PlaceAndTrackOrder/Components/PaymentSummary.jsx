@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Receipt, Printer, AlertCircle } from 'lucide-react';
 import { load } from '@cashfreepayments/cashfree-js';
 import {
-  validatingOrder,
   creatingOrder,
 } from '../../../../Services/operations/PrintOrderVendor';
 import toast from 'react-hot-toast';
@@ -10,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { apiConnector } from '../../../../Services/apiconnect';
 import { printOrderVendorEndpoints } from '../../../../Services/apis';
 import { useRef } from 'react';
+
 
 const PaymentSummary = ({
   invoice,
@@ -39,6 +39,7 @@ const PaymentSummary = ({
         {
           vendorId: invoice.vendor,
           price: invoice.price.price,
+          filesWithConfigs : filesWithConfigs
         },
         { Authorization: `Bearer ${token}` }
       );
@@ -102,8 +103,6 @@ const PaymentSummary = ({
         console.log('resutl : ', result);
         if (result && result.data) {
           const isOrderCreated = await creatingOrder(
-            // setLoading
-            //props?.setDisplayCross
             filesWithConfigs,
             token,
             invoice?.vendor,
@@ -114,18 +113,16 @@ const PaymentSummary = ({
             result?.data?.response?.[0]?.payment_time
           );
 
-          // if(isOrderCreated)
-          // {
-          //   props.setAddDocumentsWindow(false);
-          //   props.setPaymentWindow(false);
-          //   props.setDisplayCross(false);
-          // }
-
-          // }else if(result?.data?.response?.paymentStatus === "FAILED")
-          // {
-          //   // setLoading(false);
-          //   // props?.setDisplayCross(true);
-          //   toast.error("Transaction Failed.Please try again.")
+          if(isOrderCreated)
+          {
+              setAddDocumentsModelVisibility(false)
+              setPaymentSummaryModelVisibility(false)
+          }
+          }else if(result?.data?.response?.paymentStatus === "FAILED")
+          {
+            // setLoading(false);
+            // props?.setDisplayCross(true);
+            toast.error("Transaction Failed.Please try again.")
         } else {
           // setLoading(false);
           // props?.setDisplayCross(true);
@@ -380,7 +377,7 @@ const PaymentSummary = ({
         {/* Footer Summary */}
         <div className="p-4 text-sm max-640:text-[12px] text-gray-500 flex justify-between items-center  border-y-2 rounded-[2px]">
           <span>Total Documents: {filesWithConfigs?.length}</span>
-          <span>
+          {/* <span>
             Pages Required:{' '}
             {(invoice?.pages?.number_of_ss_prints_c === undefined
               ? 0
@@ -398,34 +395,37 @@ const PaymentSummary = ({
                   ? 0
                   : invoice?.pages?.number_of_bb_prints_c) / 2
               )}
-          </span>
+          </span> */}
         </div>
       </div>
-
-      <div
-        onClick={() => {
-          setAddDocumentsModelVisibility(true);
-          setPaymentSummaryModelVisibility(false);
-        }}
-      >
-        Back
-      </div>
-
-      <div className="flex gap-6">
+       
+      <div className='flex flex-row items-center justify-center gap-4 sm:gap-8 mb-6 '>
         <div className="mt-4 text-right">
           <button
             className="bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2 rounded-md text-sm font-medium shadow-sm transition"
-            onClick={OrderValidationAndCreationHandler}
+            onClick={() => {
+              setAddDocumentsModelVisibility(true);
+              setPaymentSummaryModelVisibility(false);
+            }}
           >
-            Pay {invoice?.price?.price}
+             Back
           </button>
         </div>
 
-        <div className="mt-4 text-right">
-          <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2 rounded-md text-sm font-medium shadow-sm transition">
-            pay 10001 Inklets
-          </button>
-        </div>
+        {
+            invoice?.price?.price &&
+            <div className="mt-4 text-right">
+              <button
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2 rounded-md text-sm font-medium shadow-sm transition"
+                onClick={OrderValidationAndCreationHandler}
+              >
+                Pay ₹{invoice?.price?.price}
+              </button>
+            </div>
+
+        }
+        
+
       </div>
     </div>
   );

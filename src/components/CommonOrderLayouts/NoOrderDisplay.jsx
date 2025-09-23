@@ -5,7 +5,7 @@ const NoOrderDisplay = ({ displayText, LottieAnimation,setDisplayCheckoutModel }
     <div className="text-center mt-12 text-gray-600 text-sm flex justify-center">
       <div className="flex flex-col-reverse lg:flex-row items-center px-4 sm:px-12 gap-6">
         <div className="translate-x-0 lg:translate-x-[20px] text-center lg:text-left">
-          <div className="text-lg sm:text-xl font-montserrat font-medium" onClick={()=>setDisplayCheckoutModel(true)}>
+          <div className="text-lg sm:text-xl font-montserrat font-medium" onClick={()=>{if(setDisplayCheckoutModel) {setDisplayCheckoutModel(true)}}}>
             {displayText}
           </div>
         </div>

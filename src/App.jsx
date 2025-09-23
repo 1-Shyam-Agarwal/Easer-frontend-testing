@@ -75,6 +75,11 @@ import VendorPlaceAndTrackOrder from './Pages/OnlineOrdersPages/PlaceAndTrackOrd
 import OnlineOrderDetails from './Pages/OnlineOrdersPages/PlaceAndTrackOrder/Common/OnlineOngoingOrders.jsx';
 import VendorUnrecievedOrders from './Pages/OnlineOrdersPages/VendorUnrecievedOrders.jsx';
 import OrderHistory from './Pages/OnlineOrdersPages/OrderHistory.jsx';
+import {NotificationEndpoints} from "./Services/apis.js";
+import axios from 'axios';
+import {getToken} from 'firebase/messaging';
+import { messaging } from './Config/firebase.js';
+import ReceiveOrder from './Pages/OnlineOrdersPages/ReceiveOrder.jsx';
 
 const GoogleAuthWrapper = ({ children }) => {
   return (
@@ -95,6 +100,8 @@ function App() {
   });
   const [showInkletInfo, setShowInkletInfo] = useState(false);
 
+  const{STORE_FCM_TOKEN} = NotificationEndpoints;
+
   useEffect(() => {
     async function setUserRole() {
       let role = '';
@@ -106,6 +113,37 @@ function App() {
 
     setUserRole();
   }, [token]);
+
+
+
+  if(token)
+  {
+      if (Notification.permission === "granted") {
+      
+      getToken(messaging, {
+            vapidKey: process.env.REACT_APP_FIREBASE_MESSAGING_KEY,
+      })
+      .then((fcmToken)=>
+      {
+          console.log("fcmTone : " , fcmToken);
+          if (fcmToken) {
+            axios.post(
+              STORE_FCM_TOKEN,
+              { fcmToken },
+              { headers: { Authorization: `Bearer ${token}` } }
+            )
+            .then((response)=>{})
+            .catch((error)=>{console.log("Error occured : " , error)})
+          }
+      })
+      .catch((error)=>{console.log("Error occured : " , error)})
+
+      
+    } else if (Notification.permission === "denied") {
+      console.log("Permission denied");
+    }
+  }
+
 
   return (
     <div>
@@ -171,6 +209,14 @@ function App() {
             </OpenRoute>
           }
         ></Route>
+
+        <Route
+          path="/receive-order/:id"
+            element={
+                  <ReceiveOrder/>
+            }
+        >
+        </Route>
 
         <Route
           path="/services/printing/select-college/7540dee9-90ed-4119-af54-6740da40ae8e/b53bc873-91d4-4028-bde6-f67eabab6c83"

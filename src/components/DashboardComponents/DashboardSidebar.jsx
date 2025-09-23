@@ -68,16 +68,16 @@ const DashboardSidebar = () => {
           icon: <MdSchool />,
           label: 'Place & Track Orders',
         },
-        {
-          to: '/dashboard/unreceived-orders',
-          icon: <MdWarning />,
-          label: 'Unreceived Orders',
-        },
-        {
-          to: '/dashboard/cancelled-refunds-orders',
-          icon: <MdDelete />,
-          label: 'Cancelled & Refunds',
-        },
+        // {
+        //   to: '/dashboard/unreceived-orders',
+        //   icon: <MdWarning />,
+        //   label: 'Unreceived Orders',
+        // },
+        // {
+        //   to: '/dashboard/cancelled-refunds-orders',
+        //   icon: <MdDelete />,
+        //   label: 'Cancelled & Refunds',
+        // },
         {
           to: '/dashboard/order-history',
           icon: <MdHistory />,
@@ -86,19 +86,19 @@ const DashboardSidebar = () => {
       ],
     },
 
-    {
-      to: '/dashboard/print-summary',
-      icon: <MdPrint />, // Represents cloud-based or remote printing
-      label: 'Summary',
-      type: 'single',
-    },
+    // {
+    //   to: '/dashboard/print-summary',
+    //   icon: <MdPrint />, // Represents cloud-based or remote printing
+    //   label: 'Summary',
+    //   type: 'single',
+    // },
 
-    {
-      to: '/dashboard/college-shops',
-      icon: <MdPrint />, // Represents cloud-based or remote printing
-      label: 'Campus Shops',
-      type: 'single',
-    },
+    // {
+    //   to: '/dashboard/college-shops',
+    //   icon: <MdPrint />, // Represents cloud-based or remote printing
+    //   label: 'Campus Shops',
+    //   type: 'single',
+    // },
   ];
 
   const vendorNavigation = [
@@ -124,11 +124,11 @@ const DashboardSidebar = () => {
           icon: <MdWarning />,
           label: 'Unreceived Orders',
         },
-        {
-          to: '/dashboard/cancelled-refunds-orders',
-          icon: <MdDelete />,
-          label: 'Cancelled & Refunds',
-        },
+        // {
+        //   to: '/dashboard/cancelled-refunds-orders',
+        //   icon: <MdDelete />,
+        //   label: 'Cancelled & Refunds',
+        // },
         {
           to: '/dashboard/order-history',
           icon: <MdHistory />,
@@ -137,19 +137,19 @@ const DashboardSidebar = () => {
       ],
     },
 
-    {
-      to: '/dashboard/print-summary',
-      icon: <MdPrint />, // Represents cloud-based or remote printing
-      label: 'Summary',
-      type: 'single',
-    },
+    // {
+    //   to: '/dashboard/print-summary',
+    //   icon: <MdPrint />, // Represents cloud-based or remote printing
+    //   label: 'Summary',
+    //   type: 'single',
+    // },
 
-    {
-      to: '/dashboard/college-shops',
-      icon: <MdPrint />, // Represents cloud-based or remote printing
-      label: 'Campus Shops',
-      type: 'single',
-    },
+    // {
+    //   to: '/dashboard/college-shops',
+    //   icon: <MdPrint />, // Represents cloud-based or remote printing
+    //   label: 'Campus Shops',
+    //   type: 'single',
+    // },
   ];
 
   const adminNavigation = [

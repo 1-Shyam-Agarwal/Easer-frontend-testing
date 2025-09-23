@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SiTicktick } from "react-icons/si";
 
-const OngoingOrders = ({ ongoingOrders ,setSelectedOngoingOrder  }) => {
+const OngoingOrders = ({ ongoingOrders ,setSelectedOngoingOrder,setOrderId ,displayReceiveConfirmation  ,setDisplayReceiveConfirmation}) => {
   const navigate = useNavigate();
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -23,7 +23,9 @@ const OngoingOrders = ({ ongoingOrders ,setSelectedOngoingOrder  }) => {
 
         return (
           <>
+          
             {width > 640 ? (
+              <div>
               <div
                 className={`flex sm:grid sm:grid-cols-5 gap-2 sm:gap-4 px-4 sm:px-6 py-3 sm:py-3 transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 hover:shadow-md rounded-none cursor-pointer hover:border-l-4 border-transparent hover:border-blue-400 ${
                   isNew ? "animate-bg-pulse bg-blue-50/30" : ""
@@ -46,7 +48,7 @@ const OngoingOrders = ({ ongoingOrders ,setSelectedOngoingOrder  }) => {
 
                 {/* 2. Price */}
                 <div className="text-center text-[0.9rem] font-normal flex items-center justify-center text-green-600">
-                  ₹{order?.price ?? "0"}  <SiTicktick size={17} className=" ml-2 text-green-600 inline"/>
+                  ₹{order?.price ?? "Loading..."}  <SiTicktick size={17} className=" ml-2 text-green-600 inline"/>
                 </div>
 
                 {/* 3. Date & Time */}
@@ -66,17 +68,34 @@ const OngoingOrders = ({ ongoingOrders ,setSelectedOngoingOrder  }) => {
 
                       {/* 4. OTP */}
                 <div className="text-center text-[0.9rem] flex items-center justify-center text-black-600 font-semibold">
-                  {order?.otp ?? "-"}
+                  {order?.otp ?? "Loading..."}
                 </div>
 
                 {/* 5. Prints Ready In */}
                 <div className="text-center text-[0.9rem] flex items-center justify-center text-orange-600">
-                  <span className="bg-yellow-100 text-yellow-600 px-2 py-1 rounded-full text-sm font-normal">
-                    18 mins
+                  <span className={` ${order?.orderStatus==="completed" ? 'text-green-600 bg-green-100' : 'text-yellow-600 bg-yellow-100'} px-2 py-1 rounded-full text-sm font-normal`}>
+                      {
+                        order?.orderStatus === "completed" ? "Come for pickup"
+                      :  (order?.remainingTime!==undefined && order?.remainingTime!==NaN) && order?.orderedAt
+                          ? Math.max(
+                              2,
+                              Math.ceil(order.remainingTime - (Date.now() - new Date(order.orderedAt).getTime()) / 60000)
+                            ) + " mins"
+                          : "--"
+                      }
                   </span>
                 </div>
               </div>
+              {
+                    order?.orderStatus==="completed" ? <div className="text-[0.65rem] text-gray-500 mt-1 text-center bg-gray-200 pt-1 hover:bg-gray-300"
+                                                        onClick={()=>{setOrderId(order?.orderId); setDisplayReceiveConfirmation(true)}}>
+                      Please tap here to receive the order.
+                  </div> :
+                  <div></div>
+              }
+            </div>
             ) : (
+              <div>
               <div
                 key={order?.orderId || index}
                 className={`group relative transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 hover:shadow-md cursor-pointer border-l-4 border-transparent hover:border-blue-400 active:scale-[0.98] ${
@@ -107,8 +126,8 @@ const OngoingOrders = ({ ongoingOrders ,setSelectedOngoingOrder  }) => {
                     <div className="ml-3 flex-shrink-0">
                       <div className="px-2 py-1">
                         <div className="text-green-700 font-semibold flex gap-4 text-sm">
-                          <span>₹{order?.price ?? "0"} <SiTicktick size={17} className=" ml-1 text-green-600 inline"/></span>
-                          <span className="ml-2 ">OTP : 4768</span>
+                          <span>₹{order?.price ?? " Loading..."} <SiTicktick size={17} className=" ml-1 text-green-600 inline"/></span>
+                          <span className="ml-2 ">{order?.otp ?? "-"}</span>
                         </div>
                       </div>
                     </div>
@@ -117,12 +136,22 @@ const OngoingOrders = ({ ongoingOrders ,setSelectedOngoingOrder  }) => {
             
 
                   {/* Status Section */}
-                  <div className="bg-yellow-100 p-1 space-y-1 rounded-[10px] px-2">
+                  <div className={`${order?.orderStatus === "completed" ? "bg-green-100" : "bg-yellow-100"}  p-1 space-y-1 rounded-[10px] px-2`}>
                     <div className="flex items-center justify-start">
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
                         <p className="text-xs font-medium text-gray-600">
-                          Ready in <span className="text-yellow-600"> 18mins</span>
+                          <span className={`${order?.orderStatus === "completed" ? 'text-green-600 bg-green-100' : 'text-yellow-600 bg-yellow-100'} px-2 py-1 rounded-full text-sm font-normal`}>
+                            {order?.orderStatus === "completed" 
+                              ? "Come for pickup"
+                              : (order?.remainingTime!==undefined && order?.remainingTime!==NaN) && order?.orderedAt
+                                ? "Ready in " + Math.max(
+                                    2,
+                                    Math.ceil(order.remainingTime - (Date.now() - new Date(order.orderedAt).getTime()) / 60000)
+                                  ) + " mins"
+                                : "Ready in --"
+                            }
+                          </span>
                         </p>
                       </div>
                       
@@ -171,8 +200,20 @@ const OngoingOrders = ({ ongoingOrders ,setSelectedOngoingOrder  }) => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </div>
+                    
                   </div>
+                  
+                  
                 </div>
+                
+              </div>
+              {
+                    order?.orderStatus==="completed" ? <div className="text-[0.65rem] text-gray-500 mt-1 text-center bg-gray-200 pt-1 hover:bg-gray-300"
+                                                        onClick={()=>{setOrderId(order?.orderId) ; setDisplayReceiveConfirmation(true)}}>
+                      Please tap here to receive the order.
+                  </div> :
+                  <div></div>
+              }
               </div>
             )}
           </>

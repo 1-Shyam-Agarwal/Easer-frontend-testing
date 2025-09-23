@@ -15,12 +15,14 @@ export const authEndpoints = {
 
   PRE_GOOGLE_SIGNUP_CHECK: BASE_URL + '/auth/pre-google-signup-check',
   PRE_CUSTOM_LOGIN_CHECK_AND_SEND_OTP:
-    BASE_URL + '/auth/custom/pre-login-checks-and-send-otp',
+  BASE_URL + '/auth/custom/pre-login-checks-and-send-otp',
   SAVE_GOOGLE_SIGNUP_DETAILS: BASE_URL + '/auth/save-google-signup-details',
 
   GOOGLE_PRE_LOGIN_CHECK: BASE_URL + '/auth/google/pre-login-checks',
   RESETPASSTOKEN_API: BASE_URL + '/reset-password-token',
   RESETPASSWORD_API: BASE_URL + '/reset-password',
+
+  LOGOUT_API : BASE_URL + '/logout'
 };
 
 export const getInTouchEndpoints = {
@@ -98,7 +100,9 @@ export const orderOperationsEndpoints = {
   SET_PROCESS_ORDER_INDICATOR: BASE_URL + '/set-process-order-indicator',
   DESET_PROCESS_ORDER_INDICATOR: BASE_URL + '/deset-process-indicator',
   COMPLETE_USER_ORDER: BASE_URL + '/complete-user-order',
-  RECEIVE_USER_ORDER: BASE_URL + '/order-history-creator',
+  GET_TIME_ESTIMATE_AND_ORDERS_COUNT : BASE_URL + '/get-time-estimate-and-orders-count',
+  RECEIVE_USER_ORDER: BASE_URL + '/create-order-history',
+  VALIDATE_ORDER_AND_GENERATE_PRICE : BASE_URL + '/validate-order-and-generate-price',
 };
 
 export const getUserInformationEndpoints = {
@@ -109,3 +113,7 @@ export const getUserInformationEndpoints = {
   GET_ROOMS_FOR_USER: BASE_URL + '/get-rooms-for-users',
   GET_SHOP_INFORMATION: BASE_URL + '/get-shop-information',
 };
+
+export const NotificationEndpoints = {
+  STORE_FCM_TOKEN : BASE_URL + '/store-fcm-token'
+}

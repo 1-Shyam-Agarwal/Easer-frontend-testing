@@ -2,31 +2,43 @@ import React from 'react';
 import { AiOutlineExclamationCircle } from 'react-icons/ai'; // Make sure to import the icon
 import {
   clearRole,
-  clearRoomcode,
   clearToken,
 } from '../../../Slices/AuthSlice';
 import { clearUser } from '../../../Slices/profileSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setShowModel } from '../../../Slices/LogoutSlice';
+import { useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
+import { logout } from '../../../Services/operations/Auth';
 
 const LogoutModal = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const token = useSelector((state) => state.auth.token);
 
   function cancelHandler() {
     dispatch(setShowModel(false));
   }
 
-  function yesHandler() {
-    dispatch(clearToken());
-    dispatch(clearUser());
-    dispatch(clearRole());
+  async function yesHandler() {
 
-    dispatch(setShowModel(false));
-    toast.success('Logout Successfully');
-    navigate('/login', { replace: true });
+    try
+    {
+        await logout(token  , navigate);
+        dispatch(clearToken());
+        dispatch(clearUser());
+        dispatch(clearRole());
+
+        dispatch(setShowModel(false));
+        toast.success('Logout Successfully');
+        navigate('/login', { replace: true });
+
+    }catch(e)
+    {
+        toast.error(e.message);
+        console.log(e.message);
+    }
   }
 
   return (

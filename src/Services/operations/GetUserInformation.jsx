@@ -21,30 +21,25 @@ export async function getRole(token, setRole) {
   }
 }
 
-export async function getShopStatus(token, vendorId, setIsShopOpen, navigate) {
+export async function getShopStatus(token, vendorId, setIsShopOpen, ) {
+
+  const toastId = toast.loading("Fetching shop status...");
   try {
     const response = await apiConnector(
       'POST',
       getUserInformationEndpoints.GET_SHOP_STATUS,
-      { vendorId },
+      { vendorId : "b53bc873-91d4-4028-bde6-f67eabab6c83" },
       { Authorization: `Bearer ${token}` }
     );
-    setIsShopOpen(response?.data?.data?.vendorAdditionalDetails?.isShopOpen);
-    return response?.data?.data?.vendorAdditionalDetails?.isShopOpen;
+    setIsShopOpen(response?.data?.shopStatus);
+    toast.dismiss(toastId);
+    return response?.data?.shopStatus;
   } catch (error) {
-    if (navigate) {
-      if (
-        !(
-          error?.response?.data?.message ===
-            'You are logged in on another device.' ||
-          error?.response?.data?.message === 'Session is expired.'
-        )
-      )
-        toast.error(
-          error?.response?.data?.message ||
-            'Unable to get shop status.Please try again later.'
-        );
-    }
+    toast.dismiss(toastId);
+    toast.error(
+      error?.response?.data?.message ||
+        'Unable to fetch shop status. Please try again later.'
+    );
   }
 }
 

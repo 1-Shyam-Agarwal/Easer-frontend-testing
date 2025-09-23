@@ -1,13 +1,17 @@
 import { toast } from 'react-hot-toast';
 import { apiConnector } from '../apiconnect.js';
-import { authEndpoints } from '../apis';
+import { authEndpoints, NotificationEndpoints } from '../apis';
 import { setToken } from '../../Slices/AuthSlice.js';
 import { setUser } from '../../Slices/profileSlice.js';
+import {getToken} from 'firebase/messaging';
+import { messaging } from '../../Config/firebase.js';
+import axios from 'axios';
 
 //<------------------------------------------- GENERAL AUTH HANDLERS ------------------------------------------>
 
 //Resend OTP APIs
-const { RESEND_OTP } = authEndpoints;
+const { RESEND_OTP , LOGOUT_API } = authEndpoints;
+const {STORE_FCM_TOKEN} = NotificationEndpoints
 
 export async function resendOTP(
   dispatch,
@@ -49,6 +53,7 @@ export function handlePreCustomSignupCheckAndSendOtp(
   email,
   mobileNumber,
   collegeCode,
+  username,
   setDisable,
   setShowOTPSection,
   dispatch
@@ -62,6 +67,7 @@ export function handlePreCustomSignupCheckAndSendOtp(
     email: email,
     collegeCode: collegeCode,
     mobileNumber: mobileNumber,
+    username: username
   })
     .then((data) => {
       toast.success('OTP is sent successfully');
@@ -100,6 +106,8 @@ export async function handleVerifyOtpAndCreateAccount(
       email: data?.email,
       collegeCode: data?.collegeCode,
       mobileNumber: data?.mobileNumber,
+      username : data?.username,
+      device: navigator.userAgent
     });
 
     //Storing the JWT_Token at the localStorage
@@ -256,11 +264,13 @@ export async function handleVerifyLoginOtp(
   otp,
   setVerifyOTPDisabled,
   dispatch,
-  navigate
+  navigate,
 ) {
   //Disabling the verifyOTP button to avoid customer to make multiple calls
   setVerifyOTPDisabled(true);
   const toastId = toast.loading('Verfying...');
+  const device = navigator.userAgent;
+
 
   let response;
   try {
@@ -268,32 +278,77 @@ export async function handleVerifyLoginOtp(
     response = await apiConnector('POST', VERIFY_LOGIN_OTP, {
       otp,
       email,
+      device
     });
 
+    const JWT_Token = response?.data?.easerSecurityTicket
     //Storing the JWT_Token at the localStorage
     localStorage.setItem('user', JSON.stringify(response?.data?.profileImage));
     localStorage.setItem(
       'token',
-      JSON.stringify(response?.data?.easerSecurityTicket)
+      JSON.stringify(JWT_Token)
     );
 
     //Storing the JWT_Token at the Redux store
-    dispatch(setToken(response?.data?.easerSecurityTicket));
+    dispatch(setToken(JWT_Token));
     dispatch(setUser(response?.data?.profileImage));
+
+   
+    toast.dismiss(toastId);
 
     //Indicating user that you account is created successfully and you are logged in successfully.
     toast.success('Successfully logged in!');
+
+     // ask notification permission
+    if ("Notification" in window) {
+  if (Notification.permission === "granted") {
+    // Permission already granted → just get the token
+    const fcmToken = await getToken(messaging, {
+      vapidKey: process.env.REACT_APP_FIREBASE_MESSAGING_KEY,
+    });
+
+
+    if (fcmToken) {
+      await axios.post(
+        STORE_FCM_TOKEN,
+        { fcmToken },
+        { headers: { Authorization: `Bearer ${JWT_Token}` } }
+      );
+    }
+  } else if (Notification.permission !== "denied") {
+    // Ask for permission if not denied
+    const permission = await Notification.requestPermission();
+    if (permission === "granted") {
+      const fcmToken = await getToken(messaging, {
+        vapidKey: process.env.REACT_APP_FIREBASE_MESSAGING_KEY,
+      });
+
+      if (fcmToken) {
+        await axios.post(
+          STORE_FCM_TOKEN,
+          { fcmToken },
+          { headers: { Authorization: `Bearer ${JWT_Token}` } }
+        );
+      }
+    } else {
+      console.log("You don't get order Notifications . Please enable in browser settings")
+    }
+  }
+}
+
 
     //Navigating the customer to the easer-inbox for placing the order.
     navigate('/dashboard/easer-outbox');
   } catch (error) {
     //Enabling verifyOTP button for making subsequent requests in case of fails
+    console.log(error);
     setVerifyOTPDisabled(false);
     toast.error(
       error?.response?.data?.message ||
         'Unable to login. Please try again later.'
     );
-  } finally {
+  }
+  finally{
     toast.dismiss(toastId);
   }
 }
@@ -312,6 +367,7 @@ export async function verifyPasswordHandler(
     const response = await apiConnector('POST', VERIFY_PASSWORD, {
       email,
       password,
+      device : navigator.userAgent
     });
 
     //Storing the JWT_Token at the localStorage
@@ -442,4 +498,29 @@ export async function updatePassword(
     );
   }
   setLoading(false);
+}
+
+
+
+
+
+
+//<-----------------------------------------------------------LOGOUT------------------------------------------->
+
+export async function logout(token , navigate)
+{
+    const toastId = toast.loading("logging out...")
+    try {
+      const response = await apiConnector('PUT', LOGOUT_API, {} , { Authorization: `Bearer ${token}` });
+      console.log(response);
+      console.log(token);
+      toast.dismiss(toastId);
+      navigate('/login', { replace: true });
+    } catch (error) {
+      toast.dismiss(toastId);
+      throw new Error(
+        error?.response?.data?.message ||
+          'Unable to logout. Please try again later.'
+      )
+    }
 }

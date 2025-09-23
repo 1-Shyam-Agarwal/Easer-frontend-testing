@@ -55,7 +55,14 @@ const OngoingOrders = ({ ongoingOrders }) => {
             {/* 4. Prints Ready In */}
             <div className="text-center text-[0.9rem] font-medium flex items-center justify-center text-orange-600">
               <span className="bg-yellow-100 text-yellow-600 px-2 py-1 rounded-full text-sm font-semibold">
-                18 mins
+                {
+                  order?.remainingTime
+                    ? Math.max(
+                        2,
+                        order.remainingTime - (Date.now() - order?.orderedAt)
+                      ) + " mins"
+                    : "--"
+                }
               </span>
             </div>
           </div>

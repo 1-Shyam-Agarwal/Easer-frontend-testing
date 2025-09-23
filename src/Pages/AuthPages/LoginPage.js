@@ -140,15 +140,13 @@ const LoginPage = () => {
                   {/* Easer Branding */}
                   <div className="mt-[-5rem] mb-[2rem]">
                     <div className="text-2xl font-semibold text-center text-black">
-                      <span className="text-black specialCharacter">E</span>aser
+                      <span className="text-black specialCharacter text-blue-600">E</span>aser
                     </div>
-                    <div className="text-gray-500 text-center">
-                      Making life peaceful and serene
-                    </div>
+                    
                   </div>
 
                   {/* Signup with google */}
-                  <button
+                  {/* <button
                     className="w-full bg-gray-800 flex  h-12 overflow-y-hidden items-center justify-center gap-2 rounded-sm py-3 hover:shadow-lg transition"
                     type="button"
                     onClick={() => googleLogin()}
@@ -161,16 +159,17 @@ const LoginPage = () => {
                     <span className="text-white translate-x-[-10px]">
                       Login with Google
                     </span>
-                  </button>
+                  </button> */}
 
                   {/* OR */}
-                  <div className="w-full flex gap-2 items-center justify-center mt-4">
+                  {/* <div className="w-full flex gap-2 items-center justify-center mt-4">
                     <div className="border-t-[1px] border-black w-[40%]"></div>
                     <div className="text-sm">OR</div>
                     <div className="border-t-[1px] border-black w-[40%]"></div>
-                  </div>
+                  </div> */}
 
                   {/* Email field */}
+                  <div className='text-center mb-[-5px] text-gray-700 text-base'>Login through email address</div>
                   <form onSubmit={handleSubmit(submitEmailHandler)}>
                     <div className="relative w-full mt-4">
                       <input

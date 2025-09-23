@@ -162,8 +162,7 @@ const UserSettings = () => {
                     value={name?.firstName}
                     onChange={handleNameChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    pattern="^[A-Za-z]+$"
-                    title="Only alphabets are allowed."
+                    maxLength={50}
                     required
                   />
                 </div>
@@ -180,8 +179,7 @@ const UserSettings = () => {
                     value={name?.lastName}
                     onChange={handleNameChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    pattern="^[A-Za-z]*$"
-                    title="Only alphabets are allowed."
+                    maxLength={50}
                   />
                 </div>
               </div>

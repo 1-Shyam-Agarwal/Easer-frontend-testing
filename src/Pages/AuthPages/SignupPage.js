@@ -108,6 +108,7 @@ const SignupPage = () => {
     e.preventDefault();
 
     if (otp?.length === 6) {
+      console.log(formData);
       handleVerifyOtpAndCreateAccount(
         otp,
         formData,
@@ -131,6 +132,7 @@ const SignupPage = () => {
       data?.email,
       data?.mobileNumber,
       data?.collegeCode,
+      data?.username,
       setPrimaryDisable,
       setShowOTPSection,
       dispatch
@@ -185,7 +187,7 @@ const SignupPage = () => {
             <div className="flex flex-col items-center justify-center w-[85%]">
               <div className="mt-[-30px] mb-[2rem]">
                 <div className="text-2xl font-semibold text-center text-black">
-                  <span className="text-black specialCharacter">E</span>aser
+                  <span className="text-black specialCharacter text-blue-500">E</span>aser
                 </div>
                 <div className="text-gray-500">
                   Making life peaceful and serene
@@ -193,7 +195,7 @@ const SignupPage = () => {
               </div>
 
               {/* Signup with google */}
-              <button
+              {/* <button
                 className="w-full bg-gray-800 h-12 overflow-y-hidden flex items-center justify-center gap-2 rounded-sm py-3 hover:shadow-lg transition"
                 type="button"
                 onClick={() => googleSignup()}
@@ -202,13 +204,13 @@ const SignupPage = () => {
                 <span className="text-white translate-x-[-10px]">
                   Sign up with Google
                 </span>
-              </button>
+              </button> */}
 
-              <div className="w-full flex gap-2 items-center justify-center mt-4">
+              {/* <div className="w-full flex gap-2 items-center justify-center mt-4">
                 <div className="border-t-[1px] border-black w-[40%]"></div>
                 <div className="text-sm">OR</div>
                 <div className="border-t-[1px] border-black w-[40%]"></div>
-              </div>
+              </div> */}
 
               {/* Website Local Signup */}
               <div className="w-full ">
@@ -273,6 +275,38 @@ const SignupPage = () => {
                       className="flex flex-col items-center "
                       onSubmit={handleSubmit(SignupSubmit)}
                     >
+                      {/* Select name field */}
+                      <div className="relative w-full mt-4">
+                        <input
+                          type="text"
+                          id="username"
+                          className="peer block w-full rounded-sm border placeholder-gray-500 border-gray-400 bg-white px-4 pt-3 pb-3 text-base focus:border-blue-600 focus:outline-none"
+                          {...register('username', {
+                            required: 'Required',
+                            maxLength: {
+                              value: 100,
+                              message: 'Username cannot exceed 100 characters'
+                            }
+                          })}
+                          placeholder="User Name"
+                        />
+
+                        <label
+                          htmlFor="username"
+                          className="absolute left-4 top-[-0.6rem] bg-white px-1 text-base transition-all opacity-0
+                                                peer-placeholder-shown:text-base 
+                                                peer-focus:top-[-0.7rem] 
+                                                peer-focus:opacity-100 
+                                                peer-focus:text-sm 
+                                                peer-focus:text-blue-600"
+                        >
+                          User Name
+                        </label>
+                        {errors?.username && (
+                          <ErrorMessage>{errors?.username?.message}</ErrorMessage>
+                        )}
+                      </div>
+
                       {/* Select college field */}
                       <div className="relative w-full mt-3">
                         <select

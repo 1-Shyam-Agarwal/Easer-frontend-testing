@@ -55,7 +55,7 @@ const VendorPlaceAndTrackOrder = () => {
             field_4="Price"
             field_5="OTP"
           />
-          <VendorOngoingCards ongoingOrders={ongoingOrders} selectedOngoingOrder={selectedOngoingOrder} setSelectedOngoingOrder={setSelectedOngoingOrder} />
+          <VendorOngoingCards ongoingOrders={ongoingOrders} setSelectedOngoingOrder={setSelectedOngoingOrder} selectedOngoingOrder={selectedOngoingOrder} setOngoingOrders={setOngoingOrders} />
         </div>
       )}
       {
