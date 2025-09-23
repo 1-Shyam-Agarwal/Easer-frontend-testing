@@ -1,7 +1,7 @@
 import { toast } from 'react-hot-toast';
 import { apiConnector } from '../apiconnect.js';
 import { authEndpoints, NotificationEndpoints } from '../apis';
-import { setToken } from '../../Slices/AuthSlice.js';
+import { setToken } from '../../Slices/authSlice.js';
 import { setUser } from '../../Slices/profileSlice.js';
 import {getToken} from 'firebase/messaging';
 import { messaging } from '../../Config/firebase.js';
