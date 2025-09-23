@@ -73,7 +73,7 @@ export const resetEndpoints = {
   UPDATE_SHOP_DETAILS: BASE_URL + '/update-shop-details',
   UPDATE_FINE_DETAILS: BASE_URL + '/update-fine-details',
   UPDATE_WAITING_TIME: BASE_URL + '/update-waiting-time',
-  ALTER_SHOP_STATUS: BASE_URL + '/alter-shop-status',
+  ALTER_SHOP_STATUS: BASE_URL + '/change-shop-status',
   ALTER_REFUND_STATUS: BASE_URL + '/alter-refund-status',
 };
 
@@ -86,6 +86,7 @@ export const getOrdersEndpoints = {
   GET_ALL_SPECIFIC_UNRECEIVED_ORDERS:
     BASE_URL + '/get-all-specific-unreceived-orders',
   GET_SPECIFIC_ORDER_HISTORY: BASE_URL + '/fetch-order-history',
+  GET_SPECIFIC_UNRECEIVED_ORDER : BASE_URL + '/fetch-unreceived-order'
 };
 
 export const cancellationEndpoints = {
@@ -103,6 +104,7 @@ export const orderOperationsEndpoints = {
   GET_TIME_ESTIMATE_AND_ORDERS_COUNT : BASE_URL + '/get-time-estimate-and-orders-count',
   RECEIVE_USER_ORDER: BASE_URL + '/create-order-history',
   VALIDATE_ORDER_AND_GENERATE_PRICE : BASE_URL + '/validate-order-and-generate-price',
+  ONGOING_ORDER_COUNT : BASE_URL + '/get-order-count'
 };
 
 export const getUserInformationEndpoints = {

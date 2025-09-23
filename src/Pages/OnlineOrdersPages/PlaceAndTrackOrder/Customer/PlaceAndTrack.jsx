@@ -142,6 +142,7 @@ const PlaceAndTrack = () => {
 
       {displayCheckoutModel && (
         <Checkout
+          setDisplayCheckoutModel={setDisplayCheckoutModel}
           setCheckoutModelVisibility={setCheckoutModelVisibility}
           filteredVendorsData={filteredVendorsData}
         />
@@ -177,11 +178,11 @@ const PlaceAndTrack = () => {
               </div>
               
               <h2 class='text-xl font-semibold text-gray-900 mb-3'>
-                Service Notice
+                Notice
               </h2>
               
               <p class="text-sm text-gray-700 mb-6 leading-relaxed">
-                The shop is no longer accepting online orders but will continue to receive mail orders until 5 PM. You can send the documents via Easer's outbox.
+                The shop is no longer accepting online orders for today but will continue to receive mail orders until 5 PM. You can send the documents via Easer's outbox.
               </p>
 
               

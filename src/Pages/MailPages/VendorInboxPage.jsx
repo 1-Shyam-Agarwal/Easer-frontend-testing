@@ -9,10 +9,11 @@ import {
   PollingVendorMails,
 } from '../../Services/operations/OutboxOps';
 import OrderModeToggle from '../../components/PlaceAndTrack/Vendor/OrderModeToggle';
+import { ongoingOrderCount } from '../../Services/operations/OrderOperations';
 
 const VendorInboxboxPage = () => {
   const token = useSelector((state) => state.auth.token);
-
+  const [count , setCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalMails, setTotalMails] = useState(null); // null so that "no mail" isn't shown unnecessarily
@@ -24,7 +25,6 @@ const VendorInboxboxPage = () => {
 
   useEffect(() => {
     let interval;
-
     if (!keyword) {
       fetchVendorMails(
         token,
@@ -73,6 +73,28 @@ const VendorInboxboxPage = () => {
       );
     }
   }
+
+  useEffect(()=>
+  {
+    let count_interval;
+    if(token)
+    {
+       ongoingOrderCount(
+            token,
+            setCount
+        ); 
+
+        count_interval = setInterval(() => {
+          ongoingOrderCount(
+            token,
+            setCount
+          ); // poll every 8 seconds
+        }, 6000);
+    }
+
+    return ()=>{clearInterval(count_interval)}
+    
+  }, [token])
 
   return (
     <div className="p-4 h-full overflow-y-auto bg-gray-100">
@@ -186,7 +208,7 @@ const VendorInboxboxPage = () => {
                     <div>No mails</div>
                   ) : (
                     <div className="rounded-md overflow-hidden">
-                      <OrderModeToggle active="Mails" />
+                      <OrderModeToggle active="Mails" count={count}/>
 
                       <div className="flex items-center justify-between px-6 py-3 bg-gray-50 text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         {/* Sender */}

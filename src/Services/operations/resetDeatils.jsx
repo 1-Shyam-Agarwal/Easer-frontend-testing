@@ -257,3 +257,20 @@ export async function resetShopDetails(shopName, shopLandmark, token) {
 //         }
 //     }
 // }
+
+export async function changeShopStatus(token , setIsShopOpen  )
+{
+  const toastId = toast.loading("Loading...")
+    try
+    {
+        const response  = await apiConnector("POST" , ALTER_SHOP_STATUS , {} , {'Authorization': `Bearer ${token}`});
+        toast.dismiss(toastId);
+        setIsShopOpen(prev => !prev);
+        toast.success("Succesfully updated");
+    }
+    catch(e)
+    {
+      toast.dismiss(toastId);
+      toast.error("Unable to change shop status");
+    }
+} 

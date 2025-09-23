@@ -15,6 +15,7 @@ import OrderDetailsPopup from "../../components/CommonOrderLayouts/OrderDetailsP
 const OrderHistory = () => {
   const [orderHistoryOrders, setOrderHistoryOrders] = useState([]);
   const token = useSelector((state) => state.auth.token);
+  const role = useSelector((state) => state.auth.role);
   const [loading , setLoading] = useState(false);
   const [selectedOrderHistory , setSelectedOrderHistory] = useState([]);
 
@@ -23,11 +24,6 @@ const OrderHistory = () => {
       fetchSpecificOrderHistory(token , setOrderHistoryOrders , setLoading)
 
   },[token])
-
-  useEffect(()=>
-  {
-      console.log("orderHistoryOrdersV : "  ,orderHistoryOrders)
-  },[orderHistoryOrders])
   
 
   return (
@@ -38,7 +34,11 @@ const OrderHistory = () => {
 
       {
         loading ? 
-        <div>spinner</div>
+        <div>
+          <div className="flex justify-center items-center h-[50vh]">
+            <span className="loader"></span>
+          </div>
+        </div>
         :
         <div>
           {orderHistoryOrders?.length === 0 ? (
@@ -54,7 +54,7 @@ const OrderHistory = () => {
                 field_3="Price" //Price
                 field_4="Documents" 
               />
-              <OrderHistoryOrders orderHistoryOrders = {orderHistoryOrders} setSelectedOrderHistory={setSelectedOrderHistory}/>
+              <OrderHistoryOrders role ={role} orderHistoryOrders = {orderHistoryOrders} setSelectedOrderHistory={setSelectedOrderHistory}/>
             </div>
             
             )}

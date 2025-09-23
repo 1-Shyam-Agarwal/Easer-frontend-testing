@@ -4,7 +4,7 @@ import AddDocsModal from './AddDocs/AddDocumentModel.jsx';
 import { RxCross1 } from 'react-icons/rx';
 import PaymentSummary from './PaymentSummary.jsx';
 
-const Checkout = ({ setCheckoutModelVisibility, filteredVendorsData }) => {
+const Checkout = ({ setCheckoutModelVisibility, filteredVendorsData,setDisplayCheckoutModel }) => {
   const [filesWithConfigs, setFilesWithConfigs] = useState([]);
   const [displayAddDocumentsWindow, setDisplayAddDocumentsWindow] =
     useState(true);
@@ -65,6 +65,7 @@ const Checkout = ({ setCheckoutModelVisibility, filteredVendorsData }) => {
             setPaymentSummaryModelVisibility={setPaymentSummaryModelVisibility}
             invoice={invoice}
             filesWithConfigs={filesWithConfigs}
+            setDisplayCheckoutModel={setDisplayCheckoutModel}
           />
         )}
 

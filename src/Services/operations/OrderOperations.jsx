@@ -16,7 +16,8 @@ import toast from 'react-hot-toast';
 const{
   COMPLETE_USER_ORDER,
   GET_TIME_ESTIMATE_AND_ORDERS_COUNT ,
-  RECEIVE_USER_ORDER
+  RECEIVE_USER_ORDER,
+  ONGOING_ORDER_COUNT
 } = orderOperationsEndpoints;
 
 
@@ -24,7 +25,7 @@ const{
 
 export async function completeUserOrder(token, orderId) {
 
-    const toastId = toast.loading("Notifing...");
+    const toastId = toast.loading("Sending Notification...");
     try
     {
         const response = await apiConnector("POST", COMPLETE_USER_ORDER , {orderId} , {Authorization : `Bearer ${token}`});
@@ -80,7 +81,7 @@ export async function receiveUserOrder(
     const toastId = toast.loading("Loading...")
     try
     {
-        const response = await apiConnector("POST" , orderOperationsEndpoints.RECEIVE_USER_ORDER , {orderId} , {Authorization : `Bearer ${token}`});
+        const response = await apiConnector("POST" , RECEIVE_USER_ORDER , {orderId} , {Authorization : `Bearer ${token}`});
         toast.dismiss(toastId);
         return true;
 
@@ -91,6 +92,20 @@ export async function receiveUserOrder(
         toast.error(e?.response?.data?.message || 'Unable to receive the order. Please try again.');
         return false;
     }
+}
+
+export async function ongoingOrderCount(token , setCount)
+{
+    try
+    {
+        const response = await apiConnector("GET" ,ONGOING_ORDER_COUNT , {} , {Authorization : `Bearer ${token}`} )
+        setCount(response?.data?.count)
+    }
+    catch(e)
+    {
+        console.log("Error while calculating ongoing orders count : " , e);
+    }
+
 }
 
 

@@ -7,7 +7,7 @@ const {
   GET_ALL_CANCELLED_ORDERS,
   GET_ALL_SPECIFIC_USER_ONGOING_ORDERS,
   GET_SPECIFIC_ORDER_HISTORY,
-  GET_ALL_SPECIFIC_UNRECEIVED_ORDERS,
+  GET_SPECIFIC_UNRECEIVED_ORDER,
   GET_SPECIFIC_ONLINE_ORDER,
 } = getOrdersEndpoints;
 
@@ -99,19 +99,23 @@ export async function fetchAllSpecificUnreceivedOrders(
   setLoading(true);
   try {
     const response = await apiConnector(
-      'POST',
-      GET_ALL_SPECIFIC_UNRECEIVED_ORDERS,
+      'GET',
+      GET_SPECIFIC_UNRECEIVED_ORDER,
       undefined,
       { Authorization: `Bearer ${token}` }
     );
-    setUnreceivedOrders(response?.data?.data?.unreceivedOrders);
+    setUnreceivedOrders(response?.data?.data);
   } catch (error) {
     toast.error(
       error?.response?.data?.message ||
-        'Unable to fetch unreceived orders. Please reload the page or try again later.'
+        'Unable to fetch unreceived orders.'
     );
   }
-  setLoading(false);
+  finally
+  {
+      setLoading(false);
+  }
+  
 }
 
 export async function fetchSpecificOrderHistory(
@@ -133,7 +137,10 @@ export async function fetchSpecificOrderHistory(
       error?.response?.data?.message || 'Unable to fetch order history'
     );
   }
-  setLoading(false);
+  finally{
+    setLoading(false);
+  }
+  
 }
 
 export async function fetchSpecificOnlineOrder(

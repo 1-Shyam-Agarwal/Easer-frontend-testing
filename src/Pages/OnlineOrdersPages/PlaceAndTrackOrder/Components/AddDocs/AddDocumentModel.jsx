@@ -20,6 +20,7 @@ const AddDocsModal = ({
   setInvoice,
   setDisplayPDFWarning
 }) => {
+
   const selectRef = useRef(null);
   const token = useSelector((state) => state.auth.token);
   const fileInputRef = useRef(null);
@@ -234,7 +235,7 @@ const AddDocsModal = ({
 
           {/* Drag & Drop Area */}
           <div
-            className={`relative border-2 border-dashed cursor-pointer rounded-md px-3 py-5 text-center text-sm transition-colors ${
+            className={`relative border-2 border-dashed cursor-pointer hover:bg-gray-50 rounded-md px-3 py-5 text-center text-sm transition-colors ${
               dragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300'
             }`}
 
@@ -262,7 +263,11 @@ const AddDocsModal = ({
 
           {/* Send Button */}
           {
-              filesWithConfigs?.length > 0 &&
+              
+              (
+                filesWithConfigs.filter(file => file.uploading === true).length === 0 && filesWithConfigs.length!=0
+              )  
+              &&
               <div className="mt-4 text-right">
                 <button
                   onClick={()=>{validateOrderAndGeneratePrice(token , filesWithConfigs , setAddDocumentsModelVisibility , setPaymentSummaryModelVisibility , setInvoice , setLoading);}}

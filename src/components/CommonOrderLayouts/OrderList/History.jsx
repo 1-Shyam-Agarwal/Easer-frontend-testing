@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SiTicktick } from "react-icons/si";
 
-const OrderHistoryOrders = ({ orderHistoryOrders, setSelectedOrderHistory }) => {
+const OrderHistoryOrders = ({ orderHistoryOrders, setSelectedOrderHistory,role }) => {
   const navigate = useNavigate();
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -15,7 +15,11 @@ const OrderHistoryOrders = ({ orderHistoryOrders, setSelectedOrderHistory }) => 
     };
   }, []);
 
-  console.log("orderHistoryOrders : ");
+  function capitalizeFirstLetter(name) {
+    if (!name) return '';
+    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+  }
+
 
   return (
     <div className="flex flex-col divide-y divide-gray-100 bg-white shadow-sm overflow-hidden">
@@ -33,10 +37,28 @@ const OrderHistoryOrders = ({ orderHistoryOrders, setSelectedOrderHistory }) => 
                 <div className="flex items-center gap-3 sm:justify-center">
                   <div className="flex flex-col truncate capitalize text-[0.7rem]">
                     <span className="text-[0.9rem] font-normal text-gray-800 truncate">
-                      Anand Enterprises
+                      {
+                        role === 'vendor' ?
+                          <span>{`${capitalizeFirstLetter(order?.user?.firstName)} ${capitalizeFirstLetter(order?.user?.lastName)}` || 'Unknown'}</span>
+                        :
+                        (role === 'customer' ?
+                          <span>{order?.vendor?.vendorAdditionalDetails?.shopName}</span>
+                          :
+                          "Loading..."
+                        )
+                      }
                     </span>
                     <span className="text-[0.8rem] text-gray-500 truncate font-light">
-                      Bvimr basement
+                      {
+                        role === 'vendor' ?
+                        <span>{order?.user?.mobileNumber}</span>
+                        :
+                        (role === 'customer' ?
+                          <span>{order?.vendor?.vendorAdditionalDetails?.shopLandMark}</span>
+                          :
+                          "Loading..."
+                        )
+                      }
                     </span>
                   </div>
                 </div>
@@ -58,7 +80,7 @@ const OrderHistoryOrders = ({ orderHistoryOrders, setSelectedOrderHistory }) => 
 
                 {/* 3. Price */}
                 <div className="text-center text-[0.9rem] font-normal flex items-center justify-center text-green-600">
-                  ₹{order?.price ?? "Loading...."}
+                  ₹{order?.price ?? "Loading..."}
                   <SiTicktick size={17} className="ml-2 text-green-600 inline" />
                 </div>
 
@@ -170,7 +192,7 @@ const OrderHistoryOrders = ({ orderHistoryOrders, setSelectedOrderHistory }) => 
                     <div className="ml-3 flex-shrink-0">
                       <div className="px-2 py-1">
                         <span className="text-green-700 font-semibold text-sm">
-                          ₹{order?.price ?? "Loading"}
+                          ₹{order?.price ?? "Loading..."}
                           <SiTicktick size={17} className="ml-1 text-green-600 inline" />
                         </span>
                       </div>

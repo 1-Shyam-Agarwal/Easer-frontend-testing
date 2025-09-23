@@ -100,7 +100,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SiTicktick } from "react-icons/si";
 
-const UnreceivedOrders = ({ unreceivedOrders }) => {
+const UnreceivedOrders = ({ unreceivedOrders , setSelectedOngoingOrder}) => {
   const navigate = useNavigate();
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -113,6 +113,11 @@ const UnreceivedOrders = ({ unreceivedOrders }) => {
     };
   }, []);
 
+  function capitalizeFirstLetter(name) {
+    if (!name) return '';
+    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+  }
+
   return (
     <div className="flex flex-col divide-y divide-gray-100 bg-white shadow-sm overflow-hidden">
       {unreceivedOrders?.map((order, index) => {
@@ -122,18 +127,16 @@ const UnreceivedOrders = ({ unreceivedOrders }) => {
             {width > 640 ? (
               <div
                 className={`flex sm:grid sm:grid-cols-5 gap-2 sm:gap-4 px-4 sm:px-6 py-3 sm:py-3 transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 hover:shadow-md rounded-none cursor-pointer hover:border-l-4 border-transparent hover:border-blue-400 }`}
-                onClick={() =>
-                  navigate(`/dashboard/ongoing-order/${order?.orderId}`)
-                }
+                onClick={()=>{setSelectedOngoingOrder(order)}}
               >
                 {/* 1. Sender Name */}
                 <div className="flex items-center gap-3 sm:justify-center">
                   <div className="flex flex-col truncate capitalize text-[0.7rem]">
                     <span className="text-[0.9rem] font-normal text-gray-800 truncate">
-                      Shyam Agarwal
+                      {`${capitalizeFirstLetter(order?.user?.firstName)} ${capitalizeFirstLetter(order?.user?.lastName)}` || 'Unknown'}
                     </span>
                     <span className="text-[0.8rem] text-gray-500 truncate font-light">
-                      9311161298
+                      {order?.user?.mobileNumber}
                     </span>
                   </div>
                 </div>
@@ -156,12 +159,12 @@ const UnreceivedOrders = ({ unreceivedOrders }) => {
 
                 {/* 3. Price */}
                 <div className="text-center text-[0.9rem] font-normal flex items-center justify-center text-green-600">
-                  ₹{order?.price ?? "0"}  <SiTicktick size={17} className=" ml-2 text-green-600 inline"/>
+                  ₹{order?.price ?? "Loading"}  <SiTicktick size={17} className=" ml-2 text-green-600 inline"/>
                 </div>
 
                 {/* 4. OTP */}
                 <div className="text-center text-[0.9rem] flex items-center justify-center text-black-600 font-semibold">
-                  4567
+                  {order?.otp}
                 </div>
 
                 
@@ -169,7 +172,7 @@ const UnreceivedOrders = ({ unreceivedOrders }) => {
                 {/* 5. Reference number*/}
                 <div className="text-center text-[0.9rem] font-medium flex items-center justify-center">
                   <span className=" text-yellow-600 px-2 py-1 text-sm font-normal">
-                    {width>=640 ? "" : "Ref. No :  "} 123445678909876
+                    {width>=640 ? "" : "Ref. No :  "} {order?.bankReferenceNumber}
                   </span>
                 </div> 
               </div>
@@ -177,9 +180,7 @@ const UnreceivedOrders = ({ unreceivedOrders }) => {
               <div
                 key={order?.orderId || index}
                 className={`group relative transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 hover:shadow-md cursor-pointer border-l-4 border-transparent hover:border-blue-400 active:scale-[0.98] }`}
-                onClick={() =>
-                  navigate(`/dashboard/ongoing-order/${order?.orderId}`)
-                }
+                onClick={()=>{setSelectedOngoingOrder(order)}}
               >
                 <div className="p-3 space-y-1">
                   {/* Header Section */}
@@ -189,10 +190,10 @@ const UnreceivedOrders = ({ unreceivedOrders }) => {
                         {/* Shop Details */}
                         <div className="min-w-0 flex flex-col">
                           <h3 className="text-[0.85rem] sm:text-sm font-normal text-gray-900 truncate">
-                            Anand Enterprises
+                            {`${capitalizeFirstLetter(order?.user?.firstName)} ${capitalizeFirstLetter(order?.user?.lastName)}` || 'Unknown'}
                           </h3>
                           <p className="text-[0.75rem] sm:text-xs text-gray-500 truncate">
-                            Bvimr basement
+                            {order?.user?.mobileNumber}
                           </p>
                         </div>
                       </div>
@@ -202,24 +203,14 @@ const UnreceivedOrders = ({ unreceivedOrders }) => {
                     <div className="ml-3 flex-shrink-0">
                       <div className="px-2 py-1">
                         <span className="text-green-700 font-semibold text-sm">
-                          ₹{order?.price ?? "0"} (Paid)
+                          ₹{order?.price ?? "Loading..."} (Paid)
                         </span>
                       </div>
                     </div>
                   </div>
 
                   {/* Status Section */}
-                  <div className="bg-yellow-100 p-1 space-y-1 rounded-[10px] px-2">
-                    <div className="flex items-center justify-start">
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
-                        <p className="text-xs font-medium text-gray-600">
-                          Ready in <span className="text-yellow-600">18mins</span>
-                        </p>
-                      </div>
-                      
-                    </div>
-                  </div>
+                  
 
                   {/* Footer Section */}
                   <div className="flex justify-between items-center pt-2 border-t border-gray-100">

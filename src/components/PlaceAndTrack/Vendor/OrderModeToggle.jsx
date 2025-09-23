@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-const OrderModeToggle = ({ active }) => {
+const OrderModeToggle = ({ active , count }) => {
   const navigate = useNavigate();
 
   const options = [
@@ -35,7 +35,7 @@ const OrderModeToggle = ({ active }) => {
               style={{ minWidth: '100px' }}
             >
               {item?.label === "Online Orders" ? <div>{item?.label} <div className="rounded-full ml-3 absolute  top-[13px] right-[45px] transition-all duration-300 bg-yellow-500 px-2 py-[2px] text-xs font-semibold text-white animate-bounce">
-  12
+              {(count === "undefined" || count === "NaN" || count === "") ? "-" : count}
 </div>
 </div> : item?.label}
             </button>
