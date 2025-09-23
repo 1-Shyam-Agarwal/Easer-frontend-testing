@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import CountryCode from '../../Data/CountryCode.json';
+import CountryCode from '../../Data/CountryCode.js';
 import Footer from '../Public_pages/HomePage/Components/Footer.js';
 import { handleContactDetails } from '../../Services/operations/GeneralOperations.js';
 

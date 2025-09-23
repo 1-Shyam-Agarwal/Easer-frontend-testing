@@ -1,4 +1,4 @@
-[
+const CountryCode = [
   {
     "country": "India",
     "code": "+91"
@@ -779,4 +779,6 @@
     "country": "Zimbabwe",
     "code": "+263"
   }
-]
+];
+
+export default CountryCode;
