@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import NavLinks from '../../../../Data/Navlinks.js';
+import Navlinks from '../../../../Data/Navlinks.js';
 import { useLocation, matchPath, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfileDropDown from '../../../../components/ProfileComponents/ProfileDropDown.jsx';
@@ -142,7 +142,7 @@ const Navbar = ({ setShowInkletInfo }) => {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-              {!isDashboard && NavLinks?.map((link, index) => (
+              {!isDashboard && Navlinks?.map((link, index) => (
                 <Link
                   key={index}
                   to={link.path}
@@ -277,12 +277,12 @@ const Navbar = ({ setShowInkletInfo }) => {
                 )}
 
                 {/* General Navigation */}
-                {!isDashboard && NavLinks?.length > 0 && (
+                {!isDashboard && Navlinks?.length > 0 && (
                   <div className="space-y-3">
                     <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wide">
                       Menu
                     </h3>
-                    {NavLinks.map((link, index) => (
+                    {Navlinks.map((link, index) => (
                       <Link
                         key={index}
                         to={link.path}

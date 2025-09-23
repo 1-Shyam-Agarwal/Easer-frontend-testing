@@ -1,4 +1,4 @@
-const NavLinks = [
+const Navlinks = [
   {
     title: 'Home',
     path: '/',
@@ -25,4 +25,4 @@ const NavLinks = [
   },
 ];
 
-export default NavLinks;
+export default Navlinks;
