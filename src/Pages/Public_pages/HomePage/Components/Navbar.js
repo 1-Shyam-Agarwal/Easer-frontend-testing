@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Navlinks from '../../../../Data/Navlinks.js';
+import Navlinks from '../../../../Data/navlinks.js';
 import { useLocation, matchPath, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfileDropDown from '../../../../components/ProfileComponents/ProfileDropDown.jsx';
