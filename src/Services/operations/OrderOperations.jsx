@@ -33,7 +33,6 @@ export async function completeUserOrder(token, orderId) {
     }
     catch(e)
     {
-        console.log("Error while notifying the user : " , e);
         toast.error("Unable to notify the user. Please try again.");
     }
     finally{
@@ -50,7 +49,6 @@ export async function getOngoingOrdersCountAndTimeEstimate(token , setTimeAndCou
     }
     catch(e)
     {
-        console.log("Error while fetching the ongoing orders count and time estimate : " , e);
     }
 }
 
@@ -60,7 +58,6 @@ export async function validateOrderAndGeneratePrice(token , filesWithConfigs , s
     try{
         setLoading(true);
         const response = await apiConnector("POST" , orderOperationsEndpoints.VALIDATE_ORDER_AND_GENERATE_PRICE , {filesWithConfigs} , {Authorization : `Bearer ${token}`});
-        console.log(response?.data?.data);
         
         setAddDocumentsModelVisibility(false);
         setPaymentSummaryModelVisibility(true);
@@ -87,7 +84,6 @@ export async function receiveUserOrder(
 
     }catch(e)
     {
-        console.log("Error while receiving the order : " , e);
         toast.dismiss(toastId);
         toast.error(e?.response?.data?.message || 'Unable to receive the order. Please try again.');
         return false;
@@ -103,7 +99,6 @@ export async function ongoingOrderCount(token , setCount)
     }
     catch(e)
     {
-        console.log("Error while calculating ongoing orders count : " , e);
     }
 
 }

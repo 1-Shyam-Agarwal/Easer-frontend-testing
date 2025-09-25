@@ -180,8 +180,8 @@ const ComposeModal = ({
               ref={selectRef}
               className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              {filteredVendorsData?.map((vendor) => (
-                <option key={vendor?.userId} value={vendor?.userId}>
+              {filteredVendorsData?.map((vendor , index) => (
+                <option key={index} value={vendor?.userId}>
                   {formatVendorDisplay(vendor)}
                 </option>
               ))}
@@ -228,52 +228,55 @@ const ComposeModal = ({
           {/* Upload Preview */}
           {uploadingFiles?.length > 0 && (
             <div className="mt-5 grid grid-cols-1 gap-3 sm:gap-4">
-              {uploadingFiles?.map((file, index) => (
-                <div
-                  key={file?.file_id}
-                  className="bg-gray-50 border border-gray-200 rounded-sm p-3 py-2 shadow-sm flex justify-between items-center"
-                >
-                  <div className="flex justify-between items-center gap-4">
-                    <p className="text-sm font-medium text-gray-800 truncate max-w-[80%]">
-                      {file?.name}
-                    </p>
-                    {file?.url && (
-                      <a
-                        href={file?.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-green-600 hover:underline"
-                      >
-                        view
-                      </a>
-                    )}
-                  </div>
-
-                  <div className="mt-1 text-xs text-gray-600">
-                    {file?.uploading ? (
-                      <div className="flex items-center">
-                        <div className="w-3 h-3 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mr-2" />
-                        Uploading... {file?.progress}%
-                      </div>
-                    ) : (
-                      <div className="flex items-center">
-                        <button
-                          className={`${
-                            file.uploading
-                              ? 'text-gray-300 cursor-not-allowed'
-                              : 'text-gray-400 hover:text-red-500'
-                          } text-xl flex items-center font-bold transition`}
-                          onClick={() => handleDeleteFile(file?.file_id)}
-                          disabled={file?.uploading}
-                        >
-                          <RxCross2 />
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
+  {uploadingFiles?.map((file, index) => (
+    <div
+      key={index}
+      className="bg-gray-50 border border-gray-200 rounded-sm p-3 py-2 shadow-sm flex justify-between items-center min-w-0" // Added min-w-0
+    >
+      <div className="flex items-center gap-4 min-w-0 flex-1"> {/* Added min-w-0 and flex-1 */}
+        <p 
+          className="text-sm font-medium text-gray-800 truncate flex-1 min-w-0" // Better truncation
+          title={file?.name} // Show full name on hover
+        >
+          {file?.name}
+        </p>
+        {file?.url && (
+          <a
+            href={file?.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-green-600 hover:underline text-xs whitespace-nowrap" // Added whitespace-nowrap
+          >
+            view
+          </a>
+        )}
+      </div>
+      
+      <div className="ml-4 text-xs text-gray-600 flex-shrink-0"> {/* Added flex-shrink-0 */}
+        {file?.uploading ? (
+          <div className="flex items-center whitespace-nowrap">
+            <div className="w-3 h-3 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mr-2" />
+            Uploading... {file?.progress}%
+          </div>
+        ) : (
+          <div className="flex items-center">
+            <button
+              className={`${
+                file.uploading
+                  ? 'text-gray-300 cursor-not-allowed'
+                  : 'text-gray-400 hover:text-red-500'
+              } text-xl flex items-center font-bold transition`}
+              onClick={() => handleDeleteFile(file?.file_id)}
+              disabled={file?.uploading}
+            >
+              <RxCross2 />
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  ))}
+</div>
           )}
         </div>
       )}

@@ -9,7 +9,7 @@ const OrderSearchBar = ({ setKeyword, keyword, searchElement }) => (
       className="ml-2 flex-1 bg-transparent focus:outline-none text-sm"
       value={keyword}
       onChange={(e) => setKeyword(e.target.value)}
-      onKeyDown={(e) => e.key === 'Enter' && console.log('Search:', keyword)}
+      onKeyDown={(e) => e.key === 'Enter'}
     />
   </div>
 );

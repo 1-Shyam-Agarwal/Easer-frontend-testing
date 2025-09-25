@@ -191,15 +191,6 @@ export async function creatingOrder(
   try {
     // Make the API call with the formData
 
-    console.log('pritning oreder data set : ', {
-      filesWithConfigs,
-      vendorID,
-      price,
-      orderId,
-      paymentId,
-      bankReferenceNumber,
-      paymentTime,
-    });
     const response = await apiConnector(
       'POST',
       printOrderVendorEndpoints.CREATE_ORDER,

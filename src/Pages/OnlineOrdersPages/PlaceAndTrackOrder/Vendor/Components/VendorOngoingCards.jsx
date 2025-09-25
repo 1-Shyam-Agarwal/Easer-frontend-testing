@@ -33,7 +33,6 @@ const VendorOngoingCards = ({ ongoingOrders, setSelectedOngoingOrder,setOngoingO
       // You might want to add success notification here
       // or update the orders list to remove the completed order
     } catch (error) {
-      console.error('Error completing order:', error);
       // You might want to add error notification here
     } finally {
 
@@ -76,7 +75,7 @@ const VendorOngoingCards = ({ ongoingOrders, setSelectedOngoingOrder,setOngoingO
           const isNew = Date.now() - mailTime < 30 * 1000; // Highlight new order
 
           return (
-            <div key={order?.orderId || index}>
+            <div key={index}>
               {width > 640 ? (
                 <div className="relative">
                   <div

@@ -37,7 +37,6 @@ const LogoutModal = () => {
     }catch(e)
     {
         toast.error(e.message);
-        console.log(e.message);
     }
   }
 

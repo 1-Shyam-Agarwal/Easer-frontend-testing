@@ -20,7 +20,6 @@ export async function priceCalculator(
   setAddDocumentsModelVisibility,
   setPaymentSummaryModelVisibility
 ) {
-  console.log(filesWithConfigs);
   setLoading(true);
   try {
     const response = await apiConnector(

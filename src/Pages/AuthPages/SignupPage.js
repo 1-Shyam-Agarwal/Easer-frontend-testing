@@ -108,7 +108,6 @@ const SignupPage = () => {
     e.preventDefault();
 
     if (otp?.length === 6) {
-      console.log(formData);
       handleVerifyOtpAndCreateAccount(
         otp,
         formData,
@@ -320,9 +319,9 @@ const SignupPage = () => {
                           <option value="" disabled>
                             Select College
                           </option>
-                          {collegeData?.map((element) => (
+                          {collegeData?.map((element ,index) => (
                             <option
-                              key={element?.collegeCode}
+                              key={index}
                               value={element?.collegeCode}
                             >
                               {element?.collegeName}

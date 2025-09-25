@@ -52,7 +52,6 @@ const OnlineOrderDetails = () => {
     }
 
     const zip = new JSZip();
-    console.log('file : ', onlineOrder?.documents, onlineOrder);
     const toastId = toast.loading('Downloading...');
     for (const file of onlineOrder?.documents) {
       try {
@@ -206,11 +205,11 @@ const OnlineOrderDetails = () => {
             </div>
 
             <ul className="mt-[1rem] space-y-2">
-              {onlineOrder?.documents?.map((doc) => {
+              {onlineOrder?.documents?.map((doc , index) => {
                 const type = getFileType(doc?.name);
                 return (
                   <li
-                    key={doc?.file_id}
+                    key={index}
                     className="flex  flex-row gap-4 justify-between items-center  bg-white border border-gray-200 shadow-sm rounded-sm px-4 py-3 sm:py-3 hover:shadow-md transition duration-300"
                   >
                     <div className="flex items-center gap-3 truncate mb-2 sm:mb-0">

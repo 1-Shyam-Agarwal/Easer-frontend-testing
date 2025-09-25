@@ -206,9 +206,9 @@ const DashboardSidebar = () => {
           <div
             className={`space-y-1 transition-all duration-100 ${openCategories.includes(item?.label) ? 'block' : 'hidden'} ${expandSidebar ? 'ml-4' : ''}`}
           >
-            {item?.items?.map((subItem) => (
+            {item?.items?.map((subItem , index) => (
               <NavLink
-                key={subItem?.to}
+                key={index}
                 to={subItem?.to}
                 className={({ isActive }) =>
                   `flex items-center px-3 py-3 rounded-lg ${isActive ? 'bg-blue-700 text-white' : 'text-gray-400 hover:bg-gray-700'} transition-colors duration-100`

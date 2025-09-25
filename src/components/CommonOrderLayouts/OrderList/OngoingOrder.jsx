@@ -22,7 +22,7 @@ const OngoingOrders = ({ ongoingOrders ,setSelectedOngoingOrder,setOrderId ,disp
         const isNew = Date.now() - mailTime < 30 * 1000; // Highlight new order
 
         return (
-          <>
+          <div key={index}>
           
             {width > 640 ? (
               <div>
@@ -216,7 +216,7 @@ const OngoingOrders = ({ ongoingOrders ,setSelectedOngoingOrder,setOrderId ,disp
               }
               </div>
             )}
-          </>
+          </div>
         );
       })}
     </div>

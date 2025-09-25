@@ -32,6 +32,7 @@ const PlaceAndTrack = () => {
   const[displayShopCloseNotice , setDisplayShopCloseNotice] = useState(false);
   const [displayReceiveConfirmation , setDisplayReceiveConfirmation] = useState(false);
   const [orderId , setOrderId] = useState("");
+  const [displaySpinner , setDisplaySpinner] = useState(false);
 
   function setCheckoutModelVisibility(value) {
     setDisplayCheckoutModel(value);
@@ -103,7 +104,7 @@ const PlaceAndTrack = () => {
               <div className="w-[8px] h-[8px] rounded-full bg-blue-800 animate-pulse mr-[4px]"></div>
               <MdLocalPrintshop className="text-blue-800  mr-[7px]" />
               <span className="text-sm sm:text-[1rem] ml-[0.3rem] font-montserrat">
-                {(timeAndCount?.count === undefined || timeAndCount?.count === NaN ) ? "-" : timeAndCount?.count  } remote orders + {' '}
+                {((timeAndCount?.count === undefined || timeAndCount?.count === NaN ) ) ? "-" : timeAndCount?.count  } remote orders + {' '}
                 some offline orders (Ongoing)
               </span>
             </div>
@@ -113,7 +114,7 @@ const PlaceAndTrack = () => {
               <div className="w-[8px] h-[8px] rounded-full bg-orange-500 animate-pulse mr-[4px]"></div>
               <MdOutlineAccessTime className="text-orange-500 mr-[7px]" />
               <span className="text-sm sm:text-[1rem] ml-[0.3rem] font-montserrat">
-                {(timeAndCount?.estimatedTime === undefined || timeAndCount?.estimatedTime === NaN) ? '-' : (Math.ceil(timeAndCount?.estimatedTime)<=0 ? 5 : Math.ceil(timeAndCount?.estimatedTime)) } mins (Ready Time)
+                {((timeAndCount?.estimatedTime === undefined || timeAndCount?.estimatedTime === NaN) || !isShopOpen )? '-' : (Math.ceil(timeAndCount?.estimatedTime)<=0 ? 5 : Math.ceil(timeAndCount?.estimatedTime)) } mins (Ready Time)
               </span>
             </div>
           </div>
@@ -145,6 +146,7 @@ const PlaceAndTrack = () => {
           setDisplayCheckoutModel={setDisplayCheckoutModel}
           setCheckoutModelVisibility={setCheckoutModelVisibility}
           filteredVendorsData={filteredVendorsData}
+          setDisplaySpinner={setDisplaySpinner}
         />
       )}
 
@@ -259,6 +261,16 @@ const PlaceAndTrack = () => {
 
         :
         <div></div>
+      }
+
+      {
+         displaySpinner &&
+        <div className="fixed inset-0 bg-black/70 text-white z-50 flex items-center justify-center">
+          <div className="flex justify-center flex-col gap-4 items-center h-[50vh]">
+              <span className="loader"></span>
+              Kindly wait for a while ...
+          </div>
+        </div>
       }
 
     </OrderCardContainer>

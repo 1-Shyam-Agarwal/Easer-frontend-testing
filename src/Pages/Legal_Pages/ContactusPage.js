@@ -132,7 +132,7 @@ const ContactPage = () => {
                         <div>
                           <h4 className="font-medium text-gray-900">Phone</h4>
                           <p className="text-gray-600 mt-1 max-1040:text-[14px]">
-                             For any query , You can contact your vendor.
+                            +91-9311161298
                           </p>
                         </div>
                       </div>

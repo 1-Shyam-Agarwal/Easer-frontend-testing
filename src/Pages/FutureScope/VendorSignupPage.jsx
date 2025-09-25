@@ -94,7 +94,6 @@
 //     //     try {
 //     //       dispatch(getCollegeList(setCollegeData , setLoading));
 //     //     } catch (error) {
-//     //       console.error("Error fetching data:", error);
 //     //     }
 //     //   };
 //     //   fetchCollegeData();

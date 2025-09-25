@@ -30,9 +30,6 @@ const AddDocsModal = ({
   const MAX_FILE_SIZE_MB = 30;
   const MAX_TOTAL_FILES = 25;
 
-  useEffect(() => {
-    console.log("filesWithConfigs :", filesWithConfigs)
-  },[filesWithConfigs])
 
   const processFiles = async (files) => {
     const validFiles = Array.from(files);
@@ -225,8 +222,8 @@ const AddDocsModal = ({
               ref={selectRef}
               className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              {filteredVendorsData?.map((vendor) => (
-                <option key={vendor?.userId} value={vendor?.userId}>
+              {filteredVendorsData?.map((vendor , index) => (
+                <option key={index} value={vendor?.userId}>
                   {formatVendorDisplay(vendor)}
                 </option>
               ))}
@@ -282,9 +279,9 @@ const AddDocsModal = ({
           {/* Upload Preview */}
           {filesWithConfigs?.length > 0 && (
             <div className="mt-5 mb-4 grid grid-cols-1 gap-2 sm:gap-2">
-              {filesWithConfigs?.map((file) => (
+              {filesWithConfigs?.map((file , idx) => (
                 <DocsCard
-                  key={file?.file_id}
+                  key={idx}
                   file={file}
                   handleDeleteFile={handleDeleteFile}
                   setFilesWithConfigs={setFilesWithConfigs}

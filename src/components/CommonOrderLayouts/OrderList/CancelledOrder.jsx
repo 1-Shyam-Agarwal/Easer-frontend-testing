@@ -20,7 +20,7 @@ const CancelledOrders = ({ cancelledOrders }) => {
       {cancelledOrders?.map((order, index) => {
 
         return (
-          <>
+          <div key={index}>
             {width > 640 ? (
               <div
                 className={`flex sm:grid sm:grid-cols-5 gap-2 sm:gap-4 px-4 sm:px-6 py-3 sm:py-3 transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 hover:shadow-md rounded-none cursor-pointer hover:border-l-4 border-transparent hover:border-blue-400 }`}
@@ -163,7 +163,7 @@ const CancelledOrders = ({ cancelledOrders }) => {
                 </div>
               </div>
             )}
-          </>
+          </div>
         );
       })}
     </div>

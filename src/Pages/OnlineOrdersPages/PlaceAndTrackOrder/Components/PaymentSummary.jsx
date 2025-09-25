@@ -16,7 +16,8 @@ const PaymentSummary = ({
   filesWithConfigs,
   setAddDocumentsModelVisibility,
   setPaymentSummaryModelVisibility,
-  setDisplayCheckoutModel
+  setDisplayCheckoutModel,
+  setDisplaySpinner
 }) => {
   const token = useSelector((state) => state.auth.token);
   const [loading, setLoading] = useState(false);
@@ -60,7 +61,6 @@ const PaymentSummary = ({
       // setLoading(false);
       // setDisplayCross(true);
       toast.error('We are unable to place the order.Please try again later.');
-      console.log(error);
     }
     finally{
       toast.dismiss(toastId);
@@ -83,7 +83,6 @@ const PaymentSummary = ({
       // setLoading(false);
       // setDisplayCross(true);
       toast.error('Error occured while verifying your payment.');
-      console.log(error);
     }
   };
 
@@ -93,7 +92,6 @@ const PaymentSummary = ({
     // setLoading(true);
 
     // const isOrderValid = await dispatch(validatingOrder(token , vendorID , files , fileConfigs, invoice?.price ,setLoading , props?.setDisplayCross,dispatch , navigate , socket , setSocket));
-
     if (true) {
       //if(isOrderValid)
       // let session_id = await getSessionId(setLoading,props?.setDisplayCross , vendorID  , invoice?.price);
@@ -104,9 +102,11 @@ const PaymentSummary = ({
         redirectTarget: '_modal',
       };
 
+
+      setDisplayCheckoutModel(false);
+      setDisplaySpinner(true);
       cashfree.checkout(checkoutOptions).then(async (res) => {
         const result = await verifyPayment();
-        console.log('resutl : ', result);
         if (result && result.data) {
           const isOrderCreated = await creatingOrder(
             filesWithConfigs,
@@ -121,7 +121,7 @@ const PaymentSummary = ({
 
           if(isOrderCreated)
           {
-              setDisplayCheckoutModel(false);
+              setDisplaySpinner(false);
               toast.success("Order placed Successfully.");
           }
           }else if(result?.data?.response?.paymentStatus === "FAILED")
@@ -152,13 +152,11 @@ const PaymentSummary = ({
   //     }
 
   //     cashfree.checkout(checkoutOptions).then((res) => {
-  //       console.log("payment initialized")
 
   //       verifyPayment(orderId)
   //     })
 
   //   } catch (error) {
-  //     console.log(error)
   //   }
 
   // }
@@ -325,7 +323,6 @@ const PaymentSummary = ({
               className={`grid grid-cols-6 max-640:text-[10px] max-640:gap-2 gap-4 p-2 rounded-[5px] bg-gray-50 px-2 text-sm hover:bg-gray-200 
                 transition-all duration-200 ease-in-out  group rounded-[5px]`}
             >
-              {console.log(ele)}
               {/* Filename with Tooltip */}
               <div className="text-left text-gray-700">
                 <div className="flex items-center justify-center relative">
@@ -456,7 +453,7 @@ const PaymentSummary = ({
                 <button class='bg-yellow-500 hover:bg-yellow-700 text-white font-semibold py-2 px-6 rounded-[5px] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2'
                   onClick={() => { 
                     setDisplayNoCancellationWarning(false); 
-                    OrderValidationAndCreationHandler() 
+                    OrderValidationAndCreationHandler();
                   }}>
                   Got it
                 </button>

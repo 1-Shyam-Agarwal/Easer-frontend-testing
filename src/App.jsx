@@ -80,6 +80,7 @@ import axios from 'axios';
 import {getToken} from 'firebase/messaging';
 import { messaging } from './Config/firebase.js';
 import ReceiveOrder from './Pages/OnlineOrdersPages/ReceiveOrder.jsx';
+import { tokenValidation } from './Services/operations/Auth.js';
 
 const GoogleAuthWrapper = ({ children }) => {
   return (
@@ -90,6 +91,7 @@ const GoogleAuthWrapper = ({ children }) => {
 };
 
 function App() {
+ 
   const dispatch = useDispatch();
   const token = useSelector((state) => {
     return state.auth.token;
@@ -114,6 +116,14 @@ function App() {
     setUserRole();
   }, [token]);
 
+  useEffect(()=>
+  {
+    if(token)
+    {
+        tokenValidation(dispatch ,token);
+    }
+  })
+
 
 
   if(token)
@@ -125,7 +135,6 @@ function App() {
       })
       .then((fcmToken)=>
       {
-          console.log("fcmTone : " , fcmToken);
           if (fcmToken) {
             axios.post(
               STORE_FCM_TOKEN,
@@ -133,10 +142,10 @@ function App() {
               { headers: { Authorization: `Bearer ${token}` } }
             )
             .then((response)=>{})
-            .catch((error)=>{console.log("Error occured : " , error)})
+            .catch((error)=>{})
           }
       })
-      .catch((error)=>{console.log("Error occured : " , error)})
+      .catch((error)=>{})
 
       
     } else if (Notification.permission === "denied") {
@@ -193,7 +202,7 @@ function App() {
           element={
             <OpenRoute>
               <GoogleAuthWrapper>
-                <LoginPage />
+                <LoginPage/>
               </GoogleAuthWrapper>
             </OpenRoute>
           }
@@ -480,6 +489,7 @@ function App() {
       </Routes>
       <Toaster />
       {showInkletInfo && <ShowInkletInfo setShowModal={setShowInkletInfo} />}
+      
     </div>
   );
 }

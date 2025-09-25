@@ -284,7 +284,6 @@
 //       event.preventDefault();
 //       window.history.pushState(null, '', window.location.href);
 //     };
-//     console.log("effect 3 is completed")
 //     window.addEventListener('popstate', handlePopstate);
 
 //     // Cleanup

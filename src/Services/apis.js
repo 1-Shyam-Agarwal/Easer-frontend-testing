@@ -22,6 +22,8 @@ export const authEndpoints = {
   RESETPASSTOKEN_API: BASE_URL + '/reset-password-token',
   RESETPASSWORD_API: BASE_URL + '/reset-password',
 
+  TOKEN_VALIDATION_API : BASE_URL + '/validate-token',
+
   LOGOUT_API : BASE_URL + '/logout'
 };
 

@@ -70,8 +70,8 @@ const Footer = () => {
               Quick Links
             </h3>
             <ul className="space-y-3 max-640:text-center">
-              {quickLinks?.map((link) => (
-                <li key={link?.name}>
+              {quickLinks?.map((link , index) => (
+                <li key={index}>
                   <a
                     href={link?.href}
                     className="text-gray-400 hover:text-blue-400 transition-colors duration-200"

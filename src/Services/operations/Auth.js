@@ -1,8 +1,8 @@
 import { toast } from 'react-hot-toast';
 import { apiConnector } from '../apiconnect.js';
 import { authEndpoints, NotificationEndpoints } from '../apis';
-import { setToken } from '../../Slices/authSlice.js';
-import { setUser } from '../../Slices/profileSlice.js';
+import { clearToken, setToken } from '../../Slices/authSlice.js';
+import { setUser , clearUser } from '../../Slices/profileSlice.js';
 import {getToken} from 'firebase/messaging';
 import { messaging } from '../../Config/firebase.js';
 import axios from 'axios';
@@ -10,7 +10,7 @@ import axios from 'axios';
 //<------------------------------------------- GENERAL AUTH HANDLERS ------------------------------------------>
 
 //Resend OTP APIs
-const { RESEND_OTP , LOGOUT_API } = authEndpoints;
+const { RESEND_OTP , LOGOUT_API ,TOKEN_VALIDATION_API} = authEndpoints;
 const {STORE_FCM_TOKEN} = NotificationEndpoints
 
 export async function resendOTP(
@@ -154,7 +154,6 @@ export async function handleGooglePreSignupCheck(googleToken) {
 
     toast.dismiss(toastId);
 
-    console.log('response.data.userData : ', response.data.userData);
 
     //This indicates that token is verified successfully
     return response.data.userData;
@@ -250,7 +249,6 @@ export async function handlePreCustomLoginChecksAndSendOtp(
     setData(data);
   } catch (error) {
     toast.dismiss(toastId);
-    console.log("logoin error : " , error )
     toast.error(error?.response?.data?.message || 'Please try again later.');
   } finally {
     toast.dismiss(toastId);
@@ -331,7 +329,6 @@ export async function handleVerifyLoginOtp(
         );
       }
     } else {
-      console.log("You don't get order Notifications . Please enable in browser settings")
     }
   }
 }
@@ -341,7 +338,6 @@ export async function handleVerifyLoginOtp(
     navigate('/dashboard/easer-outbox');
   } catch (error) {
     //Enabling verifyOTP button for making subsequent requests in case of fails
-    console.log(error);
     setVerifyOTPDisabled(false);
     toast.error(
       error?.response?.data?.message ||
@@ -512,8 +508,6 @@ export async function logout(token , navigate)
     const toastId = toast.loading("logging out...")
     try {
       const response = await apiConnector('PUT', LOGOUT_API, {} , { Authorization: `Bearer ${token}` });
-      console.log(response);
-      console.log(token);
       toast.dismiss(toastId);
       navigate('/login', { replace: true });
     } catch (error) {
@@ -523,4 +517,32 @@ export async function logout(token , navigate)
           'Unable to logout. Please try again later.'
       )
     }
+}
+
+
+
+export async function tokenValidation(dispatch , token ) {
+
+  try {
+    toast.dismiss();
+    const response = await apiConnector('GET',TOKEN_VALIDATION_API, {} , { Authorization: `Bearer ${token}` });
+
+  } catch (error) {
+    console.log(error);
+     if (error.status === 401) {
+      handleLogout(dispatch );
+      return;
+    }
+  }
+}
+
+function handleLogout(dispatch ) {
+  toast.dismiss();
+  dispatch(clearToken());
+  dispatch(clearUser());
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+  
+  window.location.href = "/login";
+  
 }

@@ -53,7 +53,6 @@ const MailDetail = () => {
     }
 
     const zip = new JSZip();
-    console.log('file : ', mail?.documents, mail);
     const toastId = toast.loading('Downloading...');
     for (const file of mail?.documents) {
       try {
@@ -201,11 +200,11 @@ const MailDetail = () => {
             </div>
 
             <ul className="mt-[1rem] space-y-2">
-              {mail?.documents?.map((doc) => {
+              {mail?.documents?.map((doc , index) => {
                 const type = getFileType(doc?.fileName);
                 return (
                   <li
-                    key={doc?._id}
+                    key={index}
                     className="flex  flex-row gap-4 justify-between items-center  bg-white border border-gray-200 shadow-sm rounded-sm px-4 py-3 sm:py-3 hover:shadow-md transition duration-300"
                   >
                     <div className="flex items-center gap-3 truncate mb-2 sm:mb-0">

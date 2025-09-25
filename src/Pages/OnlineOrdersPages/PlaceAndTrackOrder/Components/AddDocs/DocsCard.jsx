@@ -45,7 +45,6 @@
 //   {
 //     if(currentConfig?.numberOfPages === 1)
 //     {
-//        console.log("e.target.checked : " , e.target.checked);
 //         if(e.target.checked)
 //         {
 //             toast.error("In case of single page document , you can't select back to back configuration.")

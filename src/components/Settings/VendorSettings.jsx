@@ -107,7 +107,7 @@ const VendorSettings = () => {
   // const agreeController=async()=>
   // {
   //     setConfirmationWindow(false);
-  //     console.log("isShopOpen : " , isShopOpen);
+
   //     if(isShopOpen === true || isShopOpen===false)
   //     {
   //       const response = await dispatch(changeShopStatus(token));
@@ -193,7 +193,7 @@ const VendorSettings = () => {
 
   //   } catch (error) {
 
-  //     console.error("Upload failed:", error);
+
 
   //   } finally {
   //     setImageState((prev) => ({ ...prev, loading: false }));

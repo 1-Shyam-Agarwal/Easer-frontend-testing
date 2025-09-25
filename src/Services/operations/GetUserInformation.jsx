@@ -23,7 +23,7 @@ export async function getRole(token, setRole) {
 
 export async function getShopStatus(token, vendorId, setIsShopOpen, ) {
 
-  const toastId = toast.loading("Fetching shop status...");
+  const toastId = toast.loading("Loading...");
   try {
     const response = await apiConnector(
       'POST',
