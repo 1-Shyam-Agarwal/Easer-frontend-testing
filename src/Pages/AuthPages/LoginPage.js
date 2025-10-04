@@ -140,7 +140,7 @@ const LoginPage = () => {
                   {/* Easer Branding */}
                   <div className="mt-[-5rem] mb-[2rem]">
                     <div className="text-2xl font-semibold text-center text-black">
-                      <span className="text-black specialCharacter text-blue-600">E</span>aser
+                      <span className="text-black specialCharacter">E</span>aser
                     </div>
                     
                   </div>

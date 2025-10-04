@@ -136,7 +136,7 @@ const Navbar = ({ setShowInkletInfo }) => {
                 className="w-8 h-8 transition-transform group-hover:scale-110"
               />
               <span className="text-xl font-semibold text-gray-900">
-                <span className="text-blue-600 specialCharacter">E</span>aser
+                <span className="specialCharacter">E</span>aser
               </span>
             </Link>
 

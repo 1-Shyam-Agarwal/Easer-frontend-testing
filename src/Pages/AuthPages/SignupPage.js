@@ -186,7 +186,7 @@ const SignupPage = () => {
             <div className="flex flex-col items-center justify-center w-[85%]">
               <div className="mt-[-30px] mb-[2rem]">
                 <div className="text-2xl font-semibold text-center text-black">
-                  <span className="text-black specialCharacter text-blue-500">E</span>aser
+                  <span className="text-black specialCharacter">E</span>aser
                 </div>
                 <div className="text-gray-500">
                   Making life peaceful and serene
