@@ -1,4 +1,4 @@
-const BASE_URL = 'http://135.235.137.235:5000/api/v1';
+const BASE_URL = 'https://backend.easer.co.in/api/v1';
 //https://easer-official-backend-production.up.railway.app/api/v1
 //https://easer-2-0-backend.onrender.com/api/v1
 
