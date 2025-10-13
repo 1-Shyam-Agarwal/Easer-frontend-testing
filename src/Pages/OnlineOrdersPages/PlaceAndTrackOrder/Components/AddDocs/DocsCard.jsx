@@ -422,20 +422,14 @@ const DocsCard = ({ file, handleDeleteFile, setFilesWithConfigs }) => {
     >
       {/* Main Card Content */}
       <div className="px-4 py-3 flex justify-between items-center">
-        <div className="flex items-center gap-3 flex-1 min-w-0">
-          <p className="text-sm font-medium text-gray-900 truncate">
-            {file?.name}
-          </p>
-          {file?.url && (
-            <a
-              href={file?.url}
+        <div className="flex items-center gap-[4px] sm:gap-2  flex-1 min-w-0">
+          <a  href={file?.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:text-blue-800 text-sm font-medium shrink-0"
-            >
-              view
-            </a>
-          )}
+              className="text-blue-500 hover:text-blue-700 underline text-sm font-medium shrink-0"
+          >
+            {file?.name}
+          </a>
         </div>
 
         <div className="flex items-center gap-3 text-gray-500">
@@ -448,11 +442,12 @@ const DocsCard = ({ file, handleDeleteFile, setFilesWithConfigs }) => {
             <>
               <button
                 onClick={() => setExpandFile(!expandFile)}
-                className="p-1 hover:bg-gray-100 mr-2 ml-4 rounded transition-colors"
+                className="p-1 hover:bg-gray-100 mr-2 ml-4 flex items-center justify-between gap-2 rounded transition-colors"
               >
+                <span className='text-sm text-red-500 font-semibold'>Edit</span> 
                 <IoIosArrowDown
                   size={14}
-                  className={`transform transition-transform duration-200  ${
+                  className={`transform transition-transform duration-200 ${
                     expandFile ? 'rotate-180' : ''
                   }`}
                 />

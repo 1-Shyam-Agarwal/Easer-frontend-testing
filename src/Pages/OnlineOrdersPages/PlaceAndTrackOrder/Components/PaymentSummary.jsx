@@ -11,6 +11,8 @@ import { printOrderVendorEndpoints } from '../../../../Services/apis';
 import { useRef } from 'react';
 
 
+
+
 const PaymentSummary = ({
   invoice,
   filesWithConfigs,
@@ -20,9 +22,9 @@ const PaymentSummary = ({
   setDisplaySpinner
 }) => {
   const token = useSelector((state) => state.auth.token);
-  const [loading, setLoading] = useState(false);
   const orderIdRef = useRef("");
   const [displayNoCancellationWarning,setDisplayNoCancellationWarning] = useState(false);
+  const [disable , setDisable] = useState(false);
 
   let cashfree;
 
@@ -53,14 +55,10 @@ const PaymentSummary = ({
         orderIdRef.current = res.data.data.order_id;
         return res?.data?.data?.payment_session_id;
       } else {
-        // setLoading(false);
-        // setDisplayCross(true);
-        toast.error('We are unable to place the order.Please try again later.');
+        toast.error('Sorry! We couldn’t place your order. Please try again shortly.');
       }
     } catch (error) {
-      // setLoading(false);
-      // setDisplayCross(true);
-      toast.error('We are unable to place the order.Please try again later.');
+      toast.error('Sorry! We couldn’t place your order. Please try again shortly.');
     }
     finally{
       toast.dismiss(toastId);
@@ -82,20 +80,17 @@ const PaymentSummary = ({
     } catch (error) {
       // setLoading(false);
       // setDisplayCross(true);
-      toast.error('Error occured while verifying your payment.');
     }
   };
 
   async function OrderValidationAndCreationHandler() {
-    // props?.setDisplayCross(false);
-    // setDisplayConfirmationWindow(false);
-    // setLoading(true);
-
-    // const isOrderValid = await dispatch(validatingOrder(token , vendorID , files , fileConfigs, invoice?.price ,setLoading , props?.setDisplayCross,dispatch , navigate , socket , setSocket));
-    if (true) {
-      //if(isOrderValid)
-      // let session_id = await getSessionId(setLoading,props?.setDisplayCross , vendorID  , invoice?.price);
       let session_id = await getSessionId();
+
+      if(!session_id)
+      {
+        setDisable(false);
+        return;
+      }
 
       let checkoutOptions = {
         paymentSessionId: session_id,
@@ -105,61 +100,17 @@ const PaymentSummary = ({
 
       setDisplayCheckoutModel(false);
       setDisplaySpinner(true);
+
       cashfree.checkout(checkoutOptions).then(async (res) => {
         const result = await verifyPayment();
         if (result && result.data) {
-          const isOrderCreated = await creatingOrder(
-            filesWithConfigs,
-            token,
-            invoice?.vendor,
-            invoice?.price?.price,
-            orderIdRef.current,
-            result?.data?.response?.[0]?.cf_payment_id,
-            result?.data?.response?.[0]?.bank_reference,
-            result?.data?.response?.[0]?.payment_time
-          );
-
-          if(isOrderCreated)
-          {
-              setDisplaySpinner(false);
-              toast.success("Order placed Successfully.");
-          }
-          }else if(result?.data?.response?.paymentStatus === "FAILED")
-          {
-            // setLoading(false);
-            // props?.setDisplayCross(true);
-            toast.error("Transaction Failed.Please try again.")
-        } else {
-          // setLoading(false);
-          // props?.setDisplayCross(true);
-          toast.error('Transaction Failed.');
+          toast.success("Order placed successfully");
         }
-      });
-    } else {
-      setLoading(false);
-      // props?.setDisplayCross(true);
-    }
+        setDisplaySpinner(false);
+      })
   }
 
-  // const handleClick = async (e) => {
-  //   e.preventDefault()
-  //   try {
 
-  //     let sessionId = await getSessionId()
-  //     let checkoutOptions = {
-  //       paymentSessionId : sessionId,
-  //       redirectTarget:"_modal",
-  //     }
-
-  //     cashfree.checkout(checkoutOptions).then((res) => {
-
-  //       verifyPayment(orderId)
-  //     })
-
-  //   } catch (error) {
-  //   }
-
-  // }
 
   const PrintDetail = ({ icon: Icon, label, count, rate, pricingMode }) =>
     count > 0 ? (
@@ -405,7 +356,11 @@ const PaymentSummary = ({
       <div className='flex flex-row items-center justify-center gap-4 sm:gap-8 mb-6 '>
         <div className="mt-4 text-right">
           <button
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2 rounded-md text-sm font-medium shadow-sm transition"
+          disabled={disable}
+            className={` text-white px-4 sm:px-6 py-2 rounded-md text-sm font-medium shadow-sm transition ${disable 
+                    ? 'bg-blue-300 cursor-not-allowed' 
+                    : 'bg-blue-600 hover:bg-blue-700'
+                  }`}
             onClick={() => {
               setAddDocumentsModelVisibility(true);
               setPaymentSummaryModelVisibility(false);
@@ -419,8 +374,13 @@ const PaymentSummary = ({
             invoice?.price?.price &&
             <div className="mt-4 text-right">
               <button
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2 rounded-md text-sm font-medium shadow-sm transition"
-                onClick={()=>{setDisplayNoCancellationWarning(true)}}
+                disabled={disable}
+                onClick={() => setDisplayNoCancellationWarning(true)}
+                className={`px-4 sm:px-6 py-2 rounded-md text-sm font-medium shadow-sm transition text-white
+                  ${disable 
+                    ? 'bg-blue-300 cursor-not-allowed' 
+                    : 'bg-blue-600 hover:bg-blue-700'
+                  }`}
               >
                 Pay ₹{invoice?.price?.price}
               </button>
@@ -453,6 +413,7 @@ const PaymentSummary = ({
                 <button class='bg-yellow-500 hover:bg-yellow-700 text-white font-semibold py-2 px-6 rounded-[5px] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2'
                   onClick={() => { 
                     setDisplayNoCancellationWarning(false); 
+                    setDisable(true);
                     OrderValidationAndCreationHandler();
                   }}>
                   Got it

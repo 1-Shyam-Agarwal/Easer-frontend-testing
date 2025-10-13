@@ -339,6 +339,7 @@ export async function handleVerifyLoginOtp(
   } catch (error) {
     //Enabling verifyOTP button for making subsequent requests in case of fails
     setVerifyOTPDisabled(false);
+    console.log(error);
     toast.error(
       error?.response?.data?.message ||
         'Unable to login. Please try again later.'

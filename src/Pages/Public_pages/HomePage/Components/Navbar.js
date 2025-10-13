@@ -302,7 +302,7 @@ const Navbar = ({ setShowInkletInfo }) => {
 
               {/* Auth Buttons (if not logged in) */}
               {!token && (
-                <div className="p-4 border-t border-slate-700 space-y-3">
+                <div className="p-4 transform translate-y-[-80px] border-t border-slate-700 space-y-3">
                   <Link
                     to="/signup/user"
                     onClick={closeMenu}

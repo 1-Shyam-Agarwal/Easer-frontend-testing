@@ -44,7 +44,7 @@ const VendorPlaceAndTrackOrder = () => {
       ongoingOrderCount(
           token,
           setCount
-        );
+      );
 
       count_interval = setInterval(() => {
         ongoingOrderCount(
@@ -68,9 +68,6 @@ const VendorPlaceAndTrackOrder = () => {
   {
       changeShopStatus(token ,setIsShopOpen);
   }
-
-
-
 
 
   return (

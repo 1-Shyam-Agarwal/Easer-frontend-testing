@@ -29,13 +29,16 @@ const useIsMobile = () => {
 };
 
 const DashboardSidebar = () => {
-  const [expandSidebar, setExpandSidebar] = useState(false);
-  const [openCategories, setOpenCategories] = useState([]);
+  const isMobile = useIsMobile();
+  const [expandSidebar, setExpandSidebar] = useState(!isMobile);
   const [role, setRole] = useState('');
   const token = useSelector((state) => state.auth.token);
-  const isMobile = useIsMobile();
 
   const toggleHandler = () => setExpandSidebar(!expandSidebar);
+
+  // Initialize all categories as open
+  const [openCategories, setOpenCategories] = useState(['Remote Prints']);
+  
   const toggleCategory = (category) => {
     setOpenCategories((prev) =>
       prev.includes(category)

@@ -19,6 +19,8 @@ import { getShopStatus } from '../../../../Services/operations/GetUserInformatio
 import toast from 'react-hot-toast';
 import { pollingOngoingOrdersCountAndTimeEstimate } from '../../../../Services/operations/GetVarietyOfOrders';
 import { receiveUserOrder } from '../../../../Services/operations/OrderOperations';
+import { printOrderVendorEndpoints } from '../../../../Services/apis';
+import { apiConnector } from '../../../../Services/apiconnect';
 
 const PlaceAndTrack = () => {
   const [timeAndCount , setTimeAndCount] = useState({});
@@ -90,6 +92,32 @@ const PlaceAndTrack = () => {
     }
   }, [token]);
 
+  useEffect(() => {
+
+    let intervalId;
+    if(token)
+    {
+        const fetchPayments = async () => {
+            try {
+              const res = await apiConnector("POST" ,printOrderVendorEndpoints.POLLING_UNPAID_ORDERS , {} ,{ Authorization: `Bearer ${token}`} );
+            } catch (err) {
+            }
+          };
+
+
+          //  Call once immediately on mount
+          fetchPayments();
+
+          //  Set interval to poll every 5 minutes
+          intervalId = setInterval(fetchPayments, 5 * 60 * 1000); // 5 mins
+    }
+ 
+
+  //  Cleanup: clear interval on unmount
+    return () => clearInterval(intervalId);
+
+  }, [token]);
+
   return (
     <OrderCardContainer className="relative">
       <div className="mb-6">
@@ -114,7 +142,7 @@ const PlaceAndTrack = () => {
               <div className="w-[8px] h-[8px] rounded-full bg-orange-500 animate-pulse mr-[4px]"></div>
               <MdOutlineAccessTime className="text-orange-500 mr-[7px]" />
               <span className="text-sm sm:text-[1rem] ml-[0.3rem] font-montserrat">
-                {((timeAndCount?.estimatedTime === undefined || timeAndCount?.estimatedTime === NaN) || !isShopOpen )? '-' : (Math.ceil(timeAndCount?.estimatedTime)<=0 ? 5 : Math.ceil(timeAndCount?.estimatedTime)) } mins (Ready Time)
+                {((timeAndCount?.estimatedTime === undefined || timeAndCount?.estimatedTime === NaN) )? '-' : (Math.ceil(timeAndCount?.estimatedTime)<=0 ? 5 : Math.ceil(timeAndCount?.estimatedTime)) } mins (Ready Time)
               </span>
             </div>
           </div>
